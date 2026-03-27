@@ -220,6 +220,56 @@ for result in response.results:
 
 ---
 
+## Rodar com Docker
+
+A forma mais simples de executar o sistema sem instalar nada localmente.
+
+### Pré-requisitos
+
+- [Docker](https://docs.docker.com/get-docker/) e [Docker Compose](https://docs.docker.com/compose/) instalados.
+- A pasta `data/` com os arquivos de cada empresa (PDFs + imagens + `company.yaml`).
+
+### 1. Build da imagem
+
+```bash
+docker compose build
+```
+
+### 2. Iniciar o Ollama
+
+```bash
+docker compose up ollama -d
+```
+
+### 3. Baixar os modelos (primeira vez)
+
+```bash
+docker compose exec ollama ollama pull llama3.2
+docker compose exec ollama ollama pull nomic-embed-text
+```
+
+### 4. Indexar os documentos
+
+```bash
+docker compose run --rm app python scripts/index_documents.py
+```
+
+### 5. Rodar o pipeline
+
+```bash
+docker compose run --rm app python scripts/run_pipeline.py
+```
+
+Os resultados ficam em `results/` e os logs em `logs/` (montados como volumes no host).
+
+### 6. Rodar os testes dentro do container
+
+```bash
+docker compose run --rm app python -m pytest tests/unit/ tests/integration/ -q
+```
+
+---
+
 ## Como rodar os testes
 
 ```bash
@@ -289,4 +339,4 @@ Sistemas de IA são difíceis de testar porque os modelos são não-determiníst
 | Integração | ✅ Completo | 10 testes de integração |
 | E2E | ✅ Estrutura completa | 2 testes E2E (requerem Ollama + fotos reais) |
 
-**Total: 170 testes, 100% de cobertura unitária.**
+**Total: 175 testes, 100% de cobertura unitária.**
