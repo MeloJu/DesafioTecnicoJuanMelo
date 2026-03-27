@@ -13,6 +13,7 @@ O llm_client é injetado no __init__ (DI manual, ADR-006).
 Em produção: OllamaClient. Em testes unitários: sempre mockado.
 """
 import json
+import re
 from typing import List
 
 from app.logging.logger import get_logger
@@ -80,14 +81,18 @@ class ReasoningService:
     ) -> PersonResult:
         try:
             data = json.loads(raw)
-        except (json.JSONDecodeError, ValueError) as exc:
-            log.error(
-                "llm_call_failed",
-                correlation_id=correlation_id,
-                pessoa_id=person.pessoa_id,
-                error=f"JSON inválido: {exc}",
-            )
-            return self._indeterminado(person, f"Resposta do modelo não é JSON válido: {raw[:80]}")
+        except (json.JSONDecodeError, ValueError):
+            # LLM às vezes gera JSON com aspas não escapadas na justificativa.
+            # Tenta extrair status e justificativa via regex como fallback.
+            data = _extract_fields_from_malformed_json(raw)
+            if data is None:
+                log.error(
+                    "llm_call_failed",
+                    correlation_id=correlation_id,
+                    pessoa_id=person.pessoa_id,
+                    error=f"JSON inválido e extração regex falhou: {raw[:80]}",
+                )
+                return self._indeterminado(person, f"Resposta do modelo não é JSON válido: {raw[:80]}")
 
         raw_status = data.get("status", "").strip()
         justificativa = data.get("justificativa", "").strip()
@@ -144,3 +149,22 @@ def _build_prompt(person: PersonDetection, rules: List[Rule]) -> str:
     ])
     rule_lines = "\n".join(f"- {r.rule} (fonte: {r.source})" for r in rules)
     return _PROMPT_TEMPLATE.format(attributes=attribute_lines, rules=rule_lines)
+
+
+def _extract_fields_from_malformed_json(raw: str) -> dict | None:
+    """
+    Fallback para quando o LLM gera JSON com aspas não escapadas.
+    Extrai status e justificativa via regex simples.
+    Retorna None se não conseguir extrair ambos os campos.
+    """
+    status_match = re.search(r'"status"\s*:\s*"([^"]+)"', raw)
+    # justificativa pode conter aspas — pega tudo entre o primeiro ": e o fim do objeto
+    justificativa_match = re.search(r'"justificativa"\s*:\s*"(.+?)(?:"\s*\}|"\s*$)', raw, re.DOTALL)
+
+    if not status_match or not justificativa_match:
+        return None
+
+    return {
+        "status": status_match.group(1).strip(),
+        "justificativa": justificativa_match.group(1).strip(),
+    }

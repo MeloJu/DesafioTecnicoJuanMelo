@@ -39,6 +39,10 @@ models/
 .DS_Store
 Thumbs.db
 
-# Logs and temporary files
+# Pipeline outputs (generated locally, not versioned)
+results/
+logs/
+
+# Docs excluded from git
 ADR.md
 claude.md

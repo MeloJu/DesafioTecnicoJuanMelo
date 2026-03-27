@@ -163,6 +163,30 @@ class TestReasoningBadLlmOutput:
 
         assert result.justificativa.strip() != ""
 
+    def test_malformed_json_with_unescaped_quotes_recovered_via_regex(self):
+        """LLM gera JSON com aspas não escapadas na justificativa — regex fallback recupera."""
+        mock_client = Mock()
+        # JSON inválido porque a justificativa tem aspas internas não escapadas
+        mock_client.generate.return_value = (
+            '{"status": "Não conforme", "justificativa": "A pessoa não usa "capacete" obrigatório."}'
+        )
+        service = ReasoningService(llm_client=mock_client)
+
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+
+        assert result.status == "Não conforme"
+        assert "capacete" in result.justificativa.lower()
+
+    def test_completely_unparseable_response_returns_indeterminado(self):
+        """Texto sem campos reconhecíveis → regex também falha → Indeterminado."""
+        mock_client = Mock()
+        mock_client.generate.return_value = "Desculpe, não consigo responder a isso."
+        service = ReasoningService(llm_client=mock_client)
+
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+
+        assert result.status == "Indeterminado"
+
     def test_invalid_status_in_response_returns_indeterminado(self):
         mock_client = Mock()
         mock_client.generate.return_value = _llm_response("Aprovado", "Tudo certo.")

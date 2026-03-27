@@ -9,9 +9,12 @@ Uso:
 
 Pré-requisito: rodar index_documents.py primeiro para popular o ChromaDB.
 
-Logs JSON estruturados → logs/pipeline_YYYY-MM-DD_HH-MM-SS.log
-Saída legível         → terminal (apenas resultados, sem JSON)
+Saídas:
+  results/<empresa>/<imagem>.json  → JSON do PipelineResponse por imagem
+  logs/pipeline_YYYY-MM-DD.log     → logs JSON estruturados (structlog)
+  terminal                         → resumo legível dos resultados
 """
+import json
 import sys
 import os
 from datetime import datetime
@@ -19,26 +22,24 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Silencia output de YOLO e HuggingFace
 os.environ.setdefault("YOLO_VERBOSE", "False")
 os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 
 import yaml
 
-# Importa os módulos app/ — cada um chama get_logger() que usa o config global
 from app.pipeline.factory import create_pipeline
 from app.logging.logger import configure_logging
 
-# Redireciona TODOS os logs estruturados para arquivo
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
 _log_filename = LOG_DIR / f"pipeline_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 _log_file = open(_log_filename, "w", encoding="utf-8")
-configure_logging(stream=_log_file)  # redireciona globalmente — afeta todos os loggers
+configure_logging(stream=_log_file)
 
 DATA_ROOT = Path("data/raw")
 CHROMA_PATH = "./chroma_db"
+RESULTS_DIR = Path("results")
 
 
 def _discover_companies(data_root: Path) -> list[dict]:
@@ -51,6 +52,24 @@ def _discover_companies(data_root: Path) -> list[dict]:
     return companies
 
 
+def _save_result(empresa: str, image_path: Path, response) -> Path:
+    """Serializa o PipelineResponse como JSON e salva em results/<empresa>/."""
+    import re
+    empresa_slug = re.sub(r"[^a-z0-9]+", "_", empresa.lower()).strip("_")
+    out_dir = RESULTS_DIR / empresa_slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    out_path = out_dir / f"{image_path.stem}.json"
+    payload = {
+        "image": image_path.name,
+        "empresa": empresa,
+        "timestamp": datetime.now().isoformat(),
+        "response": json.loads(response.model_dump_json()),
+    }
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out_path
+
+
 def main():
     companies = _discover_companies(DATA_ROOT)
 
@@ -58,7 +77,8 @@ def main():
         print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
         return
 
-    print(f"Logs JSON → {_log_filename}")
+    print(f"Logs      → {_log_filename}")
+    print(f"Resultados → {RESULTS_DIR}/")
     print(f"Carregando pipeline...\n")
     pipeline = create_pipeline(chroma_path=CHROMA_PATH)
 
@@ -84,6 +104,8 @@ def main():
             print(f"\nImagem: {image_path.name}")
             try:
                 response = pipeline.run(str(image_path), empresa=empresa, setor=setor)
+                out_path = _save_result(empresa, image_path, response)
+                print(f"  → {out_path}")
 
                 if not response.results:
                     print("  Nenhuma pessoa detectada.")
@@ -100,7 +122,9 @@ def main():
         print()
 
     _log_file.close()
-    print(f"\nPipeline finalizado. Logs em: {_log_filename}")
+    print(f"Pipeline finalizado.")
+    print(f"  Resultados JSON: {RESULTS_DIR}/")
+    print(f"  Logs:            {_log_filename}")
 
 
 if __name__ == "__main__":
