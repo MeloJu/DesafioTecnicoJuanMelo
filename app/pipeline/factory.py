@@ -32,14 +32,20 @@ def create_pipeline(  # pragma: no cover
     embed_model: str = "nomic-embed-text",
     chroma_path: str = "./chroma_db",
     epi_attributes: Optional[List[EPIAttribute]] = None,
+    clip_model_path: Optional[str] = None,
 ) -> Pipeline:
-    """Instancia e conecta todos os módulos do pipeline."""
+    """Instancia e conecta todos os módulos do pipeline.
+
+    clip_model_path: caminho para um modelo CLIP fine-tunado
+        (salvo via CLIPModel.save_pretrained). Se None, usa o modelo base OpenAI.
+        Exemplo: create_pipeline(clip_model_path="models/clip_ppe")
+    """
     if epi_attributes is None:
         epi_attributes = DEFAULT_EPI_ATTRIBUTES
 
     # Vision
     detector = PersonDetector(model_path=yolo_model)
-    extractor = AttributeExtractor(clip_client=CLIPClient(), epi_attributes=epi_attributes)
+    extractor = AttributeExtractor(clip_client=CLIPClient(model_path=clip_model_path), epi_attributes=epi_attributes)
     vision_service = VisionService(detector=detector, extractor=extractor)
 
     # RAG

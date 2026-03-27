@@ -9,6 +9,7 @@ company.yaml. Se omitida, usa DEFAULT_EPI_ATTRIBUTES (4 EPIs padrão).
 
 Uso:
     .venv/Scripts/python scripts/run_pipeline.py
+    .venv/Scripts/python scripts/run_pipeline.py --clip-model models/clip_ppe
 
 Pré-requisito: rodar index_documents.py primeiro para popular o ChromaDB.
 
@@ -17,6 +18,7 @@ Saídas:
   logs/pipeline_YYYY-MM-DD.log     → logs JSON estruturados (structlog)
   terminal                         → resumo legível dos resultados
 """
+import argparse
 import json
 import sys
 import os
@@ -83,6 +85,16 @@ def _save_result(empresa: str, image_path: Path, response) -> Path:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Roda o pipeline de verificação de EPIs")
+    parser.add_argument(
+        "--clip-model",
+        default=None,
+        metavar="PATH",
+        help="Caminho para modelo CLIP fine-tunado (ex: models/clip_ppe). "
+             "Se omitido, usa o modelo base OpenAI.",
+    )
+    args = parser.parse_args()
+
     companies = _discover_companies(DATA_ROOT)
 
     if not companies:
@@ -91,6 +103,8 @@ def main():
 
     print(f"Logs      → {_log_filename}")
     print(f"Resultados → {RESULTS_DIR}/")
+    if args.clip_model:
+        print(f"CLIP model → {args.clip_model}")
     print(f"Carregando pipeline...\n")
 
     for company in companies:
@@ -108,7 +122,11 @@ def main():
             continue
 
         epi_attributes = _load_epi_attributes(company)
-        pipeline = create_pipeline(chroma_path=CHROMA_PATH, epi_attributes=epi_attributes)
+        pipeline = create_pipeline(
+            chroma_path=CHROMA_PATH,
+            epi_attributes=epi_attributes,
+            clip_model_path=args.clip_model,
+        )
 
         print(f"{'='*60}")
         print(f"Empresa: {empresa} | Setor: {setor}")

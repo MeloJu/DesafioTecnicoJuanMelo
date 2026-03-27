@@ -23,5 +23,9 @@ structlog
 pytest
 pytest-cov
 
+# Fine-tuning
+datasets>=2.18
+accelerate>=0.27
+
 # Utilities
 tqdm

@@ -234,6 +234,36 @@ project/
 
 ---
 
+## Fine-tuning do CLIP
+
+O CLIP base (zero-shot) classifica EPIs de forma genérica. O fine-tuning especializa o modelo em imagens de canteiro de obras usando o dataset público [`keremberke/hard-hat-detection`](https://huggingface.co/datasets/keremberke/hard-hat-detection).
+
+**Técnica:** contrastive fine-tuning — minimiza a distância entre embeddings de imagem e texto corretos (ex: crop com capacete ↔ "a person wearing a hard hat").
+
+```bash
+# 1. Gerar dataset de pares imagem-texto
+python scripts/generate_clip_dataset.py
+
+# 2. Fine-tunar (recomendado GPU; roda em CPU para demo)
+python scripts/finetune_clip.py --epochs 3 --output models/clip_ppe
+
+# Em CPU, use batch menor para não exceder memória:
+python scripts/finetune_clip.py --epochs 1 --batch 4
+
+# 3. Usar o modelo fine-tunado no pipeline
+python scripts/run_pipeline.py --clip-model models/clip_ppe
+```
+
+O modelo fine-tunado é salvo em `models/clip_ppe/` no formato HuggingFace e pode ser carregado diretamente pelo `CLIPClient`:
+
+```python
+from app.pipeline.factory import create_pipeline
+
+pipeline = create_pipeline(clip_model_path="models/clip_ppe")
+```
+
+---
+
 ## Decisões técnicas
 
 | Decisão | Escolha | Alternativa rejeitada |
