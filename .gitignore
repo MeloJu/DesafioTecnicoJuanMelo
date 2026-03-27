@@ -38,3 +38,7 @@ models/
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs and temporary files
+ADR.md
+claude.md

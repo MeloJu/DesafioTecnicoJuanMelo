@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
 from app.pipeline.orchestrator import Pipeline
-from app.schemas.output import BBox, PersonResult, PipelineResponse
+from app.schemas.output import BoundingBox, PersonResult, PipelineResponse
 
 
 def test_pipeline_run_orchestrates_services_and_returns_pipeline_response():
@@ -21,13 +21,13 @@ def test_pipeline_run_orchestrates_services_and_returns_pipeline_response():
     reasoning_service.analyze.side_effect = [
         PersonResult(
             pessoa_id=1,
-            bbox=BBox(x1=10, y1=20, x2=30, y2=40),
+            bbox=BoundingBox(x1=10, y1=20, x2=30, y2=40),
             status="Conforme",
             justificativa="Atende às regras.",
         ),
         PersonResult(
             pessoa_id=2,
-            bbox=BBox(x1=50, y1=60, x2=70, y2=80),
+            bbox=BoundingBox(x1=50, y1=60, x2=70, y2=80),
             status="Não conforme",
             justificativa="Violou a Regra 2.",
         ),
