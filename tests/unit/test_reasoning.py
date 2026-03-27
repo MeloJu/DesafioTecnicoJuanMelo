@@ -190,6 +190,26 @@ class TestReasoningBadLlmOutput:
 
         assert result.status == "Indeterminado"
 
+    def test_status_capitalisation_normalised(self):
+        """LLM retorna 'Não Conforme' (C maiúsculo) — deve ser aceito e normalizado."""
+        mock_client = Mock()
+        mock_client.generate.return_value = _llm_response("Não Conforme", "Capacete ausente.")
+        service = ReasoningService(llm_client=mock_client)
+
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+
+        assert result.status == "Não conforme"
+
+    def test_status_all_lowercase_normalised(self):
+        """LLM retorna 'conforme' em minúsculas — deve ser aceito e normalizado."""
+        mock_client = Mock()
+        mock_client.generate.return_value = _llm_response("conforme", "Todos EPIs presentes.")
+        service = ReasoningService(llm_client=mock_client)
+
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+
+        assert result.status == "Conforme"
+
 
 # ---------------------------------------------------------------------------
 # Edge case: LLM failure

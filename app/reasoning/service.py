@@ -89,8 +89,15 @@ class ReasoningService:
             )
             return self._indeterminado(person, f"Resposta do modelo não é JSON válido: {raw[:80]}")
 
-        status = data.get("status", "")
+        raw_status = data.get("status", "").strip()
         justificativa = data.get("justificativa", "").strip()
+
+        # Normaliza variações de capitalização que o LLM às vezes retorna
+        # ex: "Não Conforme" → "Não conforme", "conforme" → "Conforme"
+        _STATUS_ALIASES = {
+            s.lower(): s for s in _VALID_STATUSES
+        }
+        status = _STATUS_ALIASES.get(raw_status.lower(), raw_status)
 
         if status not in _VALID_STATUSES:
             log.error(
