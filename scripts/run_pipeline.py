@@ -1,59 +1,71 @@
 """
-Script de demonstração: roda o pipeline em todas as imagens de data/raw.
+Script de demonstração: roda o pipeline em todas as imagens de data/raw/.
+
+Para adicionar uma nova empresa: basta criar data/raw/<empresa>/company.yaml
+Nenhuma alteração no código é necessária.
 
 Uso:
     .venv/Scripts/python scripts/run_pipeline.py
 
 Pré-requisito: rodar index_documents.py primeiro para popular o ChromaDB.
+
+Logs JSON estruturados → logs/pipeline_YYYY-MM-DD_HH-MM-SS.log
+Saída legível         → terminal (apenas resultados, sem JSON)
 """
 import sys
-import json
+import os
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+# Silencia output de YOLO e HuggingFace
+os.environ.setdefault("YOLO_VERBOSE", "False")
+os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
+os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+
+import yaml
+
+# Importa os módulos app/ — cada um chama get_logger() que usa o config global
 from app.pipeline.factory import create_pipeline
+from app.logging.logger import configure_logging
+
+# Redireciona TODOS os logs estruturados para arquivo
+LOG_DIR = Path("logs")
+LOG_DIR.mkdir(exist_ok=True)
+_log_filename = LOG_DIR / f"pipeline_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
+_log_file = open(_log_filename, "w", encoding="utf-8")
+configure_logging(stream=_log_file)  # redireciona globalmente — afeta todos os loggers
 
 DATA_ROOT = Path("data/raw")
 CHROMA_PATH = "./chroma_db"
 
-# Mapeamento pasta → (empresa, setor)
-COMPANIES = [
-    {
-        "folder": "Construtiva Engenharia S.A_",
-        "images_folder": "images",
-        "empresa": "Construtiva Engenharia",
-        "setor": "obras",
-    },
-    {
-        "folder": "LogiTrans Global S.A_",
-        "images_folder": "imagens",
-        "empresa": "LogiTrans Global",
-        "setor": "logistica",
-    },
-    {
-        "folder": "Rede_Vitalis",
-        "images_folder": "imagens",
-        "empresa": "Rede Vitalis",
-        "setor": "saude",
-    },
-    {
-        "folder": "VITALCARE SERVIÇOS DE SAÚDE INTEGRADOS S.A_",
-        "images_folder": "images",
-        "empresa": "VitalCare",
-        "setor": "saude",
-    },
-]
+
+def _discover_companies(data_root: Path) -> list[dict]:
+    companies = []
+    for config_path in sorted(data_root.glob("*/company.yaml")):
+        with open(config_path, encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+        cfg["folder"] = config_path.parent
+        companies.append(cfg)
+    return companies
 
 
 def main():
-    print("Carregando pipeline...\n")
+    companies = _discover_companies(DATA_ROOT)
+
+    if not companies:
+        print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
+        return
+
+    print(f"Logs JSON → {_log_filename}")
+    print(f"Carregando pipeline...\n")
     pipeline = create_pipeline(chroma_path=CHROMA_PATH)
 
-    for company in COMPANIES:
-        images_dir = DATA_ROOT / company["folder"] / company["images_folder"]
+    for company in companies:
         empresa = company["empresa"]
         setor = company["setor"]
+        images_dir = company["folder"] / company["images_folder"]
 
         if not images_dir.exists():
             print(f"[AVISO] Pasta de imagens não encontrada: {images_dir}")
@@ -74,22 +86,21 @@ def main():
                 response = pipeline.run(str(image_path), empresa=empresa, setor=setor)
 
                 if not response.results:
-                    print("  Nenhuma pessoa detectada na imagem.")
+                    print("  Nenhuma pessoa detectada.")
                     continue
 
                 for result in response.results:
-                    status_icon = "✓" if result.status == "Conforme" else "✗" if result.status == "Não conforme" else "?"
-                    print(f"  [{status_icon}] Pessoa {result.pessoa_id}: {result.status}")
-                    print(f"      Justificativa: {result.justificativa}")
-                    bbox = result.bbox
-                    print(f"      BBox: ({bbox.x1:.0f},{bbox.y1:.0f}) → ({bbox.x2:.0f},{bbox.y2:.0f})")
+                    icon = "✓" if result.status == "Conforme" else "✗" if result.status == "Não conforme" else "?"
+                    print(f"  [{icon}] Pessoa {result.pessoa_id}: {result.status}")
+                    print(f"      {result.justificativa}")
 
             except Exception as exc:
                 print(f"  [ERRO] {exc}")
 
         print()
 
-    print("Pipeline finalizado.")
+    _log_file.close()
+    print(f"\nPipeline finalizado. Logs em: {_log_filename}")
 
 
 if __name__ == "__main__":

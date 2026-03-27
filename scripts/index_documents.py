@@ -1,61 +1,58 @@
 """
-Script de indexação: lê todos os documentos de data/raw e indexa no ChromaDB.
+Script de indexação: lê todos os company.yaml em data/raw/ e indexa no ChromaDB.
+
+Para adicionar uma nova empresa:
+  1. Crie a pasta: data/raw/<NomeDaEmpresa>/
+  2. Coloque o PDF/DOCX dentro
+  3. Crie data/raw/<NomeDaEmpresa>/company.yaml com:
+       empresa: Nome da Empresa
+       setor: setor_da_empresa
+       doc: nome_do_arquivo.pdf
+       images_folder: images
 
 Uso:
     .venv/Scripts/python scripts/index_documents.py
 
-O ChromaDB é criado em ./chroma_db (persistente, uma collection por empresa).
-Só precisa rodar uma vez — ou quando os documentos mudam.
+O ChromaDB é criado em ./chroma_db (persistente).
+Só precisa rodar quando documentos são adicionados ou alterados.
 """
+import re
 import sys
 from pathlib import Path
 
-# Garante que app/ é encontrado independente de onde o script é chamado
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import chromadb
+import yaml
 
 from app.rag.document_parser import DocumentParser
 from app.rag.embedding_service import EmbeddingService
 from app.rag.ollama_embedder import OllamaEmbedder
 
-# ---------------------------------------------------------------------------
-# Mapeamento: pasta → (empresa, setor, arquivo do documento)
-# ---------------------------------------------------------------------------
-
 DATA_ROOT = Path("data/raw")
 CHROMA_PATH = "./chroma_db"
 
-COMPANIES = [
-    {
-        "folder": "Construtiva Engenharia S.A_",
-        "empresa": "Construtiva Engenharia",
-        "setor": "obras",
-        "doc": "Construtiva_Engenharia_Manual_Completo_Texto_Rendido.pdf",
-    },
-    {
-        "folder": "LogiTrans Global S.A_",
-        "empresa": "LogiTrans Global",
-        "setor": "logistica",
-        "doc": "Manual_Integracao_LogiTrans_v2023.pdf",
-    },
-    {
-        "folder": "Rede_Vitalis",
-        "empresa": "Rede Vitalis",
-        "setor": "saude",
-        "doc": "Guia_Integracao_Rede_Vitalis_2024.docx",
-    },
-    {
-        "folder": "VITALCARE SERVIÇOS DE SAÚDE INTEGRADOS S.A_",
-        "empresa": "VitalCare",
-        "setor": "saude",
-        "doc": "VitalCare_Manual_Institucional_Completo.pdf",
-    },
-]
+
+def _discover_companies(data_root: Path) -> list[dict]:
+    """Encontra todas as pastas com company.yaml em data/raw/."""
+    companies = []
+    for config_path in sorted(data_root.glob("*/company.yaml")):
+        with open(config_path, encoding="utf-8") as f:
+            cfg = yaml.safe_load(f)
+        cfg["folder"] = config_path.parent
+        companies.append(cfg)
+    return companies
 
 
 def main():
-    print("Iniciando indexação de documentos...\n")
+    companies = _discover_companies(DATA_ROOT)
+
+    if not companies:
+        print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
+        print("Crie data/raw/<empresa>/company.yaml para cada empresa.")
+        return
+
+    print(f"Encontradas {len(companies)} empresa(s).\n")
 
     parser = DocumentParser()
     embedder = OllamaEmbedder(model="nomic-embed-text")
@@ -67,42 +64,39 @@ def main():
 
     total_chunks = 0
 
-    for company in COMPANIES:
-        doc_path = DATA_ROOT / company["folder"] / company["doc"]
+    for company in companies:
         empresa = company["empresa"]
         setor = company["setor"]
-
-        if not doc_path.exists():
-            print(f"  [AVISO] Arquivo não encontrado: {doc_path}")
-            continue
+        doc_path = company["folder"] / company["doc"]
 
         print(f"Indexando: {empresa} ({setor})")
         print(f"  Arquivo: {doc_path.name}")
+
+        if not doc_path.exists():
+            print(f"  [AVISO] Arquivo não encontrado: {doc_path}")
+            print()
+            continue
 
         try:
             chunks = parser.parse(str(doc_path), empresa=empresa, setor=setor)
             print(f"  Chunks extraídos: {len(chunks)}")
 
             if not chunks:
-                print(f"  [AVISO] Nenhum chunk extraído — documento pode estar vazio ou muito curto")
+                print("  [AVISO] Nenhum chunk extraído — documento pode estar vazio ou muito curto")
+                print()
                 continue
 
-            # collection_name é gerado automaticamente dentro do EmbeddingService
-            # mas aqui precisamos passá-lo explicitamente
-            import re
             collection = re.sub(r"[^a-z0-9]+", "_", empresa.lower()).strip("_")
             embedding_service.index(chunks, collection=collection)
-
-            print(f"  Indexado na collection: '{collection}'")
+            print(f"  Collection: '{collection}' ✓")
             total_chunks += len(chunks)
 
         except Exception as exc:
-            print(f"  [ERRO] {empresa}: {exc}")
+            print(f"  [ERRO] {exc}")
 
         print()
 
-    print(f"Indexação concluída. Total de chunks indexados: {total_chunks}")
-    print(f"ChromaDB persistido em: {CHROMA_PATH}/")
+    print(f"Indexação concluída. Total: {total_chunks} chunks → {CHROMA_PATH}/")
 
 
 if __name__ == "__main__":
