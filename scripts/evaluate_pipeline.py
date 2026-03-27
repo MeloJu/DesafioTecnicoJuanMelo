@@ -145,12 +145,13 @@ def _metrics(tp: int, tn: int, fp: int, fn: int) -> dict:
     }
 
 
-def evaluate(results_dir: pathlib.Path, verbose: bool = True) -> None:
+def evaluate(results_dir: pathlib.Path, verbose: bool = True, out_path: pathlib.Path | None = None) -> None:
     sep  = "=" * 60
     sep2 = "-" * 60
 
     global_tp = global_tn = global_fp = global_fn = global_indet = 0
     global_mismatch_count = 0
+    company_metrics: dict = {}
 
     print(f"\n{sep}")
     print("  AVALIACAO DO PIPELINE — vs. Gabarito Humano")
@@ -211,6 +212,9 @@ def evaluate(results_dir: pathlib.Path, verbose: bool = True) -> None:
             for w in mismatches:
                 print(f"      - {w}")
 
+        company_metrics[label] = _metrics(e_tp, e_tn, e_fp, e_fn)
+        company_metrics[label]["indeterminado"] = e_indet
+
         global_tp += e_tp; global_tn += e_tn
         global_fp += e_fp; global_fn += e_fn
         global_indet += e_indet
@@ -231,10 +235,34 @@ def evaluate(results_dir: pathlib.Path, verbose: bool = True) -> None:
     print(f"  Para matching preciso, seria necessario bbox no gabarito.")
     print(f"{sep}")
 
+    # Salvar JSON
+    if out_path is not None:
+        report = {
+            "metadata": {
+                "pessoas_comparadas": gm["total"],
+                "indeterminado": global_indet,
+                "imagens_com_contagem_diferente": global_mismatch_count,
+                "nota": "matching por posicao — sem bbox no gabarito; positivo=Conforme",
+            },
+            "global": gm,
+            "por_empresa": company_metrics,
+            "interpretacao": {
+                "precision_alta": "Quando o pipeline classifica como Conforme, acerta 84% das vezes — poucos falsos positivos.",
+                "recall_baixo": "Pipeline conservador: prefere marcar como Nao conforme quando ha duvida. Falsos negativos altos.",
+                "construtiva_img1": "Imagem de escritorio: gabarito=todos conformes, pipeline=todos nao conformes. Modelo aplica regras de obra ao escritorio — limitacao do CLIP zero-shot sem contexto de ambiente.",
+                "contagem_diferente": "VitalCare e Rede Vitalis: YOLO detecta mais pessoas que o anotador humano. Matching por posicao fica comprometido nessas imagens.",
+            },
+        }
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        print(f"\n  Metricas salvas em: {out_path}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Avalia pipeline vs gabarito humano")
-    parser.add_argument("--results", default="results/", help="Diretorio com resultados do pipeline")
+    parser.add_argument("--results",    default="results/", help="Diretorio com resultados do pipeline")
+    parser.add_argument("--out",        default="results/pipeline_evaluation.json", help="Onde salvar o JSON de metricas")
     parser.add_argument("--no-verbose", action="store_true", help="Omite detalhe por pessoa")
     args = parser.parse_args()
 
@@ -243,4 +271,4 @@ if __name__ == "__main__":
         print(f"Diretorio nao encontrado: {results_dir}")
         raise SystemExit(1)
 
-    evaluate(results_dir, verbose=not args.no_verbose)
+    evaluate(results_dir, verbose=not args.no_verbose, out_path=pathlib.Path(args.out))

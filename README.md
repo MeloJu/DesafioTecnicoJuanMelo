@@ -207,6 +207,24 @@ Resultados de 4 empresas (15 imagens, 125 pessoas analisadas):
 | VitalCare | 34 | 23.5% | 73.5% | 2.9% |
 | **Global** | **125** | **27.2%** | **68.0%** | **4.8%** |
 
+### Avaliação vs. gabarito humano
+
+Pipeline comparado com anotação humana de 103 pessoas em 20 imagens (`relatorio_compliance_visual.md`):
+
+| Empresa | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| LogiTrans Global | 52.9% | 66.7% | 40.0% | 50.0% |
+| Rede Vitalis | 52.2% | 83.3% | 52.6% | 64.5% |
+| VitalCare | 34.8% | 100.0% | 34.8% | 51.6% |
+| Construtiva Engenharia | 72.5% | 83.3% | 33.3% | 47.6% |
+| **Global** | **56.3%** | **84.4%** | **40.3%** | **54.5%** |
+
+**Interpretação:** Precision alta (84%) — quando diz Conforme, está certo. Recall baixo (40%) — pipeline conservador: prefere marcar como não conforme na dúvida a aprovar quem não deveria. Para segurança do trabalho, esse comportamento é adequado (falso negativo é menos grave que falso positivo).
+
+```bash
+python scripts/evaluate_pipeline.py   # imprime + salva results/pipeline_evaluation.json
+```
+
 ---
 
 ## Estrutura do projeto
