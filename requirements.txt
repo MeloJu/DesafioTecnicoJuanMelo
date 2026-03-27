@@ -1,31 +1,31 @@
 # Vision
-ultralytics
-transformers
-pillow
-opencv-python
+ultralytics==8.4.30
+transformers==5.3.0
+pillow==12.1.1
+opencv-python==4.13.0.92
 
 # RAG
-chromadb
-pdfplumber
-python-docx
+chromadb==1.5.5
+pdfplumber==0.11.9
+python-docx==1.2.0
 
 # LLM / Embeddings (via Ollama)
-ollama
+ollama==0.6.1
 
 # Schemas & Settings
-pydantic>=2.0
-pydantic-settings
+pydantic==2.12.5
+pydantic-settings==2.13.1
 
 # Logging
-structlog
+structlog==25.5.0
 
 # Tests
-pytest
-pytest-cov
+pytest==9.0.2
+pytest-cov==7.1.0
 
 # Fine-tuning
-datasets>=2.18
-accelerate>=0.27
+datasets==4.8.4
+accelerate==1.13.0
 
 # Utilities
-tqdm
+tqdm==4.67.3
