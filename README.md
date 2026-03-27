@@ -1,7 +1,7 @@
 # Compliance AI — EPI Verification System
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![Tests](https://img.shields.io/badge/tests-175%20passing-brightgreen?logo=pytest)
+![Tests](https://img.shields.io/badge/tests-165%20unit%20%7C%2010%20integration-brightgreen?logo=pytest)
 ![Coverage](https://img.shields.io/badge/coverage-100%25%20unit-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
@@ -191,6 +191,22 @@ docker compose run --rm app python -m pytest tests/unit/ tests/integration/ -q
 | Integração | 10 testes |
 | E2E | 2 testes (requerem ambiente real) |
 
+### Métricas dos resultados reais
+
+```bash
+python scripts/compute_metrics.py
+```
+
+Resultados de 4 empresas (15 imagens, 125 pessoas analisadas):
+
+| Empresa | Pessoas | Conforme | Não conforme | Indeterminado |
+|---|---|---|---|---|
+| Construtiva Engenharia | 40 | 15.0% | 85.0% | 0.0% |
+| LogiTrans Global | 17 | 35.3% | 58.8% | 5.9% |
+| Rede Vitalis | 34 | 41.2% | 47.1% | 11.8% |
+| VitalCare | 34 | 23.5% | 73.5% | 2.9% |
+| **Global** | **125** | **27.2%** | **68.0%** | **4.8%** |
+
 ---
 
 ## Estrutura do projeto
@@ -220,8 +236,12 @@ project/
 │       ├── service.py         ← ReasoningService
 │       └── ollama_llm.py      ← wrapper Llama via Ollama
 ├── scripts/
-│   ├── index_documents.py     ← indexa PDFs no ChromaDB
-│   └── run_pipeline.py        ← roda o pipeline para todas as empresas em data/
+│   ├── index_documents.py         ← indexa PDFs no ChromaDB
+│   ├── run_pipeline.py            ← roda o pipeline para todas as empresas em data/
+│   ├── compute_metrics.py         ← agrega resultados de results/ e exibe métricas
+│   ├── generate_clip_dataset.py   ← gera dataset de pares imagem-texto para fine-tuning
+│   └── finetune_clip.py           ← fine-tuning contrastivo do CLIP em dados de EPI
+├── results/                       ← resultados reais (4 empresas, 125 pessoas, 15 imagens)
 ├── tests/
 │   ├── unit/
 │   ├── integration/
@@ -236,7 +256,7 @@ project/
 
 ## Fine-tuning do CLIP
 
-O CLIP base (zero-shot) classifica EPIs de forma genérica. O fine-tuning especializa o modelo em imagens de canteiro de obras usando o dataset público [`keremberke/hard-hat-detection`](https://huggingface.co/datasets/keremberke/hard-hat-detection).
+O CLIP base (zero-shot) classifica EPIs de forma genérica. O fine-tuning especializa o modelo no domínio de EPIs usando contrastive learning.
 
 **Técnica:** contrastive fine-tuning — minimiza a distância entre embeddings de imagem e texto corretos (ex: crop com capacete ↔ "a person wearing a hard hat").
 
