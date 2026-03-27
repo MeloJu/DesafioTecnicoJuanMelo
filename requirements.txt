@@ -1,0 +1,26 @@
+# Vision
+ultralytics
+transformers
+pillow
+opencv-python
+
+# RAG
+chromadb
+pdfplumber
+
+# LLM / Embeddings (via Ollama)
+ollama
+
+# Schemas & Settings
+pydantic>=2.0
+pydantic-settings
+
+# Logging
+structlog
+
+# Tests
+pytest
+pytest-cov
+
+# Utilities
+tqdm

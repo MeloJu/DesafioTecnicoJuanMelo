@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# pyproject build
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+
+# Data (large binaries — keep only in data/ locally, not in git)
+data/
+
+# ChromaDB local storage
+chroma_db/
+*.chroma
+
+# Models cache
+models/
+
+# OS
+.DS_Store
+Thumbs.db
