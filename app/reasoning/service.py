@@ -99,11 +99,21 @@ class ReasoningService:
         raw_status = data.get("status", "").strip()
         justificativa = data.get("justificativa", "").strip()
 
-        # Normaliza variações de capitalização que o LLM às vezes retorna
+        # Normaliza variações de capitalização e conjugação que o LLM às vezes retorna
         # ex: "Não Conforme" → "Não conforme", "conforme" → "Conforme"
         _STATUS_ALIASES = {
             s.lower(): s for s in _VALID_STATUSES
         }
+        _STATUS_ALIASES.update({
+            "não conformo": "Não conforme",
+            "não conforma": "Não conforme",
+            "nao conforme": "Não conforme",
+            "nao conformo": "Não conforme",
+            "nao conforma": "Não conforme",
+            "inconformidade": "Não conforme",
+            "nao_conforme": "Não conforme",
+            "não_conforme": "Não conforme",
+        })
         status = _STATUS_ALIASES.get(raw_status.lower(), raw_status)
 
         if status not in _VALID_STATUSES:

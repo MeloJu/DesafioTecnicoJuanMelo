@@ -56,8 +56,8 @@
           "x2": 1019.642578125,
           "y2": 568.3921508789062
         },
-        "status": "Indeterminado",
-        "justificativa": "Status inválido retornado pelo modelo: 'Não conforma'"
+        "status": "Não conforme",
+        "justificativa": "Não conforme (status corrigido de 'Não conforma' — conjugação inválida do LLM)."
       },
       {
         "pessoa_id": 6,
@@ -122,8 +122,8 @@
           "x2": 69.32433319091797,
           "y2": 690.0985107421875
         },
-        "status": "Indeterminado",
-        "justificativa": "Status inválido retornado pelo modelo: 'Não conforma'"
+        "status": "Não conforme",
+        "justificativa": "Não conforme (status corrigido de 'Não conforma' — conjugação inválida do LLM)."
       },
       {
         "pessoa_id": 12,

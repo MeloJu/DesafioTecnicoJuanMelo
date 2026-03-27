@@ -34,8 +34,8 @@
           "x2": 1663.7679443359375,
           "y2": 1248.9208984375
         },
-        "status": "Indeterminado",
-        "justificativa": "Status inválido retornado pelo modelo: 'Não Conformo'"
+        "status": "Não conforme",
+        "justificativa": "Não conforme (status corrigido de 'Não Conformo' — conjugação inválida do LLM)."
       }
     ]
   }
