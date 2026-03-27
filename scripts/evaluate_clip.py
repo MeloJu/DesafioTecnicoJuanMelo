@@ -6,7 +6,7 @@ Calcula accuracy, precision, recall e F1 para classificação binária
 
 Uso:
     python scripts/evaluate_clip.py
-    python scripts/evaluate_clip.py --data data/clip_finetune/labels.jsonl
+    python scripts/evaluate_clip.py --data data/clip_finetune/test/labels.jsonl
     python scripts/evaluate_clip.py --finetuned models/clip_ppe
 """
 import argparse
@@ -90,7 +90,7 @@ def print_results(name: str, metrics: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Avalia CLIP base vs. fine-tunado")
-    parser.add_argument("--data",      default="data/clip_finetune/labels.jsonl")
+    parser.add_argument("--data",      default="data/clip_finetune/test/labels.jsonl")
     parser.add_argument("--finetuned", default="models/clip_ppe")
     parser.add_argument("--threshold", type=float, default=0.50,
                         help="Score minimo para classificar como positivo (default: 0.50)")
@@ -137,7 +137,7 @@ def main() -> None:
         print("  Execute: python scripts/finetune_clip.py --epochs 2 --batch 4")
 
     print(f"\n{sep}")
-    print("  Nota: dataset sintetico — imagens geradas via PIL.")
+    print("  Nota: avaliacao no test split (held-out — nunca visto durante treino).")
     print("  Para metricas reais, use imagens reais de EPIs anotadas.")
     print(sep)
 
