@@ -1,0 +1,42 @@
+{
+  "image": "vitalcare_4.png",
+  "empresa": "VitalCare",
+  "timestamp": "2026-03-27T09:04:00.412487",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 1064.4439697265625,
+          "y1": 409.22357177734375,
+          "x2": 1423.4794921875,
+          "y2": 911.7772216796875
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade porque não apresenta colete, como especificado na regra 6.1 Trecho sobre Requisitos por Ambiente, que exige o uso de jaleco ou avental de uso exclusivo dentro da instituição em áreas assistenciais de atendimento direto ao paciente."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 231.16273498535156,
+          "y1": 454.3644714355469,
+          "x2": 529.0841674804688,
+          "y2": 876.1642456054688
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está em conformidade com as regras, pois apresenta um capacete, botas de segurança e luvas presentes. No entanto, a colete está ausente, conforme regra 4.1 do manual."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 760.7545776367188,
+          "y1": 563.2451171875,
+          "x2": 1051.5330810546875,
+          "y2": 894.1757202148438
+        },
+        "status": "Não conforme",
+        "justificativa": "O uso de colete e luvas é obrigatório em áreas assistenciais, mas a pessoa não está usando esses equipamentos. O capacete também é recomendado para área assistencial."
+      }
+    ]
+  }
+}

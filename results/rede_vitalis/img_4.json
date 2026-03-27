@@ -1,0 +1,53 @@
+{
+  "image": "img_4.png",
+  "empresa": "Rede Vitalis",
+  "timestamp": "2026-03-27T09:02:51.469302",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 276.962158203125,
+          "y1": 390.462646484375,
+          "x2": 447.19403076171875,
+          "y2": 715.539306640625
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que é permitido conforme regra \"Pode usar: Relógio, anel, brinco... Vocês estão liberados (porque não tocam nos pacientes). Aproveitem! ✅➡\". Além disso, a pessoa está usando colete, mas não há regra que proíba seu uso. No entanto, é importante notar que o guia recomenda esticar os braços e girar o pescoço a cada 2 horas, o que está sendo feito."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 674.0354614257812,
+          "y1": 416.15185546875,
+          "x2": 918.7969970703125,
+          "y2": 1003.0930786132812
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa está ausente do colete e não tem botas de segurança, embora o guia indique que elas são permitidas (Relógio, anel, brinco... Vocês estão liberados)."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 404.8197326660156,
+          "y1": 494.0599670410156,
+          "x2": 738.50634765625,
+          "y2": 1023.5187377929688
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está presente o luvas, que é permitido de acordo com a regra 'Pode usar: Relógio, anel, brinco... Vocês estão liberados (porque não tocam nos pacientes). Aproveitem! '"
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 109.47908020019531,
+          "y1": 406.27557373046875,
+          "x2": 325.3826904296875,
+          "y2": 996.3499755859375
+        },
+        "status": "Conforme",
+        "justificativa": "O colete, botas de segurança e luvas estão presentes, o que atende às regras. O capacete não foi verificado e está incerto."
+      }
+    ]
+  }
+}

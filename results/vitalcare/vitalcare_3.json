@@ -1,0 +1,64 @@
+{
+  "image": "vitalcare_3.png",
+  "empresa": "VitalCare",
+  "timestamp": "2026-03-27T09:03:55.404505",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 41.67729568481445,
+          "y1": 182.11428833007812,
+          "x2": 736.5348510742188,
+          "y2": 1012.0081787109375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando um colete, que é obrigatório em áreas assistenciais de atendimento direto ao paciente, de acordo com o artigo 6.1 Trecho sobre Requisitos por Ambiente da diretriz de Biossegurança e Controle de Infecção."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 908.0195922851562,
+          "y1": 147.645263671875,
+          "x2": 1466.53173828125,
+          "y2": 1011.179931640625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando luvas, que são consideradas equipamento de proteção individual obrigatório em áreas assistenciais de atendimento direto ao paciente, conforme se destaca no trecho 6.1 Trecho sobre Requisitos por Ambiente."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1385.7060546875,
+          "y1": 230.5910186767578,
+          "x2": 1479.5606689453125,
+          "y2": 615.8270874023438
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa está ausente de equipamentos de proteção individual adequados em ambientes assistenciais, como luvas descartáveis e aventais impermeáveis, o que não se alinha com a regra estabelecida na diretriz de biossegurança e controle de infecção."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 529.0213012695312,
+          "y1": 317.8800964355469,
+          "x2": 1134.4818115234375,
+          "y2": 816.2542724609375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com o manual institucional da VitalCare, pois não está usando um colete como requisito de vestimenta em ambientes assistenciais."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 782.0706787109375,
+          "y1": 315.6064453125,
+          "x2": 1163.5665283203125,
+          "y2": 617.6436157226562
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual, pois não está usando luvas, que é obrigatória em áreas assistenciais de atendimento direto ao paciente."
+      }
+    ]
+  }
+}

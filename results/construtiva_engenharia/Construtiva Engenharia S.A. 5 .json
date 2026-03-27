@@ -1,0 +1,108 @@
+{
+  "image": "Construtiva Engenharia S.A. 5 .png",
+  "empresa": "Construtiva Engenharia",
+  "timestamp": "2026-03-27T09:01:09.994791",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 100.06157684326172,
+          "y1": 392.94580078125,
+          "x2": 444.0960998535156,
+          "y2": 835.3485717773438
+        },
+        "status": "Não conforme",
+        "justificativa": "O colete de segurança não está presente na pessoa, conforme especificado na regra 6.1 Diretrizes de Segurança por Ambiente e Setor."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 765.3436889648438,
+          "y1": 259.6730651855469,
+          "x2": 1010.9873046875,
+          "y2": 964.17431640625
+        },
+        "status": "Conforme",
+        "justificativa": "O capacete, colete e botas de segurança estão presentes nas características atribuídas à pessoa. Além disso, as luvas também estão presentes, o que atende às diretrizes de segurança para a proteção da saúde e bem-estar dos colaboradores."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1170.43408203125,
+          "y1": 141.50625610351562,
+          "x2": 1355.9119873046875,
+          "y2": 523.5809936523438
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não possui um colete de segurança, como exigido pelo manual, além disso, o uso de acessórios pendentes ou itens que possam enroscar em máquinas, equipamentos ou estruturas está proibido nos ambientes operacionais."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 600.5673217773438,
+          "y1": 138.4815673828125,
+          "x2": 721.8687133789062,
+          "y2": 498.6531982421875
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando um colete de segurança, como exigido na regra 6.6 da política de Saúde, Segurança e Meio Ambiente, e tampouco apresenta um capacete de segurança ou uma luva adequada."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 186.41114807128906,
+          "y1": 154.377197265625,
+          "x2": 367.3919372558594,
+          "y2": 457.5320129394531
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete de segurança, como especificado na regra 6.1 Diretrizes de Segurança por Ambiente e Setor: 'capacete: presente, colete: incerto, botas de segurança: presente, luvas: presente'"
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 845.8237915039062,
+          "y1": 159.71177673339844,
+          "x2": 952.825927734375,
+          "y2": 338.2123718261719
+        },
+        "status": "Não conforme",
+        "justificativa": "Capacete: presente, colete: ausente e luvas: ausente, mas o botas de segurança estão presentes e se encaixam com a regra que exige equipamentos de proteção individual no ambiente operacional de obras e campo."
+      },
+      {
+        "pessoa_id": 7,
+        "bbox": {
+          "x1": 850.4600219726562,
+          "y1": 159.1885223388672,
+          "x2": 952.184326171875,
+          "y2": 284.85784912109375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra do uso de colete de segurança, pois o colete é indicado como ausente e as instruções do manual recomendam seu uso contínuo em ambientes operacionais de obras e campo."
+      },
+      {
+        "pessoa_id": 8,
+        "bbox": {
+          "x1": 1139.405517578125,
+          "y1": 706.3948364257812,
+          "x2": 1509.899169921875,
+          "y2": 1000.674072265625
+        },
+        "status": "Não conforme",
+        "justificativa": "O colaborador não está usando capacete de segurança, que é um equipamento obrigatório em ambientes operacionais de obras e campo. A regra 6.1 Diretrizes de Segurança por Ambiente e Setor especifica que o uso contínuo de capacete de segurança é indispensável em tais ambientes."
+      },
+      {
+        "pessoa_id": 9,
+        "bbox": {
+          "x1": 550.3299560546875,
+          "y1": 87.70150756835938,
+          "x2": 597.0471801757812,
+          "y2": 204.56903076171875
+        },
+        "status": "Não conforme",
+        "justificativa": "Capacete: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo), colete: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo), luvas: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo)"
+      }
+    ]
+  }
+}

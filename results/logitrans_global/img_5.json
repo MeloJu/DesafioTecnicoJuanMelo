@@ -1,0 +1,31 @@
+{
+  "image": "img_5.png",
+  "empresa": "LogiTrans Global",
+  "timestamp": "2026-03-27T09:01:59.639227",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 104.24409484863281,
+          "y1": 175.41552734375,
+          "x2": 401.7054138183594,
+          "y2": 1012.9933471679688
+        },
+        "status": "Não conforme",
+        "justificativa": "Capacete: ausente, colete: ausente, botas de segurança: ausente e luvas: ausente. As regras especificam que o uso de capacete é facultativo nas operações de solo e picking, mas obrigatório em operações de içamento vertical ou em áreas isoladas para obras civis, e não há menção a nenhum tipo de proteção térmica corporal (japona) para as áreas frias."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 362.38104248046875,
+          "y1": 131.81982421875,
+          "x2": 604.3829345703125,
+          "y2": 1014.8435668945312
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete de alta visibilidade como requerido na ZONA 1: Galpões de Carga Seca (Armazém Geral / Cross-Docking) e não tem evidências de usar protetor auditiva, mesmo que não haja ruído alto"
+      }
+    ]
+  }
+}

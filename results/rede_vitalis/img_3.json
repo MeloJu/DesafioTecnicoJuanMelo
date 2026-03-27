@@ -1,0 +1,53 @@
+{
+  "image": "img_3.png",
+  "empresa": "Rede Vitalis",
+  "timestamp": "2026-03-27T09:02:43.407099",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 1486.2308349609375,
+          "y1": 256.0389709472656,
+          "x2": 2093.03076171875,
+          "y2": 1262.6041259765625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras da EPI, pois o colete e as botas de segurança estão incertos."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 2049.649658203125,
+          "y1": 411.64599609375,
+          "x2": 2478.968505859375,
+          "y2": 1246.9993896484375
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que é permitido. A colete não é mencionado como um item proibido."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 345.9892883300781,
+          "y1": 414.89898681640625,
+          "x2": 1045.6715087890625,
+          "y2": 1536.0
+        },
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não conforma'"
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 327.18804931640625,
+          "y1": 595.3973999023438,
+          "x2": 507.0037536621094,
+          "y2": 1047.9278564453125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois é incerto se está presente ou não."
+      }
+    ]
+  }
+}

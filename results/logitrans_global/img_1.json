@@ -1,0 +1,42 @@
+{
+  "image": "img_1.png",
+  "empresa": "LogiTrans Global",
+  "timestamp": "2026-03-27T09:01:17.686672",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 1239.5186767578125,
+          "y1": 400.4437561035156,
+          "x2": 1638.9644775390625,
+          "y2": 1493.779541015625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete refletivo de alta visibilidade, embora esteja em uma área de trânsito de carretas e caminhões. A regra estabelece que colete de alta visibilidade é obrigatório para pedestres na zona 3."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 679.583251953125,
+          "y1": 217.44003295898438,
+          "x2": 916.4597778320312,
+          "y2": 910.477294921875
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, colete com faixas reflexivas integradas (padrão homologado), botas de segurança e luvas. Além disso, a pessoa está usando calçados de segurança, vestindo o colete laranja por cima da japona térmica azul, que possui faixas reflexivas integradas, o que atende à regra de exceção. A pessoa também está usando óculos de proteção e está na área restrita do pátio de manobras e docas."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1821.244384765625,
+          "y1": 565.5847778320312,
+          "x2": 2322.20166015625,
+          "y2": 1092.411376953125
+        },
+        "status": "Não conforme",
+        "justificativa": "Capacete: incerto - O uso de capacete é obrigatório nas áreas de alta risco, como os galpões e docas. A pessoa não está usando um capacete."
+      }
+    ]
+  }
+}

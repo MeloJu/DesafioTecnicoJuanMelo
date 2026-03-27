@@ -40,8 +40,7 @@ models/
 .DS_Store
 Thumbs.db
 
-# Pipeline outputs (generated locally, not versioned)
-results/
+# Pipeline outputs
 logs/
 
 # Docs excluded from git

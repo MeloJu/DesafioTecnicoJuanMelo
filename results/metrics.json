@@ -1,0 +1,74 @@
+{
+  "global": {
+    "total": 125,
+    "images": 15,
+    "counts": {
+      "Conforme": 34,
+      "Não conforme": 85,
+      "Indeterminado": 6
+    },
+    "pct": {
+      "Conforme": 27.2,
+      "Não conforme": 68.0,
+      "Indeterminado": 4.8
+    }
+  },
+  "por_empresa": {
+    "Construtiva Engenharia": {
+      "total": 40,
+      "images": 5,
+      "counts": {
+        "Conforme": 6,
+        "Não conforme": 34,
+        "Indeterminado": 0
+      },
+      "pct": {
+        "Conforme": 15.0,
+        "Não conforme": 85.0,
+        "Indeterminado": 0.0
+      }
+    },
+    "LogiTrans Global": {
+      "total": 17,
+      "images": 5,
+      "counts": {
+        "Conforme": 6,
+        "Não conforme": 10,
+        "Indeterminado": 1
+      },
+      "pct": {
+        "Conforme": 35.3,
+        "Não conforme": 58.8,
+        "Indeterminado": 5.9
+      }
+    },
+    "Rede Vitalis": {
+      "total": 34,
+      "images": 5,
+      "counts": {
+        "Conforme": 14,
+        "Não conforme": 16,
+        "Indeterminado": 4
+      },
+      "pct": {
+        "Conforme": 41.2,
+        "Não conforme": 47.1,
+        "Indeterminado": 11.8
+      }
+    },
+    "VitalCare": {
+      "total": 34,
+      "images": 5,
+      "counts": {
+        "Conforme": 8,
+        "Não conforme": 25,
+        "Indeterminado": 1
+      },
+      "pct": {
+        "Conforme": 23.5,
+        "Não conforme": 73.5,
+        "Indeterminado": 2.9
+      }
+    }
+  }
+}

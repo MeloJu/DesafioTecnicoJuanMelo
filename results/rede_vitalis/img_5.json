@@ -1,0 +1,75 @@
+{
+  "image": "img_5.png",
+  "empresa": "Rede Vitalis",
+  "timestamp": "2026-03-27T09:03:02.647387",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 308.71051025390625,
+          "y1": 463.29620361328125,
+          "x2": 707.963623046875,
+          "y2": 1020.6905517578125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade porque não está usando o saco preto, como especificado na regra  Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 883.775390625,
+          "y1": 322.7274475097656,
+          "x2": 955.8140869140625,
+          "y2": 518.7755126953125
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está em conformidade com as regras, pois possui um capacete presente, luvas presentes e unhas curtinhas e limpas."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 418.1480407714844,
+          "y1": 309.4120178222656,
+          "x2": 497.39862060546875,
+          "y2": 536.5054931640625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar saco preto (lixo comum) pois o atributo 'capacete' foi marcado como incerto, e a regra especifica que é necessário usar um saco preto."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 602.8938598632812,
+          "y1": 259.52520751953125,
+          "x2": 874.0431518554688,
+          "y2": 1019.4935302734375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)' pois não tem colete e, portanto, não está usando saco preto."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 606.3388671875,
+          "y1": 317.7640075683594,
+          "x2": 668.0718994140625,
+          "y2": 441.81573486328125
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um capacete, o que é uma prática comum na Vitalis. A presença de luvas e a ausência de coletes e botas de segurança não são criticadas explicitamente nas regras. No entanto, a falta de colete pode ser considerada indeterminada para evitar incidentes. O saco preto (lixo comum) não foi mencionado como uma preocupação específica."
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 979.3619995117188,
+          "y1": 324.87445068359375,
+          "x2": 1017.4246826171875,
+          "y2": 453.08831787109375
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, colete e luvas, o que é permitido de acordo com as regras do Guia_Integracao_Rede_Vitalis_2024.docx."
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "image": "vitalcare_2.png",
+  "empresa": "VitalCare",
+  "timestamp": "2026-03-27T09:03:47.835820",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 505.65997314453125,
+          "y1": 374.8879089355469,
+          "x2": 1085.5474853515625,
+          "y2": 990.86767578125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com o requisito de uso de luvas descartáveis em setores de isolamento ou procedimentos invasivos, pois as luvas estavam em dúvida (incerto) e não foram especificadas como ausentes."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 1151.4644775390625,
+          "y1": 201.33241271972656,
+          "x2": 1398.9893798828125,
+          "y2": 513.4486083984375
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, luvas e colete que podem ser considerados como equipamentos de proteção individual em ambientes assistenciais. No entanto, o colete incerto não é de acordo com a regra, pois especifica que os equipamentos de proteção individual devem estar sempre visíveis e adequados."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 351.3579406738281,
+          "y1": 181.12229919433594,
+          "x2": 717.0659790039062,
+          "y2": 989.0437622070312
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um botas de segurança e luvas, o que está em acordo com as diretrizes da instituição. Além disso, o uso de luvas é obrigatório em áreas assistenciais restritas, como mencionado na regra 6.1. No entanto, a capacete e colete estão ausentes, mas isso não foi considerado uma violação explícita na regra, apenas como \"incerto\"."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 799.71875,
+          "y1": 262.1408386230469,
+          "x2": 1305.1439208984375,
+          "y2": 965.3388061523438
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um botas de segurança, que é obrigatório em áreas assistenciais (regras 6.1). Além disso, as luvas estão presentes, mas não há informação sobre se elas são descartáveis ou não. No entanto, o manual não especifica a necessidade de usar luvas descartáveis em todas as áreas assistenciais. Portanto, é necessário verificar se o uso de luvas está sendo feito de acordo com os protocolos da instituição."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 44.366024017333984,
+          "y1": 184.2454833984375,
+          "x2": 322.83319091796875,
+          "y2": 986.3660278320312
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um capacete presente, colete ausente e botas de segurança presente, o que está em consonância com as diretrizes da instituição. Além disso, está usando luvas, o que é obrigatório em ambientes assistenciais de atendimento direto ao paciente. A única exceção é a ausência do colete, mas como não há uma regra específica sobre o uso de um colete em relação à segurança do paciente, consideramos que a pessoa está em conformidade."
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 150.7858123779297,
+          "y1": 236.71731567382812,
+          "x2": 483.78179931640625,
+          "y2": 843.28271484375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com o requisito de uso de equipamentos de proteção individual, especialmente as luvas. A regra estabelece que em áreas assistenciais de atendimento direto ao paciente, a higienização frequente das mãos e o uso de jaleco ou avental de uso exclusivo são considerados práticas indispensáveis. Embora a pessoa tenha mencionado que as luvas estão incertas, não há uma justificativa clara para não estarem presentes em todas as situações."
+      },
+      {
+        "pessoa_id": 7,
+        "bbox": {
+          "x1": 940.7594604492188,
+          "y1": 151.24278259277344,
+          "x2": 1041.7578125,
+          "y2": 298.6438903808594
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra sobre apresentação pessoal e vestimenta na área assistencial, pois usou luvas incertas, embora o manual exija o uso de equipamentos de proteção individual específicos como luvas descartáveis no setor de isolamento ou procedimentos invasivos. Além disso, também não estava usando colete e botas de segurança, que são requisitos normais para a área assistencial."
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "image": "img_2.png",
+  "empresa": "Rede Vitalis",
+  "timestamp": "2026-03-27T09:02:36.503924",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 713.8709716796875,
+          "y1": 305.64556884765625,
+          "x2": 1112.4453125,
+          "y2": 1512.5958251953125
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um capacete, colete e luvas, o que atende às especificações do Guia_Integracao_Rede_Vitalis_2024.docx. Além disso, não há nenhuma indicação de que a pessoa esteja em desacordo com as regras de comportamento, como esticar os braços e girar o pescoço a cada 2 horas."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 1120.3421630859375,
+          "y1": 339.8667907714844,
+          "x2": 1450.2025146484375,
+          "y2": 1434.4884033203125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete e botas de segurança, pois o valor é 'incerto'."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1420.9654541015625,
+          "y1": 305.14404296875,
+          "x2": 1877.4891357421875,
+          "y2": 1536.0
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um capacete, que é permitido de acordo com a regra do saco preto não ser considerado item de uso pessoal (Papel de bala, copo de café, fralda limpa). Além disso, as luvas estão presentes e são permitidas de acordo com a regra sobre itens que podem ser usados. A colete e as botas de segurança não foram verificadas como necessárias ou desnecessárias e, portanto, sua presença não é considerada. A recomendação de esticar os braços e girar o pescoço a cada 2 horas também não foi mencionada em relação à pessoa."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 1857.7691650390625,
+          "y1": 355.2507019042969,
+          "x2": 2145.962646484375,
+          "y2": 1460.5655517578125
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando um capacete, o que é permitido de acordo com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)'."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 1308.6715087890625,
+          "y1": 318.5150451660156,
+          "x2": 1425.1036376953125,
+          "y2": 539.736083984375
+        },
+        "status": "Conforme",
+        "justificativa": "O capacete está presente, o colete e as botas de segurança estão incertos, mas a luvas estão presentes. Não há infração em relação às regras mencionadas."
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 1672.3023681640625,
+          "y1": 343.04388427734375,
+          "x2": 1765.03857421875,
+          "y2": 546.2752075195312
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois ele está ausente."
+      }
+    ]
+  }
+}

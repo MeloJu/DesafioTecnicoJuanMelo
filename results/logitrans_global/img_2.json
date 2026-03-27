@@ -1,0 +1,42 @@
+{
+  "image": "img_2.png",
+  "empresa": "LogiTrans Global",
+  "timestamp": "2026-03-27T09:01:27.069308",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 512.3399047851562,
+          "y1": 152.27896118164062,
+          "x2": 1238.556396484375,
+          "y2": 1488.9869384765625
+        },
+        "status": "Conforme",
+        "justificativa": "Capacete presente, colete incerto (exceção à regra do colete Laranja não é aplicável aqui), botas de segurança presente e luvas presente. A regra sobre o colete Laranja não é aplicável aqui pois não há menção a faixas reflectivas integradas no capacete."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 1837.32861328125,
+          "y1": 76.75212097167969,
+          "x2": 2349.052978515625,
+          "y2": 1253.452392578125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete, o que é obrigatório em Áreas Externas de Trânsito, como o Pátio de Manobras e Docas (ZONA 3). Além disso, a pessoa está usando sapatos de salto, mesmo que esteja no galpão, o que não está permitido."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1299.1275634765625,
+          "y1": 132.22998046875,
+          "x2": 1663.7679443359375,
+          "y2": 1248.9208984375
+        },
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não Conformo'"
+      }
+    ]
+  }
+}

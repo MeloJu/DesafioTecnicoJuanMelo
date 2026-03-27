@@ -1,0 +1,64 @@
+{
+  "image": "img_4.png",
+  "empresa": "LogiTrans Global",
+  "timestamp": "2026-03-27T09:01:54.155874",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 537.1242065429688,
+          "y1": 457.15777587890625,
+          "x2": 669.7752075195312,
+          "y2": 799.5165405273438
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete de alta visibilidade como exigido nas Áreas Externas, pois só é obrigatório para pedestres que transitarão no pátio externo."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 692.765869140625,
+          "y1": 461.93402099609375,
+          "x2": 806.0975341796875,
+          "y2": 804.4298095703125
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando o capacete, colete e botas de segurança. Embora não esteja usando luvas, pois foram detectadas apenas essas peças de vestimenta, a regra específica sobre uso de luvas não foi mencionada como obrigatória para esta zona operacional. Portanto, considerando que outras peças de proteção estão sendo usadas e que a pessoa está em uma área onde pode haver riscos de segurança, podemos dizer que a pessoa está conforme com as regras."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 391.5943298339844,
+          "y1": 484.4769592285156,
+          "x2": 527.01171875,
+          "y2": 847.0570068359375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando o colete de alta visibilidade (laranja) como exigido na Zona 3 do manual, e também não está usando óculos de proteção como obrigatório para a área externa."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 901.109375,
+          "y1": 462.7681579589844,
+          "x2": 946.052734375,
+          "y2": 595.1336669921875
+        },
+        "status": "Conforme",
+        "justificativa": "O capacetre, colete e botas de segurança estão presentes. A luva é presente, mas não há referência expressa na norma que proíba o uso de luvas sem vestir as mãos nuas para manusear caixas congeladas.\n\nA japona térmica azul possui faixas reflectivas integradas, então não há problema com o colete laranja. A pessoa está vestida de forma adequada e em conformidade com as regras para a zona 2."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 88.6056137084961,
+          "y1": 473.07977294921875,
+          "x2": 228.5097198486328,
+          "y2": 720.7037963867188
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa está ausente de luvas, o que é obrigatório para qualquer manuseio de carga. Além disso, não há menção à presença de faixas reflectivas integradas na japona térmica azul."
+      }
+    ]
+  }
+}

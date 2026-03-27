@@ -1,0 +1,163 @@
+{
+  "image": "img_1.png",
+  "empresa": "Rede Vitalis",
+  "timestamp": "2026-03-27T09:02:21.995524",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 598.9340209960938,
+          "y1": 347.0033874511719,
+          "x2": 1265.0377197265625,
+          "y2": 1511.0194091796875
+        },
+        "status": "Conforme",
+        "justificativa": "Capacete presente, colete ausente, botas de segurança incerto e luvas presente, o que atende às normas do guia"
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 2461.661865234375,
+          "y1": 525.300048828125,
+          "x2": 2814.714111328125,
+          "y2": 1535.8743896484375
+        },
+        "status": "Não conforme",
+        "justificativa": "Colete incerto de acordo com a regra Fica a Dica: Viu o colega de relógio na UTI? Dá um toque amigo. \"Ei, o adorno!\" Melhor ouvir de você do que levar bronca da CCIH."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 1666.1094970703125,
+          "y1": 575.4558715820312,
+          "x2": 2031.466796875,
+          "y2": 1329.7557373046875
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que atende às regras da Vitalis. Além disso, não há nenhum item proibido como saco preto ou lixo comum na lista, mas nem é uma necessidade de estar presente para ser considerado conforme."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 9.819080352783203,
+          "y1": 531.7391967773438,
+          "x2": 242.55084228515625,
+          "y2": 976.642333984375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)', pois não foi verificada a presença do saco preto."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 890.3864135742188,
+          "y1": 323.5189514160156,
+          "x2": 1019.642578125,
+          "y2": 568.3921508789062
+        },
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não conforma'"
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 2106.755615234375,
+          "y1": 493.6851501464844,
+          "x2": 2334.541015625,
+          "y2": 808.8818359375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa está ausente do colete e não tem um saco preto, que é considerado lixo comum (papel de bala, copo de café, fralda limpa)."
+      },
+      {
+        "pessoa_id": 7,
+        "bbox": {
+          "x1": 1570.2137451171875,
+          "y1": 332.8441162109375,
+          "x2": 1649.7354736328125,
+          "y2": 574.1551513671875
+        },
+        "status": "Indeterminado",
+        "justificativa": "A capacidade de indiscernibilidade dos atributos da pessoa (capacete, colete, botas de segurança e luvas) não é clara, pois o valor de cada um é 'incerto'. Não é possível determinar se a pessoa está em conformidade ou não com as regras sem mais informações sobre os itens que ela carrega."
+      },
+      {
+        "pessoa_id": 8,
+        "bbox": {
+          "x1": 1052.84716796875,
+          "y1": 338.56292724609375,
+          "x2": 1193.4990234375,
+          "y2": 647.5827026367188
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está em conformidade porque tem um capacete, uma luva e está seguindo as instruções de alongamento da Guia Integracao Rede Vitalis. A colete e botas de segurança não são mencionadas como requisitos ou conselhos na lista de regras."
+      },
+      {
+        "pessoa_id": 9,
+        "bbox": {
+          "x1": 2383.570068359375,
+          "y1": 449.2440490722656,
+          "x2": 2472.154296875,
+          "y2": 581.449462890625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras da Vitalis. Ela não possui o colete, que é um item essencial para proteger sua segurança na UTI."
+      },
+      {
+        "pessoa_id": 10,
+        "bbox": {
+          "x1": 1758.7735595703125,
+          "y1": 297.8832702636719,
+          "x2": 1873.963623046875,
+          "y2": 500.5386657714844
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 'Fica a Dica: Viu o colega de relógio na UTI? Dá um toque amigo. \"Ei, o adorno!\". Melhor ouvir de você do que levar bronca da CCIH.', pois não está usando um colete."
+      },
+      {
+        "pessoa_id": 11,
+        "bbox": {
+          "x1": 0.1632518768310547,
+          "y1": 468.87176513671875,
+          "x2": 69.32433319091797,
+          "y2": 690.0985107421875
+        },
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não conforma'"
+      },
+      {
+        "pessoa_id": 12,
+        "bbox": {
+          "x1": 1760.9296875,
+          "y1": 303.3822021484375,
+          "x2": 1842.323486328125,
+          "y2": 490.2132568359375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra do capacete: ausente, mas o guia informa que ele deve estar presente (Saco Preto: Lixo Comum). Além disso, também faltam botas de segurança. A presença das luvas é um bom sinal."
+      },
+      {
+        "pessoa_id": 13,
+        "bbox": {
+          "x1": 2757.186767578125,
+          "y1": 432.08905029296875,
+          "x2": 2815.1162109375,
+          "y2": 637.5426025390625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete e botas de segurança, pois elas estão ausentes."
+      },
+      {
+        "pessoa_id": 14,
+        "bbox": {
+          "x1": 0.0,
+          "y1": 469.0076599121094,
+          "x2": 71.29418182373047,
+          "y2": 781.1578979492188
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois ele está ausente."
+      }
+    ]
+  }
+}

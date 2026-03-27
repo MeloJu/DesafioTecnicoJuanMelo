@@ -1,0 +1,53 @@
+{
+  "image": "img_3.png",
+  "empresa": "LogiTrans Global",
+  "timestamp": "2026-03-27T09:01:39.054277",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 198.77415466308594,
+          "y1": 333.88720703125,
+          "x2": 393.3323669433594,
+          "y2": 832.5237426757812
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, colete, botas de segurança e luvas, o que é obrigatório para manuseio de carga. Além disso, não há mencão de falta em relação ao uso do colete refletivo, óculos de proteção, calçados de segurança ou proteção auditiva. Portanto, a pessoa está em conformidade com as regras."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 732.3834228515625,
+          "y1": 361.05810546875,
+          "x2": 882.1959228515625,
+          "y2": 767.7345581054688
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete refletivo, embora a regra de uso do colete laranja seja excepcionada se estiver usando uma japona térmica azul com faixas reflectivas integradas. Além disso, não há evidências de que a pessoa esteja usando colete laranja ou japona térmica azul com faixas reflectivas integradas."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 601.2947998046875,
+          "y1": 425.18280029296875,
+          "x2": 661.2630004882812,
+          "y2": 654.3289184570312
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete refletivo. De acordo com o manual, todos os colaboradores operacionais, conferentes, líderes de equipe, gerentes e visitantes devem usar Colete Refletivo na cor LARANJA."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 545.9392700195312,
+          "y1": 415.7383728027344,
+          "x2": 615.2088012695312,
+          "y2": 666.1419067382812
+        },
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando o colete Laranja, que é permitido em ambientes frios, desde que tenha faixas reflectivas integradas. Além disso, está usando luvas térmicas impermeáveis, que são obrigatórias para manuseio de carga. A pessoa também está usando botas de segurança e um capacete, o que é obrigatório em áreas de trânsito pesado."
+      }
+    ]
+  }
+}

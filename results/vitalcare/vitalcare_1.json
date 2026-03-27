@@ -1,0 +1,174 @@
+{
+  "image": "vitalcare_1.png",
+  "empresa": "VitalCare",
+  "timestamp": "2026-03-27T09:03:32.882234",
+  "response": {
+    "results": [
+      {
+        "pessoa_id": 1,
+        "bbox": {
+          "x1": 914.6948852539062,
+          "y1": 366.5516052246094,
+          "x2": 1370.8638916015625,
+          "y2": 830.8778076171875
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando equipamento de proteção individual (EPI) em área assistencial, especificamente não usou luvas e colete, além de não usar capacete. A regra estabelece que na área assistencial de atendimento direto ao paciente, a higienização frequente das mãos e o uso de jaleco ou avental de uso exclusivo dentro da instituição são práticas indispensáveis, e o uso de equipamentos de proteção individual específicos é considerado obrigatório durante toda a atividade."
+      },
+      {
+        "pessoa_id": 2,
+        "bbox": {
+          "x1": 163.096435546875,
+          "y1": 436.64715576171875,
+          "x2": 640.4766235351562,
+          "y2": 987.641845703125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras de vestimenta para ambientes assistenciais, pois usou anéis e relógios que são considerados adornos pessoais e podem causar contaminação cruzada."
+      },
+      {
+        "pessoa_id": 3,
+        "bbox": {
+          "x1": 881.826904296875,
+          "y1": 143.9629364013672,
+          "x2": 987.04150390625,
+          "y2": 526.9649658203125
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade porque o uso de equipamentos de proteção individual (EPIs) foi mencionado na regra 6.1, mas não há evidência de que ela esteja usando um colete e luvas descartáveis nas áreas assistenciais, além de estar usando uma pulseira (adorno pessoal) e unhas artificiais que poderiam causar contaminação cruzada."
+      },
+      {
+        "pessoa_id": 4,
+        "bbox": {
+          "x1": 1002.413818359375,
+          "y1": 138.3437957763672,
+          "x2": 1111.5230712890625,
+          "y2": 532.2113647460938
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de vestimenta e higiene em ambientes assistenciais, pois não usa luvas como requisito obrigatório."
+      },
+      {
+        "pessoa_id": 5,
+        "bbox": {
+          "x1": 125.99330139160156,
+          "y1": 201.70724487304688,
+          "x2": 320.2319030761719,
+          "y2": 435.2576904296875
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando luvas, que é um requisito obrigatório em ambientes assistenciais de atendimento direto ao paciente, conforme regra 6.1 do manual institucional da VitalCare."
+      },
+      {
+        "pessoa_id": 6,
+        "bbox": {
+          "x1": 1222.7291259765625,
+          "y1": 171.35833740234375,
+          "x2": 1323.5574951171875,
+          "y2": 398.2612609863281
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 6.1 Trecho sobre Requisitos por Ambiente, pois não possui luvas, embora seja uma área assistencial de atendimento direto ao paciente."
+      },
+      {
+        "pessoa_id": 7,
+        "bbox": {
+          "x1": 1093.32177734375,
+          "y1": 184.9371795654297,
+          "x2": 1200.27587890625,
+          "y2": 397.8004455566406
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de apresentação pessoal e vestimenta em ambientes assistenciais, pois o uso de luvas incertas é permitido apenas em áreas específicas (setores de isolamento ou procedimentos invasivos) e não é mencionado como obrigatório em todas as áreas assistenciais."
+      },
+      {
+        "pessoa_id": 8,
+        "bbox": {
+          "x1": 426.4884033203125,
+          "y1": 115.81551361083984,
+          "x2": 778.5472412109375,
+          "y2": 649.4806518554688
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas em ambientes assistenciais, pois as luvas estavam ausentes. A regra especifica que o uso de jaleco ou avental de uso exclusivo e, em áreas de isolamento ou procedimentos invasivos, o uso de equipamentos de proteção individual específicos é obrigatório."
+      },
+      {
+        "pessoa_id": 9,
+        "bbox": {
+          "x1": 344.3182678222656,
+          "y1": 206.63548278808594,
+          "x2": 412.276123046875,
+          "y2": 292.7051086425781
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando equipamentos de proteção individual necessários para o ambiente assistencial, como luvas, colete e botas de segurança, contrariando as diretrizes de biossegurança e controle de infecção (regra 6.1)."
+      },
+      {
+        "pessoa_id": 10,
+        "bbox": {
+          "x1": 1061.132080078125,
+          "y1": 184.9247589111328,
+          "x2": 1202.1968994140625,
+          "y2": 513.663818359375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual nas áreas assistenciais de atendimento direto ao paciente, pois não mencionou o uso de jaleco ou avental de uso exclusivo e não usou luvas descartáveis. Além disso, a pessoa mencionou que o colete e botas de segurança estavam incertos, mas não há regra específica que exija seu uso em ambientes assistenciais."
+      },
+      {
+        "pessoa_id": 11,
+        "bbox": {
+          "x1": 344.3135070800781,
+          "y1": 165.01263427734375,
+          "x2": 580.3662109375,
+          "y2": 463.9156188964844
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando luvas, o que é obrigatório em áreas assistenciais de atendimento direto ao paciente (regra 6.1 Trecho sobre Requisitos por Ambiente)."
+      },
+      {
+        "pessoa_id": 12,
+        "bbox": {
+          "x1": 431.771484375,
+          "y1": 113.3912124633789,
+          "x2": 779.2188720703125,
+          "y2": 868.771728515625
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as diretrizes de vestimenta para ambientes assistenciais, pois não está usando jaleco ou avental de uso exclusivo dentro da instituição e também não tem luvas, o que pode ser considerado como falta de equipamento de proteção individual."
+      },
+      {
+        "pessoa_id": 13,
+        "bbox": {
+          "x1": 344.1131286621094,
+          "y1": 167.8195343017578,
+          "x2": 580.7410278320312,
+          "y2": 590.6956787109375
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras de vestimenta para ambientes assistenciais, pois não usa um jaleco ou avental de uso exclusivo dentro da instituição e também não tem uma identificação funcional clara."
+      },
+      {
+        "pessoa_id": 14,
+        "bbox": {
+          "x1": 1238.2325439453125,
+          "y1": 278.53656005859375,
+          "x2": 1446.2281494140625,
+          "y2": 461.5500183105469
+        },
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras de vestimenta na área assistencial, pois não está usando colete e não tem certeza se o capacete é adequado para a área. Além disso, está usando botas de segurança e luvas, mas isso não é suficiente para garantir a biossegurança em áreas assistenciais."
+      },
+      {
+        "pessoa_id": 15,
+        "bbox": {
+          "x1": 1239.987060546875,
+          "y1": 278.2061462402344,
+          "x2": 1447.23046875,
+          "y2": 538.385986328125
+        },
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não Conformo'"
+      }
+    ]
+  }
+}
