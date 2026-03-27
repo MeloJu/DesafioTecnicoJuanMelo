@@ -17,16 +17,21 @@ import pytest
 from app.rag.embedding_service import EmbeddingService
 from app.rag.service import RagService
 from app.reasoning.service import ReasoningService
+from app.schemas.epi_config import EPIAttribute
 from app.schemas.output import (
     BoundingBox,
     Chunk,
-    PersonAttributes,
     PersonDetection,
 )
 
 CORRELATION_ID = "integration-rag-reasoning-id"
 
 _FIXED_EMBEDDING = [0.1] * 128
+
+_DEFAULT_EPI = [
+    EPIAttribute("helmet", "capacete", "wearing hard hat", "not wearing hard hat"),
+    EPIAttribute("vest", "colete refletivo", "wearing vest", "not wearing vest"),
+]
 
 
 # ---------------------------------------------------------------------------
@@ -38,7 +43,7 @@ def _make_person(helmet: bool = False, vest: bool = True) -> PersonDetection:
     return PersonDetection(
         pessoa_id=1,
         bbox=BoundingBox(x1=0, y1=0, x2=100, y2=200),
-        attributes=PersonAttributes(helmet=helmet, vest=vest),
+        attributes={"helmet": helmet, "vest": vest},
     )
 
 
@@ -118,7 +123,7 @@ class TestRagReasoningIntegration:
         assert "Capacete" in rules[0].rule
         assert rules[0].source == "normas_obras.pdf"
 
-        result = reasoning.analyze(person, rules, CORRELATION_ID)
+        result = reasoning.analyze(person, rules, CORRELATION_ID, _DEFAULT_EPI)
 
         assert result.status == "Conforme"
         assert result.pessoa_id == 1
@@ -138,7 +143,7 @@ class TestRagReasoningIntegration:
 
         person = _make_person(helmet=False, vest=True)
         rules = rag.retrieve("Construtiva", "obras", "capacete", CORRELATION_ID)
-        result = reasoning.analyze(person, rules, CORRELATION_ID)
+        result = reasoning.analyze(person, rules, CORRELATION_ID, _DEFAULT_EPI)
 
         assert result.status == "Não conforme"
         assert "ausente" in result.justificativa.lower()
@@ -154,7 +159,7 @@ class TestRagReasoningIntegration:
 
         assert rules == []
 
-        result = reasoning.analyze(person, rules, CORRELATION_ID)
+        result = reasoning.analyze(person, rules, CORRELATION_ID, _DEFAULT_EPI)
 
         assert result.status == "Indeterminado"
         mock_llm.generate.assert_not_called()
@@ -200,7 +205,7 @@ class TestRagReasoningIntegration:
 
         assert len(rules) == 2
 
-        result = reasoning.analyze(person, rules, CORRELATION_ID)
+        result = reasoning.analyze(person, rules, CORRELATION_ID, _DEFAULT_EPI)
 
         assert result.status == "Conforme"
         # LLM recebeu prompt com ambas as regras
@@ -219,7 +224,7 @@ class TestRagReasoningIntegration:
 
         person = _make_person()
         rules = rag.retrieve("Construtiva", "obras", "capacete", CORRELATION_ID)
-        result = reasoning.analyze(person, rules, CORRELATION_ID)
+        result = reasoning.analyze(person, rules, CORRELATION_ID, _DEFAULT_EPI)
 
         assert result.status == "Indeterminado"
         assert "Ollama offline" in result.justificativa

@@ -9,6 +9,8 @@ Uso:
     pipeline = create_pipeline()
     response = pipeline.run("imagem.jpg", empresa="Construtiva", setor="obras")
 """
+from typing import List, Optional
+
 import chromadb
 
 from app.pipeline.orchestrator import Pipeline
@@ -17,6 +19,7 @@ from app.rag.ollama_embedder import OllamaEmbedder
 from app.rag.service import RagService
 from app.reasoning.ollama_llm import OllamaLLM
 from app.reasoning.service import ReasoningService
+from app.schemas.epi_config import DEFAULT_EPI_ATTRIBUTES, EPIAttribute
 from app.vision.clip_client import CLIPClient
 from app.vision.detector import PersonDetector
 from app.vision.extractor import AttributeExtractor
@@ -28,12 +31,15 @@ def create_pipeline(  # pragma: no cover
     llm_model: str = "llama3.2",
     embed_model: str = "nomic-embed-text",
     chroma_path: str = "./chroma_db",
+    epi_attributes: Optional[List[EPIAttribute]] = None,
 ) -> Pipeline:
     """Instancia e conecta todos os módulos do pipeline."""
+    if epi_attributes is None:
+        epi_attributes = DEFAULT_EPI_ATTRIBUTES
 
     # Vision
     detector = PersonDetector(model_path=yolo_model)
-    extractor = AttributeExtractor(clip_client=CLIPClient())
+    extractor = AttributeExtractor(clip_client=CLIPClient(), epi_attributes=epi_attributes)
     vision_service = VisionService(detector=detector, extractor=extractor)
 
     # RAG
@@ -51,4 +57,5 @@ def create_pipeline(  # pragma: no cover
         vision_service=vision_service,
         rag_service=rag_service,
         reasoning_service=reasoning_service,
+        epi_attributes=epi_attributes,
     )

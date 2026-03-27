@@ -14,9 +14,10 @@ Em produção: OllamaClient. Em testes unitários: sempre mockado.
 """
 import json
 import re
-from typing import List
+from typing import Dict, List, Optional
 
 from app.logging.logger import get_logger
+from app.schemas.epi_config import EPIAttribute
 from app.schemas.output import BoundingBox, PersonDetection, PersonResult, Rule
 
 log = get_logger()
@@ -46,6 +47,7 @@ class ReasoningService:
         person: PersonDetection,
         rules: List[Rule],
         correlation_id: str,
+        epi_attributes: List[EPIAttribute] = None,
     ) -> PersonResult:
         if not rules:
             log.warning(
@@ -55,7 +57,7 @@ class ReasoningService:
             )
             return self._indeterminado(person, "Nenhuma regra encontrada para esta empresa e setor.")
 
-        prompt = _build_prompt(person, rules)
+        prompt = _build_prompt(person, rules, epi_attributes or [])
 
         try:
             raw = self._llm.generate(prompt, correlation_id=correlation_id)
@@ -139,14 +141,23 @@ class ReasoningService:
         )
 
 
-def _build_prompt(person: PersonDetection, rules: List[Rule]) -> str:
-    attrs = person.attributes
-    attribute_lines = "\n".join([
-        f"- capacete: {'presente' if attrs.helmet is True else 'ausente' if attrs.helmet is False else 'incerto'}",
-        f"- colete: {'presente' if attrs.vest is True else 'ausente' if attrs.vest is False else 'incerto'}",
-        f"- botas de segurança: {'presente' if attrs.safety_boots is True else 'ausente' if attrs.safety_boots is False else 'incerto'}",
-        f"- luvas: {'presente' if attrs.gloves is True else 'ausente' if attrs.gloves is False else 'incerto'}",
-    ])
+def _build_prompt(
+    person: PersonDetection,
+    rules: List[Rule],
+    epi_attributes: List[EPIAttribute],
+) -> str:
+    if epi_attributes:
+        attribute_lines = "\n".join(
+            f"- {epi.label_pt}: "
+            f"{'presente' if person.attributes.get(epi.name) is True else 'ausente' if person.attributes.get(epi.name) is False else 'incerto'}"
+            for epi in epi_attributes
+        )
+    else:
+        # Fallback genérico quando nenhum EPIAttribute foi configurado
+        attribute_lines = "\n".join(
+            f"- {k}: {'presente' if v is True else 'ausente' if v is False else 'incerto'}"
+            for k, v in person.attributes.items()
+        )
     rule_lines = "\n".join(f"- {r.rule} (fonte: {r.source})" for r in rules)
     return _PROMPT_TEMPLATE.format(attributes=attribute_lines, rules=rule_lines)
 

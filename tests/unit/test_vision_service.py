@@ -14,7 +14,7 @@ from unittest.mock import Mock, patch, MagicMock
 from PIL import Image
 
 from app.vision.service import VisionService
-from app.schemas.output import BoundingBox, PersonAttributes, PersonDetection
+from app.schemas.output import BoundingBox, PersonDetection
 
 CORRELATION_ID = "test-vision-service-id"
 
@@ -29,7 +29,7 @@ def _make_detection(
     return PersonDetection(
         pessoa_id=pessoa_id,
         bbox=BoundingBox(x1=x1, y1=y1, x2=x2, y2=y2),
-        attributes=PersonAttributes(),
+        attributes={},
     )
 
 
@@ -41,15 +41,15 @@ class TestVisionService:
     def _make_service(
         self,
         detections: list,
-        attrs: PersonAttributes | None = None,
+        attrs: dict | None = None,
     ) -> VisionService:
         mock_detector = Mock()
         mock_detector.detect.return_value = detections
 
         mock_extractor = Mock()
-        mock_extractor.extract.return_value = attrs or PersonAttributes(
-            helmet=True, vest=True, safety_boots=False, gloves=None
-        )
+        mock_extractor.extract.return_value = attrs or {
+            "helmet": True, "vest": True, "safety_boots": False, "gloves": None
+        }
 
         return VisionService(detector=mock_detector, extractor=mock_extractor)
 
@@ -63,7 +63,7 @@ class TestVisionService:
 
         assert len(results) == 1
         assert isinstance(results[0], PersonDetection)
-        assert results[0].attributes.helmet is True
+        assert results[0].attributes["helmet"] is True
 
     def test_empty_detection_returns_empty_list(self):
         service = self._make_service([])
@@ -103,9 +103,9 @@ class TestVisionService:
             mock_img.open.return_value = _make_dummy_image()
             results = service.process("test.jpg", CORRELATION_ID)
 
-        # Original detection attributes were all None; returned copy has filled attrs
-        assert detection.attributes.helmet is None
-        assert results[0].attributes.helmet is True
+        # Original detection has empty attributes; returned copy has filled attrs
+        assert detection.attributes == {}
+        assert results[0].attributes["helmet"] is True
 
     def test_extractor_receives_correct_bbox(self):
         detection = _make_detection(x1=10, y1=20, x2=110, y2=220)

@@ -4,7 +4,7 @@ PersonDetector — detecta pessoas em imagens via YOLO (Ultralytics).
 Responsabilidade única (ADR-004): encontrar bounding boxes de pessoas.
 Não classifica EPIs — isso é responsabilidade do IAttributeExtractor.
 
-Retorna List[PersonDetection] com attributes todos None.
+Retorna List[PersonDetection] com attributes={} (dict vazio).
 O IAttributeExtractor preenche os atributos em seguida.
 
 Classe YOLO (cls=0 no COCO) é o único índice considerado pessoa.
@@ -14,7 +14,7 @@ from typing import List
 from ultralytics import YOLO
 
 from app.logging.logger import get_logger
-from app.schemas.output import BoundingBox, PersonAttributes, PersonDetection
+from app.schemas.output import BoundingBox, PersonDetection
 
 log = get_logger()
 
@@ -46,7 +46,7 @@ class PersonDetector:
                         x2=float(x2),
                         y2=float(y2),
                     ),
-                    attributes=PersonAttributes(),
+                    attributes={},
                 ))
                 pessoa_id += 1
 

@@ -1,6 +1,6 @@
-from typing import List, Literal, Optional
+from typing import Dict, List, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, field_validator, model_validator
+from pydantic import BaseModel, field_validator, model_validator
 
 
 class BoundingBox(BaseModel):
@@ -18,19 +18,10 @@ class BoundingBox(BaseModel):
         return self
 
 
-class PersonAttributes(BaseModel):
-    model_config = ConfigDict(strict=True)
-
-    helmet: Optional[bool] = None
-    vest: Optional[bool] = None
-    safety_boots: Optional[bool] = None
-    gloves: Optional[bool] = None
-
-
 class PersonDetection(BaseModel):
     pessoa_id: int
     bbox: BoundingBox
-    attributes: PersonAttributes
+    attributes: Dict[str, Optional[bool]]
 
 
 class Rule(BaseModel):

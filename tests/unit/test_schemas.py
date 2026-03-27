@@ -3,7 +3,6 @@ from pydantic import ValidationError
 
 from app.schemas.output import (
     BoundingBox,
-    PersonAttributes,
     PersonDetection,
     Rule,
     Chunk,
@@ -41,52 +40,42 @@ class TestBoundingBox:
 
 
 # ---------------------------------------------------------------------------
-# PersonAttributes
-# ---------------------------------------------------------------------------
-
-class TestPersonAttributes:
-    def test_all_none_by_default(self):
-        attrs = PersonAttributes()
-        assert attrs.helmet is None
-        assert attrs.vest is None
-        assert attrs.safety_boots is None
-        assert attrs.gloves is None
-
-    def test_all_set_true(self):
-        attrs = PersonAttributes(helmet=True, vest=True, safety_boots=True, gloves=True)
-        assert attrs.helmet is True
-        assert attrs.gloves is True
-
-    def test_partial_set(self):
-        attrs = PersonAttributes(helmet=False, vest=True)
-        assert attrs.helmet is False
-        assert attrs.vest is True
-        assert attrs.safety_boots is None
-
-    def test_invalid_type_raises(self):
-        with pytest.raises(ValidationError):
-            PersonAttributes(helmet="yes")
-
-
-# ---------------------------------------------------------------------------
-# PersonDetection
+# PersonDetection (attributes now a dict)
 # ---------------------------------------------------------------------------
 
 class TestPersonDetection:
-    def test_valid(self):
+    def test_valid_with_dict_attributes(self):
         detection = PersonDetection(
             pessoa_id=1,
             bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-            attributes=PersonAttributes(helmet=True),
+            attributes={"helmet": True, "vest": False},
         )
         assert detection.pessoa_id == 1
-        assert detection.attributes.helmet is True
+        assert detection.attributes["helmet"] is True
+        assert detection.attributes["vest"] is False
+
+    def test_empty_dict_attributes_allowed(self):
+        detection = PersonDetection(
+            pessoa_id=1,
+            bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
+            attributes={},
+        )
+        assert detection.attributes == {}
+
+    def test_none_values_in_attributes(self):
+        detection = PersonDetection(
+            pessoa_id=1,
+            bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
+            attributes={"helmet": None, "vest": True},
+        )
+        assert detection.attributes["helmet"] is None
+        assert detection.attributes["vest"] is True
 
     def test_missing_pessoa_id_raises(self):
         with pytest.raises(ValidationError):
             PersonDetection(
                 bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-                attributes=PersonAttributes(),
+                attributes={},
             )
 
     def test_missing_attributes_raises(self):

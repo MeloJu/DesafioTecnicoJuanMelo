@@ -6,15 +6,15 @@ What we test:
 - correlation_id gerado internamente e passado a todos os serviços
 - Edge case: nenhuma pessoa detectada → retorna resposta vazia, rag/reasoning não chamados
 - Edge case: exceção em qualquer serviço → propaga, correlation_id limpo no finally
-- _build_rag_query: query gerada a partir dos atributos detectados
+- _build_rag_query: query gerada a partir dos atributos detectados + epi_attributes
 """
 import pytest
 from unittest.mock import Mock, patch
 
 from app.pipeline.orchestrator import Pipeline, _build_rag_query
+from app.schemas.epi_config import EPIAttribute
 from app.schemas.output import (
     BoundingBox,
-    PersonAttributes,
     PersonDetection,
     PersonResult,
     PipelineResponse,
@@ -22,6 +22,13 @@ from app.schemas.output import (
 )
 
 FIXED_UUID = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+
+_DEFAULT_EPI = [
+    EPIAttribute("helmet", "capacete", "pos", "neg", 0.65, 0.35),
+    EPIAttribute("vest", "colete", "pos", "neg", 0.60, 0.40),
+    EPIAttribute("safety_boots", "botas de segurança", "pos", "neg", 0.70, 0.30),
+    EPIAttribute("gloves", "luvas", "pos", "neg", 0.60, 0.40),
+]
 
 
 # ---------------------------------------------------------------------------
@@ -32,7 +39,7 @@ def _make_person(pessoa_id: int = 1, helmet: bool = False, vest: bool = True) ->
     return PersonDetection(
         pessoa_id=pessoa_id,
         bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-        attributes=PersonAttributes(helmet=helmet, vest=vest),
+        attributes={"helmet": helmet, "vest": vest},
     )
 
 
@@ -54,6 +61,7 @@ def _make_pipeline(vision=None, rag=None, reasoning=None) -> Pipeline:
         vision_service=vision or Mock(),
         rag_service=rag or Mock(),
         reasoning_service=reasoning or Mock(),
+        epi_attributes=_DEFAULT_EPI,
     )
 
 
@@ -207,13 +215,13 @@ class TestPipelineEdgeCases:
 class TestBuildRagQuery:
     def test_absent_attributes_included_in_query(self):
         people = [_make_person(helmet=False, vest=False)]
-        query = _build_rag_query(people)
+        query = _build_rag_query(people, _DEFAULT_EPI)
         assert "capacete" in query
         assert "colete" in query
 
     def test_present_attributes_excluded_from_query(self):
         people = [_make_person(helmet=True, vest=True)]
-        query = _build_rag_query(people)
+        query = _build_rag_query(people, _DEFAULT_EPI)
         assert "capacete" not in query
         assert "colete" not in query
 
@@ -221,21 +229,21 @@ class TestBuildRagQuery:
         person = PersonDetection(
             pessoa_id=1,
             bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-            attributes=PersonAttributes(),  # all None
+            attributes={"helmet": None},
         )
-        query = _build_rag_query([person])
+        query = _build_rag_query([person], _DEFAULT_EPI)
         assert "capacete" in query
 
     def test_all_present_returns_base_query(self):
         person = PersonDetection(
             pessoa_id=1,
             bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-            attributes=PersonAttributes(helmet=True, vest=True, safety_boots=True, gloves=True),
+            attributes={"helmet": True, "vest": True, "safety_boots": True, "gloves": True},
         )
-        query = _build_rag_query([person])
+        query = _build_rag_query([person], _DEFAULT_EPI)
         assert query == "regras obrigatórias de EPI"
 
     def test_no_duplicate_terms_for_multiple_people(self):
         people = [_make_person(1, helmet=False), _make_person(2, helmet=False)]
-        query = _build_rag_query(people)
+        query = _build_rag_query(people, _DEFAULT_EPI)
         assert query.count("capacete") == 1

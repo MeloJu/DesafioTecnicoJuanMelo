@@ -108,10 +108,7 @@ class TestPersonDetectorHappyPath:
         results = detector.detect(IMAGE_PATH, CORRELATION_ID)
 
         attrs = results[0].attributes
-        assert attrs.helmet is None
-        assert attrs.vest is None
-        assert attrs.safety_boots is None
-        assert attrs.gloves is None
+        assert attrs == {}  # detector retorna dict vazio; extractor preenche depois
 
 
 # ---------------------------------------------------------------------------

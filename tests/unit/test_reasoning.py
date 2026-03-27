@@ -16,9 +16,9 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 
 from app.reasoning.service import ReasoningService
+from app.schemas.epi_config import EPIAttribute
 from app.schemas.output import (
     BoundingBox,
-    PersonAttributes,
     PersonDetection,
     PersonResult,
     Rule,
@@ -35,7 +35,7 @@ def _make_person(helmet: bool = False, vest: bool = True) -> PersonDetection:
     return PersonDetection(
         pessoa_id=1,
         bbox=BoundingBox(x1=0.0, y1=0.0, x2=100.0, y2=200.0),
-        attributes=PersonAttributes(helmet=helmet, vest=vest),
+        attributes={"helmet": helmet, "vest": vest},
     )
 
 
@@ -43,6 +43,13 @@ def _make_rules() -> list[Rule]:
     return [
         Rule(rule="Capacete obrigatório em obras.", source="manual.pdf"),
         Rule(rule="Colete refletivo obrigatório.", source="manual.pdf"),
+    ]
+
+
+def _make_epi_attributes() -> list[EPIAttribute]:
+    return [
+        EPIAttribute("helmet", "capacete", "wearing hard hat", "not wearing hard hat"),
+        EPIAttribute("vest", "colete refletivo", "wearing vest", "not wearing vest"),
     ]
 
 
@@ -62,7 +69,7 @@ class TestReasoningHappyPath:
         )
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert isinstance(result, PersonResult)
 
@@ -73,7 +80,7 @@ class TestReasoningHappyPath:
         )
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(helmet=False), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(helmet=False), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Não conforme"
         assert result.justificativa == "Capacete ausente conforme regra 1."
@@ -85,7 +92,7 @@ class TestReasoningHappyPath:
         )
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(helmet=True, vest=True), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(helmet=True, vest=True), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Conforme"
 
@@ -95,7 +102,7 @@ class TestReasoningHappyPath:
         service = ReasoningService(llm_client=mock_client)
         person = _make_person()
 
-        result = service.analyze(person, _make_rules(), CORRELATION_ID)
+        result = service.analyze(person, _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.pessoa_id == person.pessoa_id
         assert result.bbox == person.bbox
@@ -105,7 +112,7 @@ class TestReasoningHappyPath:
         mock_client.generate.return_value = _llm_response("Conforme", "OK.")
         service = ReasoningService(llm_client=mock_client)
 
-        service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         mock_client.generate.assert_called_once()
 
@@ -119,7 +126,7 @@ class TestReasoningNoRules:
         mock_client = Mock()
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), [], CORRELATION_ID)
+        result = service.analyze(_make_person(), [], CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -127,7 +134,7 @@ class TestReasoningNoRules:
         mock_client = Mock()
         service = ReasoningService(llm_client=mock_client)
 
-        service.analyze(_make_person(), [], CORRELATION_ID)
+        service.analyze(_make_person(), [], CORRELATION_ID, _make_epi_attributes())
 
         mock_client.generate.assert_not_called()
 
@@ -135,7 +142,7 @@ class TestReasoningNoRules:
         mock_client = Mock()
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), [], CORRELATION_ID)
+        result = service.analyze(_make_person(), [], CORRELATION_ID, _make_epi_attributes())
 
         assert result.justificativa.strip() != ""
 
@@ -150,7 +157,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = "isso não é json { broken"
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -159,7 +166,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = "broken"
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.justificativa.strip() != ""
 
@@ -172,7 +179,7 @@ class TestReasoningBadLlmOutput:
         )
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Não conforme"
         assert "capacete" in result.justificativa.lower()
@@ -183,7 +190,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = "Desculpe, não consigo responder a isso."
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -192,7 +199,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = _llm_response("Aprovado", "Tudo certo.")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -201,7 +208,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = json.dumps({"status": "Conforme"})
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -210,7 +217,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = _llm_response("Conforme", "")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -220,7 +227,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = _llm_response("Não Conforme", "Capacete ausente.")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Não conforme"
 
@@ -230,7 +237,7 @@ class TestReasoningBadLlmOutput:
         mock_client.generate.return_value = _llm_response("conforme", "Todos EPIs presentes.")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Conforme"
 
@@ -245,7 +252,7 @@ class TestReasoningLlmFailure:
         mock_client.generate.side_effect = Exception("connection timeout")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.status == "Indeterminado"
 
@@ -255,7 +262,7 @@ class TestReasoningLlmFailure:
         service = ReasoningService(llm_client=mock_client)
 
         # Should not raise
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
         assert result is not None
 
     def test_llm_exception_justificativa_not_empty(self):
@@ -263,6 +270,6 @@ class TestReasoningLlmFailure:
         mock_client.generate.side_effect = Exception("timeout")
         service = ReasoningService(llm_client=mock_client)
 
-        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID)
+        result = service.analyze(_make_person(), _make_rules(), CORRELATION_ID, _make_epi_attributes())
 
         assert result.justificativa.strip() != ""

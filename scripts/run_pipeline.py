@@ -4,6 +4,9 @@ Script de demonstração: roda o pipeline em todas as imagens de data/raw/.
 Para adicionar uma nova empresa: basta criar data/raw/<empresa>/company.yaml
 Nenhuma alteração no código é necessária.
 
+Para customizar os EPIs de uma empresa, adicione a seção `epi_attributes` ao
+company.yaml. Se omitida, usa DEFAULT_EPI_ATTRIBUTES (4 EPIs padrão).
+
 Uso:
     .venv/Scripts/python scripts/run_pipeline.py
 
@@ -30,6 +33,7 @@ import yaml
 
 from app.pipeline.factory import create_pipeline
 from app.logging.logger import configure_logging
+from app.schemas.epi_config import DEFAULT_EPI_ATTRIBUTES, EPIAttribute
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -50,6 +54,14 @@ def _discover_companies(data_root: Path) -> list[dict]:
         cfg["folder"] = config_path.parent
         companies.append(cfg)
     return companies
+
+
+def _load_epi_attributes(cfg: dict) -> list:
+    """Carrega epi_attributes do company.yaml ou usa o padrão."""
+    raw = cfg.get("epi_attributes")
+    if not raw:
+        return DEFAULT_EPI_ATTRIBUTES
+    return [EPIAttribute(**item) for item in raw]
 
 
 def _save_result(empresa: str, image_path: Path, response) -> Path:
@@ -80,7 +92,6 @@ def main():
     print(f"Logs      → {_log_filename}")
     print(f"Resultados → {RESULTS_DIR}/")
     print(f"Carregando pipeline...\n")
-    pipeline = create_pipeline(chroma_path=CHROMA_PATH)
 
     for company in companies:
         empresa = company["empresa"]
@@ -96,8 +107,12 @@ def main():
             print(f"[AVISO] Nenhuma imagem em: {images_dir}")
             continue
 
+        epi_attributes = _load_epi_attributes(company)
+        pipeline = create_pipeline(chroma_path=CHROMA_PATH, epi_attributes=epi_attributes)
+
         print(f"{'='*60}")
         print(f"Empresa: {empresa} | Setor: {setor}")
+        print(f"EPIs configurados: {[e.name for e in epi_attributes]}")
         print(f"{'='*60}")
 
         for image_path in images:

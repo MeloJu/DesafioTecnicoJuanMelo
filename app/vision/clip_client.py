@@ -3,31 +3,13 @@ CLIPClient — wrapper real para classificação zero-shot via HuggingFace.
 
 Carregado uma única vez no __init__; roda em CPU.
 Injetado no AttributeExtractor via DI — nunca instanciado em testes unitários.
-"""
-from typing import Tuple
 
+classify() recebe os textos CLIP diretamente (positivo e negativo) em vez de
+uma chave de atributo hardcodada. Os textos são definidos em EPIAttribute.
+"""
 import torch
 from PIL import Image
 from transformers import CLIPModel, CLIPProcessor
-
-CLIP_TEXT_LABELS: dict[str, Tuple[str, str]] = {
-    "helmet": (
-        "a person wearing a hard hat",
-        "a person not wearing a hard hat",
-    ),
-    "vest": (
-        "a person wearing a high visibility vest",
-        "a person not wearing a high visibility vest",
-    ),
-    "safety_boots": (
-        "a person wearing safety boots",
-        "a person wearing regular shoes or sandals",
-    ),
-    "gloves": (
-        "a person wearing protective gloves",
-        "a person not wearing gloves",
-    ),
-}
 
 
 class CLIPClient:
@@ -35,9 +17,13 @@ class CLIPClient:
         self._model = CLIPModel.from_pretrained(model_name)
         self._processor = CLIPProcessor.from_pretrained(model_name)
 
-    def classify(self, image_crop: Image.Image, attr: str) -> float:
-        """Return similarity score [0,1] for the positive label of attr."""
-        positive_text, negative_text = CLIP_TEXT_LABELS[attr]
+    def classify(
+        self,
+        image_crop: Image.Image,
+        positive_text: str,
+        negative_text: str,
+    ) -> float:
+        """Return similarity score [0,1] for the positive label."""
         inputs = self._processor(
             text=[positive_text, negative_text],
             images=image_crop,

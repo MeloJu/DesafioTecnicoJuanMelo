@@ -142,15 +142,19 @@ class TestCLIPClient:
         mock_model.return_value = mock_outputs
 
         client = CLIPClient()
-        score = client.classify(Image.new("RGB", (100, 100)), "helmet")
+        score = client.classify(
+            Image.new("RGB", (100, 100)),
+            positive_text="a person wearing a hard hat",
+            negative_text="a person not wearing a hard hat",
+        )
 
         assert isinstance(score, float)
         assert 0.0 <= score <= 1.0
 
     @patch("app.vision.clip_client.CLIPProcessor")
     @patch("app.vision.clip_client.CLIPModel")
-    def test_classify_uses_correct_labels_for_helmet(self, mock_model_cls, mock_processor_cls):
-        from app.vision.clip_client import CLIPClient, CLIP_TEXT_LABELS
+    def test_classify_passes_texts_to_processor(self, mock_model_cls, mock_processor_cls):
+        from app.vision.clip_client import CLIPClient
 
         import torch
 
@@ -167,15 +171,19 @@ class TestCLIPClient:
         mock_model.return_value = mock_out
 
         client = CLIPClient()
-        client.classify(Image.new("RGB", (100, 100)), "helmet")
+        client.classify(
+            Image.new("RGB", (100, 100)),
+            positive_text="wearing hard hat",
+            negative_text="not wearing hard hat",
+        )
 
         call_kwargs = mock_processor.call_args[1]
-        assert CLIP_TEXT_LABELS["helmet"][0] in call_kwargs["text"]
-        assert CLIP_TEXT_LABELS["helmet"][1] in call_kwargs["text"]
+        assert "wearing hard hat" in call_kwargs["text"]
+        assert "not wearing hard hat" in call_kwargs["text"]
 
     @patch("app.vision.clip_client.CLIPProcessor")
     @patch("app.vision.clip_client.CLIPModel")
-    def test_classify_all_supported_attributes(self, mock_model_cls, mock_processor_cls):
+    def test_classify_with_custom_texts(self, mock_model_cls, mock_processor_cls):
         from app.vision.clip_client import CLIPClient
 
         import torch
@@ -194,6 +202,6 @@ class TestCLIPClient:
 
         client = CLIPClient()
         image = Image.new("RGB", (100, 100))
-        for attr in ["helmet", "vest", "safety_boots", "gloves"]:
-            score = client.classify(image, attr)
-            assert isinstance(score, float)
+        # Any EPI can now be classified by passing its texts directly
+        score = client.classify(image, "wearing safety glasses", "not wearing safety glasses")
+        assert isinstance(score, float)
