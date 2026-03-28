@@ -1,7 +1,7 @@
 {
   "image": "Construtiva Engenharia S.A. 3 .png",
   "empresa": "Construtiva Engenharia",
-  "timestamp": "2026-03-27T09:00:43.022617",
+  "timestamp": "2026-03-27T23:45:20.884263",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 888.9776611328125
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com as regras de segurança no ambiente operacional. O manual estabelece que no ambiente operacional, a vestimenta deve priorizar segurança e funcionalidade, sendo proibido o uso de roupas soltas, acessórios pendentes ou itens que possam enroscar em máquinas, equipamentos ou estruturas."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de colete refletivo, pois o valor é incerto, enquanto a regra especifica que ele deve ser presente."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 936.7911376953125
         },
         "status": "Conforme",
-        "justificativa": "Capacete, colete e botas de segurança estão presentes, o que atende às exigências do manual de conformidade da Construtiva Engenharia S.A. as luvas não são mencionadas explicitamente como obrigatórias nas regras, mas a regra em questão sobre \" equipamentos de proteção individual\" para ambientes operacionais é interpretada como que os elementos de segurança já estão abordados com capaço, colete e botas de segurança"
+        "justificativa": "A pessoa está usando capacete, colete refletivo de alta visibilidade, botas de segurança e luvas de proteção, o que está em conformidade com a regra (6.0 Diretrizes de Segurança por Ambiente e Setor) da Construtiva Engenharia que exige o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados durante toda a permanência no local."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 518.2041625976562
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete de segurança, que é exigido em ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos."
+        "justificativa": "A pessoa está ausente do colete refletivo de alta visibilidade, uma exigência obrigatória em ambientes operacionais de obras e campo, como especificado na regra 6.1 Diretrizes de Segurança por Ambiente e Setor da empresa Construtiva Engenharia."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 748.5941772460938
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete de segurança, que é obrigatório em ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos."
+        "justificativa": "A pessoa não está em conformidade com as regras de segurança, pois não usou colete refletivo de alta visibilidade e calçados de segurança apropriados nos ambientes operacionais de obras e campo."
       },
       {
         "pessoa_id": 5,
@@ -56,8 +56,8 @@
           "x2": 754.4215087890625,
           "y2": 511.8290100097656
         },
-        "status": "Não conforme",
-        "justificativa": "O colaborador não está usando colete de segurança, como exigido no ambiente operacional de obras e campo (regra 6.0)."
+        "status": "Conforme",
+        "justificativa": "A pessoa está em conformidade com as regras de segurança e vestimenta da Construtiva Engenharia. Ela possui um capacete, colete refletivo, botas de segurança e luvas de proteção, o que é exigido nas áreas operacionais de obras e campo (Regra 6.2). Além disso, ela está usando camisas sociais ou polos, calças sociais ou jeans em bom estado, o que é permitido nos ambientes administrativos (Regra 5.1)."
       },
       {
         "pessoa_id": 6,
@@ -68,7 +68,7 @@
           "y2": 780.2286987304688
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente de capacete, colete e botas de segurança no ambiente operacional e não possui luvas em situações onde poderiam ser necessárias."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual, pois não tem capacete de segurança (ausente) e não tem colete refletivo de alta visibilidade (incerto). Além disso, falta o uso de botas de segurança. A regra específica violada é a 6.1 Diretrizes de Segurança por Ambiente e Setor, que exige o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados em ambientes operacionais de obras e campo."
       },
       {
         "pessoa_id": 7,
@@ -78,8 +78,8 @@
           "x2": 1296.9368896484375,
           "y2": 724.4888916015625
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não apresenta capacete de segurança em seu ato, o que é exigido para ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos."
+        "status": "Indeterminado",
+        "justificativa": "Status inválido retornado pelo modelo: 'Não conformidade'"
       }
     ]
   }

@@ -1,7 +1,7 @@
 {
   "image": "Construtiva Engenharia S.A. 4 .png",
   "empresa": "Construtiva Engenharia",
-  "timestamp": "2026-03-27T09:00:53.157160",
+  "timestamp": "2026-03-27T23:45:32.421805",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 955.8463134765625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não apresenta capacete, o que é obrigatório em ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos."
+        "justificativa": "A pessoa não está em conformidade com a regra relacionada ao uso de capacete de segurança. A Construtiva Engenharia exige que os colaboradores usem capacete de segurança nos ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos. O uso de capacete é obrigatório durante toda a permanência no local."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 976.30078125
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente do colete, um equipamento de proteção individual obrigatório em ambientes operacionais de obras e campo."
+        "justificativa": "A pessoa não tem um colete refletivo de alta visibilidade, como exigido pela regra 6.1 Diretrizes de Segurança por Ambiente e Setor para ambientes operacionais de obras e campo."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 839.2054443359375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não possui um colete de segurança, como especificado na regra 6.0 (Saúde, Segurança e Meio Ambiente) - Diretrizes de Segurança por Ambiente e Setor (capacete: presente, colete: incerto, botas de segurança: presente, luvas: presente)"
+        "justificativa": "A pessoa está usando coletes refletivos de alta visibilidade, mas não há declaração explícita de sua presença ou ausência. Além disso, é necessário verificar se o colete refletivo foi utilizado corretamente e se a pessoa está segurando-o de maneira adequada."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 490.4587707519531
         },
         "status": "Não conforme",
-        "justificativa": "O colete não foi encontrado na pessoa, sendo um equipamento de segurança obrigatório para operações em ambientes operacionais de obras e campo."
+        "justificativa": "A pessoa está usando um colete refletivo incerto, violando a regra específica que estabelece que os capacetes, coletes refletivos de alta visibilidade e calçados de segurança devem ser usados em ambientes operacionais. (Construtiva Engenharia, 6.0)"
       },
       {
         "pessoa_id": 5,
@@ -57,7 +57,7 @@
           "y2": 544.1527709960938
         },
         "status": "Não conforme",
-        "justificativa": "O colaborador não está em conformidade com a regra de uso de equipamentos de segurança, pois não está usando capacete e colete, e também não está usando calçados de segurança. A regra estabelece que nos ambientes operacionais, é prática indispensável o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados durante toda a permanência no local."
+        "justificativa": "A pessoa não tem colete refletivo de alta visibilidade, embora seja exigido na área operacional de obras e campo. A regra específica 6.1 Diretrizes de Segurança por Ambiente e Setor exige o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados durante toda a permanência no local."
       },
       {
         "pessoa_id": 6,
@@ -68,7 +68,7 @@
           "y2": 556.8701171875
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, colete e botas de segurança, o que atende ao requisito de uso contínuo desses equipamentos em ambientes operacionais. Além disso, a pessoa também está usando luvas, que é um equipamento de proteção individual recomendado para prevenir lesões nos dedos durante atividades como manuseio de ferramentas ou equipamentos."
+        "justificativa": "A pessoa está em conformidade com as regras de segurança, pois está usando capacete, colete refletivo, botas de segurança e luvas de proteção no ambiente operacional, conforme regra 6.1 Diretrizes de Segurança por Ambiente e Setor."
       }
     ]
   }

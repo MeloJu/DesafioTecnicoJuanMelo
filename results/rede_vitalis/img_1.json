@@ -1,7 +1,7 @@
 {
   "image": "img_1.png",
   "empresa": "Rede Vitalis",
-  "timestamp": "2026-03-27T09:02:21.995524",
+  "timestamp": "2026-03-27T23:57:38.467810",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1265.0377197265625,
           "y2": 1511.0194091796875
         },
-        "status": "Conforme",
-        "justificativa": "Capacete presente, colete ausente, botas de segurança incerto e luvas presente, o que atende às normas do guia"
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar Botas de Segurança, pois está usando um tênis que pode não oferecer a mesma proteção contra substâncias perigosas e manchas, sendo o uso da Bota de Segurança Branca (Galocha) obrigatório como dica de segurança na UTI."
       },
       {
         "pessoa_id": 2,
@@ -23,8 +23,8 @@
           "x2": 2814.714111328125,
           "y2": 1535.8743896484375
         },
-        "status": "Não conforme",
-        "justificativa": "Colete incerto de acordo com a regra Fica a Dica: Viu o colega de relógio na UTI? Dá um toque amigo. \"Ei, o adorno!\" Melhor ouvir de você do que levar bronca da CCIH."
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas de proteção, o que é conforme com as regras da Rede Vitalis, pois não há menção específica de regra que proíba ou permita esses itens. Além disso, não há mencão explícita sobre a colete refletivo em nenhuma das regras."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 2031.466796875,
           "y2": 1329.7557373046875
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que atende às regras da Vitalis. Além disso, não há nenhum item proibido como saco preto ou lixo comum na lista, mas nem é uma necessidade de estar presente para ser considerado conforme."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de colete refletivo, pois está ausente. A regra específica violada é: Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa). Nome da empresa: Rede Vitalis."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 976.642333984375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)', pois não foi verificada a presença do saco preto."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois a regra específica menciona que 'Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela. Nada de molhar o tênis!' e as botas de segurança estão presentes, não uma luva de proteção."
       },
       {
         "pessoa_id": 5,
@@ -57,7 +57,7 @@
           "y2": 568.3921508789062
         },
         "status": "Não conforme",
-        "justificativa": "Não conforme (status corrigido de 'Não conforma' — conjugação inválida do LLM)."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar botas de segurança, pois elas estão ausentes. A regra específica mencionada no Guia_Integracao_Rede_Vitalis_2024.docx diz que 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela. Nada de molhar o tênis!'"
       },
       {
         "pessoa_id": 6,
@@ -68,7 +68,7 @@
           "y2": 808.8818359375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente do colete e não tem um saco preto, que é considerado lixo comum (papel de bala, copo de café, fralda limpa)."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar botas de segurança, pois o atributo 'botas de segurança' está indicado como incerto. De acordo com o manual da empresa, é necessário usar Bota de Borracha Branca (Galocha) e luva amarela para limpar o chão ou banheiro, mas não se menciona a necessidade de usar botas de segurança."
       },
       {
         "pessoa_id": 7,
@@ -78,8 +78,8 @@
           "x2": 1649.7354736328125,
           "y2": 574.1551513671875
         },
-        "status": "Indeterminado",
-        "justificativa": "A capacidade de indiscernibilidade dos atributos da pessoa (capacete, colete, botas de segurança e luvas) não é clara, pois o valor de cada um é 'incerto'. Não é possível determinar se a pessoa está em conformidade ou não com as regras sem mais informações sobre os itens que ela carrega."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar botas de segurança, pois está usando um tênis. A regra específica violada é 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela. Nada de molhar o tênis!' (Guia_Integracao_Rede_Vitalis_2024.docx). A empresa Rede Vitalis exige a utilização de botas de segurança para garantir a segurança dos pacientes e do próprio profissional."
       },
       {
         "pessoa_id": 8,
@@ -89,8 +89,8 @@
           "x2": 1193.4990234375,
           "y2": 647.5827026367188
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está em conformidade porque tem um capacete, uma luva e está seguindo as instruções de alongamento da Guia Integracao Rede Vitalis. A colete e botas de segurança não são mencionadas como requisitos ou conselhos na lista de regras."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois as botas de segurança estão ausentes. A regra específica mencionada é: Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela."
       },
       {
         "pessoa_id": 9,
@@ -101,7 +101,7 @@
           "y2": 581.449462890625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com as regras da Vitalis. Ela não possui o colete, que é um item essencial para proteger sua segurança na UTI."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de botas de segurança, pois o manual da empresa especifica que 'na dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.' E não está usando a bota de segurança correta, apenas uma incerta."
       },
       {
         "pessoa_id": 10,
@@ -112,7 +112,7 @@
           "y2": 500.5386657714844
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra 'Fica a Dica: Viu o colega de relógio na UTI? Dá um toque amigo. \"Ei, o adorno!\". Melhor ouvir de você do que levar bronca da CCIH.', pois não está usando um colete."
+        "justificativa": "A pessoa não está em conformidade com a regra 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.' da empresa Rede Vitalis, pois não está usando a galocha e a luva amarela, embora esteja usando botas de segurança."
       },
       {
         "pessoa_id": 11,
@@ -123,7 +123,7 @@
           "y2": 690.0985107421875
         },
         "status": "Não conforme",
-        "justificativa": "Não conforme (status corrigido de 'Não conforma' — conjugação inválida do LLM)."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois elas são indicadas como incertas (incerto), mas a regra especifica que 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.', então não está em conformidade com a regra. (Rede Vitalis)"
       },
       {
         "pessoa_id": 12,
@@ -134,7 +134,7 @@
           "y2": 490.2132568359375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra do capacete: ausente, mas o guia informa que ele deve estar presente (Saco Preto: Lixo Comum). Além disso, também faltam botas de segurança. A presença das luvas é um bom sinal."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois a regra específica menciona que o uso da Bota de Borracha Branca (Galocha) e a luva amarela é obrigatório para limpeza de superfícies úmidas, mas não menciona a luva amarela como requisito. Além disso, a pessoa não está usando uma luva amarela para proteger as mãos enquanto estiver em contato com lixo ou outros materiais sucios."
       },
       {
         "pessoa_id": 13,
@@ -145,7 +145,7 @@
           "y2": 637.5426025390625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar colete e botas de segurança, pois elas estão ausentes."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois elas estão listadas como incertas. Além disso, também falta um equipamento de proteção individual (EPI) específico para o banheiro e a limpeza, que é o 'Chaveiro' não mencionado na lista dos EPIs permitidos. A empresa Rede Vitalis deve garantir que os funcionários usem as equipamentos de proteção adequados para evitar riscos à saúde."
       },
       {
         "pessoa_id": 14,
@@ -156,7 +156,7 @@
           "y2": 781.1578979492188
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois ele está ausente."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete refletivo. A regra estabelece que o colete refletivo é obrigatório, mas a pessoa declarou que estava ausente."
       }
     ]
   }

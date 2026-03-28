@@ -27,14 +27,17 @@ _VALID_STATUSES = {"Conforme", "Não conforme", "Indeterminado"}
 _PROMPT_TEMPLATE = """\
 Você é um sistema de verificação de conformidade de EPIs.
 
+Empresa avaliada: {empresa}
+
 Atributos detectados na pessoa:
 {attributes}
 
-Regras aplicáveis:
+Regras aplicáveis (extraídas do manual da empresa):
 {rules}
 
-Analise se a pessoa está em conformidade com as regras e responda APENAS com JSON válido:
-{{"status": "<Conforme|Não conforme|Indeterminado>", "justificativa": "<explicação objetiva citando a regra>"}}
+Analise se a pessoa está em conformidade com as regras e responda APENAS com JSON válido.
+Na justificativa, cite obrigatoriamente o nome da empresa ({empresa}) e a regra específica violada ou cumprida.
+{{"status": "<Conforme|Não conforme|Indeterminado>", "justificativa": "<explicação objetiva citando a regra e o nome da empresa>"}}
 """
 
 
@@ -48,6 +51,7 @@ class ReasoningService:
         rules: List[Rule],
         correlation_id: str,
         epi_attributes: List[EPIAttribute] = None,
+        empresa: str = "",
     ) -> PersonResult:
         if not rules:
             log.warning(
@@ -57,7 +61,7 @@ class ReasoningService:
             )
             return self._indeterminado(person, "Nenhuma regra encontrada para esta empresa e setor.")
 
-        prompt = _build_prompt(person, rules, epi_attributes or [])
+        prompt = _build_prompt(person, rules, epi_attributes or [], empresa)
 
         try:
             raw = self._llm.generate(prompt, correlation_id=correlation_id)
@@ -96,8 +100,15 @@ class ReasoningService:
                 )
                 return self._indeterminado(person, f"Resposta do modelo não é JSON válido: {raw[:80]}")
 
-        raw_status = data.get("status", "").strip()
-        justificativa = data.get("justificativa", "").strip()
+        raw_status = data.get("status", "")
+        if isinstance(raw_status, list):
+            raw_status = raw_status[0] if raw_status else ""
+        raw_status = str(raw_status).strip()
+
+        justificativa = data.get("justificativa", "")
+        if isinstance(justificativa, list):
+            justificativa = " ".join(str(item) for item in justificativa)
+        justificativa = str(justificativa).strip()
 
         # Normaliza variações de capitalização e conjugação que o LLM às vezes retorna
         # ex: "Não Conforme" → "Não conforme", "conforme" → "Conforme"
@@ -107,9 +118,13 @@ class ReasoningService:
         _STATUS_ALIASES.update({
             "não conformo": "Não conforme",
             "não conforma": "Não conforme",
+            "não conformes": "Não conforme",
+            "não conformidade": "Não conforme",
             "nao conforme": "Não conforme",
             "nao conformo": "Não conforme",
             "nao conforma": "Não conforme",
+            "nao conformes": "Não conforme",
+            "nao conformidade": "Não conforme",
             "inconformidade": "Não conforme",
             "nao_conforme": "Não conforme",
             "não_conforme": "Não conforme",
@@ -155,6 +170,7 @@ def _build_prompt(
     person: PersonDetection,
     rules: List[Rule],
     epi_attributes: List[EPIAttribute],
+    empresa: str = "",
 ) -> str:
     if epi_attributes:
         attribute_lines = "\n".join(
@@ -169,7 +185,7 @@ def _build_prompt(
             for k, v in person.attributes.items()
         )
     rule_lines = "\n".join(f"- {r.rule} (fonte: {r.source})" for r in rules)
-    return _PROMPT_TEMPLATE.format(attributes=attribute_lines, rules=rule_lines)
+    return _PROMPT_TEMPLATE.format(attributes=attribute_lines, rules=rule_lines, empresa=empresa or "não informada")
 
 
 def _extract_fields_from_malformed_json(raw: str) -> dict | None:

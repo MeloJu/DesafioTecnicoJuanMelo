@@ -1,7 +1,7 @@
 {
   "image": "vitalcare_3.png",
   "empresa": "VitalCare",
-  "timestamp": "2026-03-27T09:03:55.404505",
+  "timestamp": "2026-03-27T23:48:58.907551",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 1012.0081787109375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando um colete, que é obrigatório em áreas assistenciais de atendimento direto ao paciente, de acordo com o artigo 6.1 Trecho sobre Requisitos por Ambiente da diretriz de Biossegurança e Controle de Infecção."
+        "justificativa": "A pessoa não cumprirá a regra de usar um colete refletivo em ambientes assistenciais, pois a regra estabelece que o uso de coletes refletivos é obrigatório (VitalCare MANUAL DO COLABORADOR E BOAS PRÁTICAS)."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 1011.179931640625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando luvas, que são consideradas equipamento de proteção individual obrigatório em áreas assistenciais de atendimento direto ao paciente, conforme se destaca no trecho 6.1 Trecho sobre Requisitos por Ambiente."
+        "justificativa": "A pessoa não está em conformidade com as regras de vestimenta no ambiente assistencial, pois não está usando um colete refletivo (regra 5.3 do manual da empresa VitalCare) e também não tem certeza se usa luvas de proteção, o que é obrigatório em áreas assistenciais restritas (regra 6.1 do manual da empresa VitalCare)."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 615.8270874023438
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente de equipamentos de proteção individual adequados em ambientes assistenciais, como luvas descartáveis e aventais impermeáveis, o que não se alinha com a regra estabelecida na diretriz de biossegurança e controle de infecção."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual em áreas assistenciais, pois não utilizou luvas de proteção (regra 6.1). A VitalCare estabelece que o uso de luvas descartáveis é obrigatório em setores de isolamento ou procedimentos invasivos, mas não há exigência específica para outras áreas assistenciais."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 816.2542724609375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com o manual institucional da VitalCare, pois não está usando um colete como requisito de vestimenta em ambientes assistenciais."
+        "justificativa": "A pessoa não está em conformidade com a regra de apresentação pessoal e vestimenta nas áreas assistenciais, pois não está usando colete refletivo e capacete. De acordo com o manual da empresa (VitalCare), na seção 5.1, ambientes assistenciais devem priorizar higiene, segurança e identificação funcional, e é vedado o uso de adornos pessoais que possam causar risco de contaminação cruzada."
       },
       {
         "pessoa_id": 5,
@@ -57,7 +57,7 @@
           "y2": 617.6436157226562
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual, pois não está usando luvas, que é obrigatória em áreas assistenciais de atendimento direto ao paciente."
+        "justificativa": "A pessoa não está em conformidade com a regra de apresentação pessoal e vestimenta, especificamente com o uso de luvas de proteção (regra 6.1 Trecho sobre Requisitos por Ambiente) da empresa VitalCare."
       }
     ]
   }

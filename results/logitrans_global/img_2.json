@@ -1,7 +1,7 @@
 {
   "image": "img_2.png",
   "empresa": "LogiTrans Global",
-  "timestamp": "2026-03-27T09:01:27.069308",
+  "timestamp": "2026-03-27T23:46:15.267461",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1238.556396484375,
           "y2": 1488.9869384765625
         },
-        "status": "Conforme",
-        "justificativa": "Capacete presente, colete incerto (exceção à regra do colete Laranja não é aplicável aqui), botas de segurança presente e luvas presente. A regra sobre o colete Laranja não é aplicável aqui pois não há menção a faixas reflectivas integradas no capacete."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está usando colete refletivo na cor Laranja, como especificado pela LogiTrans Global no manual de segurança, onde se afirma que todos os colaboradores operacionais devem usar Colete Refletivo na cor LARANJA para garantir a alta visibilidade em áreas externas. Embora o modelo da japona térmica possa ter faixas refletivas integradas, não há certeza de que esteja cumprindo com essa regra específica."
       },
       {
         "pessoa_id": 2,
@@ -23,8 +23,8 @@
           "x2": 2349.052978515625,
           "y2": 1253.452392578125
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete, o que é obrigatório em Áreas Externas de Trânsito, como o Pátio de Manobras e Docas (ZONA 3). Além disso, a pessoa está usando sapatos de salto, mesmo que esteja no galpão, o que não está permitido."
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando colete refletivo, mas não há indicação de que esteja sendo usado como exigido pela regra (exceção à Regra do Colete). Além disso, o colete não foi verificado se possui faixas reflexivas integradas para atender ao padrão homologado. Portanto, a pessoa não está em conformidade com essa regra."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 1663.7679443359375,
           "y2": 1248.9208984375
         },
-        "status": "Não conforme",
-        "justificativa": "Não conforme (status corrigido de 'Não Conformo' — conjugação inválida do LLM)."
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando capacete, colete refletivo, botas de segurança e luvas de proteção, atendendo à regra do uso de luvas térmicas impermeáveis obrigatório para qualquer manuseio de carga e ao uso de óculos de proteção obrigatório na Zona 3."
       }
     ]
   }

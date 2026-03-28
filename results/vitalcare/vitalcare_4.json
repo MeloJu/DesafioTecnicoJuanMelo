@@ -1,7 +1,7 @@
 {
   "image": "vitalcare_4.png",
   "empresa": "VitalCare",
-  "timestamp": "2026-03-27T09:04:00.412487",
+  "timestamp": "2026-03-27T23:49:05.643767",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1423.4794921875,
           "y2": 911.7772216796875
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade porque não apresenta colete, como especificado na regra 6.1 Trecho sobre Requisitos por Ambiente, que exige o uso de jaleco ou avental de uso exclusivo dentro da instituição em áreas assistenciais de atendimento direto ao paciente."
+        "status": "Conforme",
+        "justificativa": "A pessoa está vestindo um colete refletivo incerto, o que não está de acordo com a diretriza de VitalCare que estabelece que os colaboradores devem priorizar higiene e segurança na apresentação pessoal, incluindo a ausência de adornos pessoais que possam causar contaminação cruzada."
       },
       {
         "pessoa_id": 2,
@@ -23,8 +23,8 @@
           "x2": 529.0841674804688,
           "y2": 876.1642456054688
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está em conformidade com as regras, pois apresenta um capacete, botas de segurança e luvas presentes. No entanto, a colete está ausente, conforme regra 4.1 do manual."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de 'Ambientes Assistenciais: A apresentação pessoal deve priorizar higiene, segurança e identificação funcional.' (VitalCare) pois não usou um colete refletivo, que é um equipamento de proteção individual obrigatório nesses ambientes."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 894.1757202148438
         },
         "status": "Não conforme",
-        "justificativa": "O uso de colete e luvas é obrigatório em áreas assistenciais, mas a pessoa não está usando esses equipamentos. O capacete também é recomendado para área assistencial."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual nas áreas assistenciais, pois está usando um colete refletivo, que é obrigatório na medida de sua situação como referido no trecho: 'Em setores de isolamento ou procedimentos invasivos, o uso de equipamentos de proteção individual específicos, como luvas descartáveis, máscaras de proteção respiratória e aventais impermeáveis, é considerado obrigatório durante toda a atividade.' - VitalCare_Manual_Institucional_Completo.pdf"
       }
     ]
   }

@@ -30,7 +30,7 @@ class Pipeline:
             query = _build_rag_query(people, self._epi_attributes)
             rules = self._rag.retrieve(empresa, setor, query, correlation_id)
             results = [
-                self._reasoning.analyze(person, rules, correlation_id, self._epi_attributes)
+                self._reasoning.analyze(person, rules, correlation_id, self._epi_attributes, empresa)
                 for person in people
             ]
 

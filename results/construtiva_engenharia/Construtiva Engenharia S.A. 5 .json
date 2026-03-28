@@ -1,7 +1,7 @@
 {
   "image": "Construtiva Engenharia S.A. 5 .png",
   "empresa": "Construtiva Engenharia",
-  "timestamp": "2026-03-27T09:01:09.994791",
+  "timestamp": "2026-03-27T23:45:55.656608",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 835.3485717773438
         },
         "status": "Não conforme",
-        "justificativa": "O colete de segurança não está presente na pessoa, conforme especificado na regra 6.1 Diretrizes de Segurança por Ambiente e Setor."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de colete refletivo, pois ele é ausente. A regra especifica que no ambiente operacional, caracterizado pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos, o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade é indispensável. Além disso, a pessoa não tem um luvas de proteção que atenda aos padrões de segurança necessários."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 964.17431640625
         },
         "status": "Conforme",
-        "justificativa": "O capacete, colete e botas de segurança estão presentes nas características atribuídas à pessoa. Além disso, as luvas também estão presentes, o que atende às diretrizes de segurança para a proteção da saúde e bem-estar dos colaboradores."
+        "justificativa": "A pessoa está em conformidade com as regras pois usa capacete, colete refletivo e botas de segurança. A regra específica não foi mencionada explicitamente na análise, mas a utilização de equipamentos de proteção individual é obrigatória nos ambientes operacionais de obras e campo de acordo com o manual da Construtiva Engenharia."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 523.5809936523438
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não possui um colete de segurança, como exigido pelo manual, além disso, o uso de acessórios pendentes ou itens que possam enroscar em máquinas, equipamentos ou estruturas está proibido nos ambientes operacionais."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual. Ela não tem capacete de segurança (incerto) e não usa colete refletivo, mas sim, não está presente. A Construtiva Engenharia exige que os colaboradores operacionais usem capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados durante toda a permanência no local."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 498.6531982421875
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando um colete de segurança, como exigido na regra 6.6 da política de Saúde, Segurança e Meio Ambiente, e tampouco apresenta um capacete de segurança ou uma luva adequada."
+        "justificativa": "A pessoa não está em conformidade com as regras de segurança, pois não possui capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados. A regra especificada na Construtiva Engenharia (6.1 Diretrizes de Segurança por Ambiente e Setor) exige o uso contínuo desses equipamentos em ambientes operacionais de obras e campo, onde há circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos."
       },
       {
         "pessoa_id": 5,
@@ -57,7 +57,7 @@
           "y2": 457.5320129394531
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete de segurança, como especificado na regra 6.1 Diretrizes de Segurança por Ambiente e Setor: 'capacete: presente, colete: incerto, botas de segurança: presente, luvas: presente'"
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de colete refletivo, pois o documento específico do manual da empresa indica que 'Nos ambientes operacionais, a vestimenta deve priorizar segurança e funcionalidade, sendo proibido o uso de roupas soltas, acessórios pendentes ou itens que possam enroscar em máquinas, equipamentos ou estruturas.', mas não especifica a necessidade do colete refletivo. A empresa específica indica como regra obrigatória o uso do colete refletivo de alta visibilidade nas áreas operacionais."
       },
       {
         "pessoa_id": 6,
@@ -68,7 +68,7 @@
           "y2": 338.2123718261719
         },
         "status": "Não conforme",
-        "justificativa": "Capacete: presente, colete: ausente e luvas: ausente, mas o botas de segurança estão presentes e se encaixam com a regra que exige equipamentos de proteção individual no ambiente operacional de obras e campo."
+        "justificativa": "A pessoa não possui colete refletivo, o que é obrigatório em ambientes operacionais de obras e campo, caracterizados pela circulação de máquinas, materiais pesados, atividades em altura e exposição a riscos físicos. A regra específica violada é a 6.0.2 da Construtiva Engenharia."
       },
       {
         "pessoa_id": 7,
@@ -79,7 +79,7 @@
           "y2": 284.85784912109375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra do uso de colete de segurança, pois o colete é indicado como ausente e as instruções do manual recomendam seu uso contínuo em ambientes operacionais de obras e campo."
+        "justificativa": "A pessoa não está em conformidade com as regras da Construtiva Engenharia, pois não usa capacete de segurança (regra mencionada em 6.1 Diretrizes de Segurança por Ambiente e Setor) e também não usa colete refletivo de alta visibilidade (regra mencionada em 6.1 Diretrizes de Segurança por Ambiente e Setor), embora esteja presente a luvas de proteção (regra que não é específica para o setor de obras, mas que pode ser considerada como um requisito geral)."
       },
       {
         "pessoa_id": 8,
@@ -90,7 +90,7 @@
           "y2": 1000.674072265625
         },
         "status": "Não conforme",
-        "justificativa": "O colaborador não está usando capacete de segurança, que é um equipamento obrigatório em ambientes operacionais de obras e campo. A regra 6.1 Diretrizes de Segurança por Ambiente e Setor especifica que o uso contínuo de capacete de segurança é indispensável em tais ambientes."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso do capacete de segurança, pois ele é ausente. A regra estabelece que capacetes de segurança são obrigatórios em ambientes operacionais de obras e campo."
       },
       {
         "pessoa_id": 9,
@@ -101,7 +101,7 @@
           "y2": 204.56903076171875
         },
         "status": "Não conforme",
-        "justificativa": "Capacete: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo), colete: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo), luvas: não está de acordo com a regra (exigido em ambientes operacionais de obras e campo)"
+        "justificativa": "A pessoa não está em conformidade com a regra que exige o uso contínuo de capacete de segurança, colete refletivo de alta visibilidade e calçados de segurança apropriados durante toda a permanência no local de obras e campo (Regra 6.1 Diretrizes de Segurança por Ambiente e Setor), como ela não possui capacete, colete refletivo e botas de segurança."
       }
     ]
   }

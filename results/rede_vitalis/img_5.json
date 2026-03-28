@@ -1,7 +1,7 @@
 {
   "image": "img_5.png",
   "empresa": "Rede Vitalis",
-  "timestamp": "2026-03-27T09:03:02.647387",
+  "timestamp": "2026-03-27T23:58:17.000325",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 1020.6905517578125
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade porque não está usando o saco preto, como especificado na regra  Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)."
+        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum' (Papel de bala, copo de café, fralda limpa) da empresa Rede Vitalis porque não está usando colete refletivo. Além disso, não está usando Bota de Borracha Branca (Galocha) e luva amarela no banheiro como recomendado."
       },
       {
         "pessoa_id": 2,
@@ -23,8 +23,8 @@
           "x2": 955.8140869140625,
           "y2": 518.7755126953125
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está em conformidade com as regras, pois possui um capacete presente, luvas presentes e unhas curtinhas e limpas."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar botas de segurança, que é obrigatória perante os pacientes (Regras aplicáveis: Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa) e Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.)"
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 536.5054931640625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar saco preto (lixo comum) pois o atributo 'capacete' foi marcado como incerto, e a regra especifica que é necessário usar um saco preto."
+        "justificativa": "A pessoa não está em conformidade com as regras de segurança, pois não está usando uma botinha de borracha branca (Galocha) e não tem luvas amarelas como especificado na regra 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.' da Guia_Integracao_Rede_Vitalis_2024.docx. Além disso, a pessoa não está usando uma luva de proteção como especificado na regra 'Unhas: Curtinhas e limpas.'"
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 1019.4935302734375
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)' pois não tem colete e, portanto, não está usando saco preto."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar colete refletivo, pois está ausente. A regra específica mencionada no manual da Rede Vitalis é: 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa).'"
       },
       {
         "pessoa_id": 5,
@@ -56,8 +56,8 @@
           "x2": 668.0718994140625,
           "y2": 441.81573486328125
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, o que é uma prática comum na Vitalis. A presença de luvas e a ausência de coletes e botas de segurança não são criticadas explicitamente nas regras. No entanto, a falta de colete pode ser considerada indeterminada para evitar incidentes. O saco preto (lixo comum) não foi mencionado como uma preocupação específica."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras da Rede Vitalis. A regra específica violada é a de uso de coletes refletivos (Pode usar: não especifica coletes) e a regra que indica que 'Dica de Segurança: Vai lavar o chão ou o banheiro? Tem que colocar a Bota de Borracha Branca (Galocha) e a luva amarela.' é aplicada, mas as botas são descritas como 'botas de segurança' e não como galochas. Além disso, as luvas usadas pela pessoa estão em conformidade, mas não há menção à presença da Bota de Borracha Branca (Galocha)."
       },
       {
         "pessoa_id": 6,
@@ -67,8 +67,8 @@
           "x2": 1017.4246826171875,
           "y2": 453.08831787109375
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, colete e luvas, o que é permitido de acordo com as regras do Guia_Integracao_Rede_Vitalis_2024.docx."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar coletes refletivos, pois está ausente, enquanto a regra especifica que o colete refletivo é obrigatório."
       }
     ]
   }

@@ -1,7 +1,7 @@
 {
   "image": "vitalcare_5.png",
   "empresa": "VitalCare",
-  "timestamp": "2026-03-27T09:04:08.902227",
+  "timestamp": "2026-03-27T23:49:14.080970",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1086.8404541015625,
           "y2": 880.79443359375
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete presente, colete ausente, botas de segurança presente e luvas presente. Embora o manual não exija explicitamente a presença ou ausência do colete em áreas assistenciais, a ausência dele não viola nenhuma regra específica. Além disso, as outras medidas preventivas (capacete, botas de segurança e luvas) estão de acordo com as diretrizes de biossegurança da instituição."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 6.1 de diretrizes de biossegurança, pois não está usando luvas de proteção como requisito obrigatório em áreas assistenciais de atendimento direto ao paciente."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 716.1845092773438
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, colete e botas de segurança, o que atende às diretrizes de vestimenta para ambientes assistenciais. Além disso, ela está usando luvas, o que é obrigatório em setores de isolamento ou procedimentos invasivos. No entanto, a classificação do colete como incerta pode ser considerada não conforme, pois não há uma resposta clara se ele está sendo usado corretamente."
+        "justificativa": "A pessoa está em conformidade com as regras de segurança e identificação, pois apresenta um capacete, botas de segurança e luvas de proteção. Embora o colete refletivo esteja incerto, não há regra específica que exija sua presença em todos os ambientes assistenciais."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 706.3573608398438
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de vestimenta em ambientes assistenciais, pois está usando luvas que são consideradas equipamentos de proteção individual e devem ser usadas em áreas de isolamento ou procedimentos invasivos."
+        "justificativa": "A pessoa não está em conformidade com a regra de vestimenta para ambientes assistenciais, pois não está usando um colete refletivo ou luvas de proteção como exigido pela VitalCare."
       },
       {
         "pessoa_id": 4,
@@ -45,8 +45,8 @@
           "x2": 1139.2822265625,
           "y2": 580.13232421875
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, colete incerto, botas de segurança e luvas, o que atende à norma de apresentação pessoal em ambientes assistenciais da VitalCare. A recomendação específica sobre coletes não é mencionada, mas os outros itens estão em conformidade com as diretrizes de higiene e segurança."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual em ambientes assistenciais. De acordo com a regra 6.1 do manual da empresa, no setor de isolamento ou procedimentos invasivos é obrigatório o uso de equipamentos de proteção individual específicos, como luvas descartáveis, máscaras de proteção respiratória e aventais impermeáveis. A pessoa não mencionou a utilização desses equipamentos, apenas apresentou as botas de segurança, capacete e luvas de proteção, que podem não ser suficientes para garantir a biossegurança em ambientes assistenciais."
       }
     ]
   }

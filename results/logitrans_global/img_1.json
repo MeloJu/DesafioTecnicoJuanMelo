@@ -1,7 +1,7 @@
 {
   "image": "img_1.png",
   "empresa": "LogiTrans Global",
-  "timestamp": "2026-03-27T09:01:17.686672",
+  "timestamp": "2026-03-27T23:46:06.718299",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1638.9644775390625,
           "y2": 1493.779541015625
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete refletivo de alta visibilidade, embora esteja em uma área de trânsito de carretas e caminhões. A regra estabelece que colete de alta visibilidade é obrigatório para pedestres na zona 3."
+        "status": "Conforme",
+        "justificativa": "A pessoa está vestindo colete refletivo, capacete, botas de segurança e luvas de proteção, que são obrigatórios para todas as pessoas dentro do galpão de carga seca. Além disso, a pessoa está usando calçados de segurança, que é um requisito para qualquer pessoa que transite pelo pátio externo."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 910.477294921875
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, colete com faixas reflexivas integradas (padrão homologado), botas de segurança e luvas. Além disso, a pessoa está usando calçados de segurança, vestindo o colete laranja por cima da japona térmica azul, que possui faixas reflexivas integradas, o que atende à regra de exceção. A pessoa também está usando óculos de proteção e está na área restrita do pátio de manobras e docas."
+        "justificativa": "A pessoa está usando capacete, colete refletivo, botas de segurança e luvas de proteção, cumprindo com as regras de segurança e vestimenta previstas pela empresa LogiTrans Global."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 1092.411376953125
         },
         "status": "Não conforme",
-        "justificativa": "Capacete: incerto - O uso de capacete é obrigatório nas áreas de alta risco, como os galpões e docas. A pessoa não está usando um capacete."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso do colete refletivo na Zona 3 (Pátio de Manobras e Docas) pois não mencionou se o seu colete é da cor Laranja, que é obrigatório para essa zona. Além disso, a pessoa usou botas de segurança e luvas de proteção, mas não especificou se elas atendem às exigências de equipamentos de proteção individual (EPIs) para essa área."
       }
     ]
   }

@@ -1,7 +1,7 @@
 {
   "image": "img_2.png",
   "empresa": "Rede Vitalis",
-  "timestamp": "2026-03-27T09:02:36.503924",
+  "timestamp": "2026-03-27T23:57:50.207192",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 1512.5958251953125
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, colete e luvas, o que atende às especificações do Guia_Integracao_Rede_Vitalis_2024.docx. Além disso, não há nenhuma indicação de que a pessoa esteja em desacordo com as regras de comportamento, como esticar os braços e girar o pescoço a cada 2 horas."
+        "justificativa": "A pessoa está em conformidade com todas as regras, pois apresentou capacete, colete refletivo, luvas de proteção e unhas curtinhas e limpas. A única dúvida não foi o botas de segurança."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 1434.4884033203125
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar colete e botas de segurança, pois o valor é 'incerto'."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois elas estão incertas. A regra específica violada é: 'Luvas: Curtinhas e limpas' (Guia_Integracao_Rede_Vitalis_2024.docx)."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 1877.4891357421875,
           "y2": 1536.0
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, que é permitido de acordo com a regra do saco preto não ser considerado item de uso pessoal (Papel de bala, copo de café, fralda limpa). Além disso, as luvas estão presentes e são permitidas de acordo com a regra sobre itens que podem ser usados. A colete e as botas de segurança não foram verificadas como necessárias ou desnecessárias e, portanto, sua presença não é considerada. A recomendação de esticar os braços e girar o pescoço a cada 2 horas também não foi mencionada em relação à pessoa."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras da Rede Vitalis, pois não há evidências de que está seguindo as diretrizes sobre uso de colete refletivo e botas de segurança. A regra específica violada é a indicada pela letra (Saco Preto: Lixo Comum), mas parece estar relacionada ao uso de luvas de proteção, ou talvez à 'Pode usar: Relógio, anel, brinco...' que não se aplica aqui."
       },
       {
         "pessoa_id": 4,
@@ -45,8 +45,8 @@
           "x2": 2145.962646484375,
           "y2": 1460.5655517578125
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, o que é permitido de acordo com a regra 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)'."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar coletes refletivos, pois está incerta sobre se o equipamento é necessário. A regra específica violada é 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)' não é relevante para este caso, mas a regra 'Unhas: Curtinhas e limpas' é uma boa analogia. O guia da empresa indica que as unhas devem ser curtinhas e limpas, o que sugere que a pessoa deve ter as unhas bem cuidadas e não deixá-las longas ou sujas. Na mesma linha, a pessoa poderia estar se refirindo ao fato de que as luvas de proteção estão presentes, mas não está clara sobre como elas devem ser usadas."
       },
       {
         "pessoa_id": 5,
@@ -56,8 +56,8 @@
           "x2": 1425.1036376953125,
           "y2": 539.736083984375
         },
-        "status": "Conforme",
-        "justificativa": "O capacete está presente, o colete e as botas de segurança estão incertos, mas a luvas estão presentes. Não há infração em relação às regras mencionadas."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de coletes refletivos, pois o estado é incerto. A regra específica violada é: Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)."
       },
       {
         "pessoa_id": 6,
@@ -68,7 +68,7 @@
           "y2": 546.2752075195312
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois ele está ausente."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de coletes refletivos, pois este é ausente. A regra especifica que os coletes refletivos são necessários para garantir a segurança dos profissionais de saúde."
       }
     ]
   }

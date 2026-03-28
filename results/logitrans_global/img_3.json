@@ -1,7 +1,7 @@
 {
   "image": "img_3.png",
   "empresa": "LogiTrans Global",
-  "timestamp": "2026-03-27T09:01:39.054277",
+  "timestamp": "2026-03-27T23:46:27.143818",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 832.5237426757812
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, colete, botas de segurança e luvas, o que é obrigatório para manuseio de carga. Além disso, não há mencão de falta em relação ao uso do colete refletivo, óculos de proteção, calçados de segurança ou proteção auditiva. Portanto, a pessoa está em conformidade com as regras."
+        "justificativa": "A pessoa está em conformidade com as regras de segurança e vestimenta, pois: o capacete foi mencionado como facultativo nas operações de solo e picking e não há menção a falta de uso de luvas de proteção na zona 1 (Galpões de Carga Seca), mas é permitido em outras áreas e as luvas foram citadas como presente. O colete refletivo, coletes nas cores amarela e verde são proibidos em certas situações ou estão associados a equipes específicas, porém o colete azul escuro na zona 2 (Câmaras Frias) é uma óptica específica para a empresa LogiTrans Global. Além disso, as botas de segurança e luvas de proteção foram mencionadas como presentes."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 767.7345581054688
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete refletivo, embora a regra de uso do colete laranja seja excepcionada se estiver usando uma japona térmica azul com faixas reflectivas integradas. Além disso, não há evidências de que a pessoa esteja usando colete laranja ou japona térmica azul com faixas reflectivas integradas."
+        "justificativa": "A pessoa não está em conformidade com as regras de visibilidade na Câmara Fria. O manual estabelece que, se a japona térmica azul possuir faixas reflectivas integradas, o uso do colete laranja por cima é dispensado. No entanto, a pessoa não mencionou se o seu uniforme inclui essa característica."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 661.2630004882812,
           "y2": 654.3289184570312
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete refletivo. De acordo com o manual, todos os colaboradores operacionais, conferentes, líderes de equipe, gerentes e visitantes devem usar Colete Refletivo na cor LARANJA."
+        "status": "Conforme",
+        "justificativa": "A pessoa está vestindo o colete refletivo de cor laranja, como exigido na ZONA 3 (Pátio de Manobras e Docas) de acordo com a regra: 'Colete Refletivo: Uso obrigatório do Colete LARANJA (Alta visibilidade dia/noite).'"
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 666.1419067382812
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando o colete Laranja, que é permitido em ambientes frios, desde que tenha faixas reflectivas integradas. Além disso, está usando luvas térmicas impermeáveis, que são obrigatórias para manuseio de carga. A pessoa também está usando botas de segurança e um capacete, o que é obrigatório em áreas de trânsito pesado."
+        "justificativa": "A pessoa está em conformidade com as regras de segurança, pois tem capacete, colete refletivo e botas de segurança presentes, além de usar luvas de proteção. Além disso, não há mencão explícita sobre a violação de alguma regra específica no texto fornecido."
       }
     ]
   }

@@ -1,7 +1,7 @@
 {
   "image": "img_5.png",
   "empresa": "LogiTrans Global",
-  "timestamp": "2026-03-27T09:01:59.639227",
+  "timestamp": "2026-03-27T23:46:47.699957",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 1012.9933471679688
         },
         "status": "Não conforme",
-        "justificativa": "Capacete: ausente, colete: ausente, botas de segurança: ausente e luvas: ausente. As regras especificam que o uso de capacete é facultativo nas operações de solo e picking, mas obrigatório em operações de içamento vertical ou em áreas isoladas para obras civis, e não há menção a nenhum tipo de proteção térmica corporal (japona) para as áreas frias."
+        "justificativa": "A pessoa não está usando colete refletivo, que é obrigatório para qualquer manuseio de carga. Além disso, também não está usando botas de segurança ou luvas de proteção, que são requisitos para a Zona 1: Galpões de Carga Seca (Armazém Geral / Cross-Docking). O nome da empresa é LogiTrans Global e a regra específica violada é o artigo \"Colete Refletivo: Uso obrigatório do Colete Laranja (Alta visibilidade dia/noite)\"."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 1014.8435668945312
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete de alta visibilidade como requerido na ZONA 1: Galpões de Carga Seca (Armazém Geral / Cross-Docking) e não tem evidências de usar protetor auditiva, mesmo que não haja ruído alto"
+        "justificativa": "A pessoa não está vestindo colete refletivo, como especificado na regra de Zona 1: Galpões de Carga Seca (Armazém Geral / Cross-Docking) do manual da LogiTrans Global. A regra exige que 'Todos os colaboradores operacionais, conferentes, líderes de equipe, gerentes e visitantes devem usar Colete Refletivo na cor LARANJA.'"
       }
     ]
   }

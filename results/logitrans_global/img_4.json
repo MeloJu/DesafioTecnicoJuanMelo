@@ -1,7 +1,7 @@
 {
   "image": "img_4.png",
   "empresa": "LogiTrans Global",
-  "timestamp": "2026-03-27T09:01:54.155874",
+  "timestamp": "2026-03-27T23:46:41.456150",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 799.5165405273438
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está usando colete de alta visibilidade como exigido nas Áreas Externas, pois só é obrigatório para pedestres que transitarão no pátio externo."
+        "justificativa": "A pessoa não está em conformidade com as regras de visibilidade na Câmara Fria, pois não usou colete refletivo como exigido pela regra \"Visibilidade na Câmara Fria: Exceção à Regra do Colete\" e também não usa luvas de proteção como exigido pela regra \"Uso de Luvas Térmicas impermeáveis\"."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 804.4298095703125
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando o capacete, colete e botas de segurança. Embora não esteja usando luvas, pois foram detectadas apenas essas peças de vestimenta, a regra específica sobre uso de luvas não foi mencionada como obrigatória para esta zona operacional. Portanto, considerando que outras peças de proteção estão sendo usadas e que a pessoa está em uma área onde pode haver riscos de segurança, podemos dizer que a pessoa está conforme com as regras."
+        "justificativa": "A pessoa está usando capacete, colete refletivo, botas de segurança e luvas de proteção, que são todos vestimentas obrigatórias para a ZONA 1 (Galpões de Carga Seca) segundo o Manual da Empresa LogiTrans Global. Além disso, a pessoa está usando calçado seguro e colete refletivo na cor Laranja, que é permitido para pedestres na ZONA 1, o que atende às regras estabelecidas pela empresa."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 527.01171875,
           "y2": 847.0570068359375
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está usando o colete de alta visibilidade (laranja) como exigido na Zona 3 do manual, e também não está usando óculos de proteção como obrigatório para a área externa."
+        "status": "Conforme",
+        "justificativa": "A pessoa está usando colete refletivo incerto, mas segundo a regra de Visibilidade na Câmara Fria, se a japona térmica azul possuir faixas refletivas integradas, o uso do colete laranja por cima é dispensado. Portanto, não há violação da regra."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 595.1336669921875
         },
         "status": "Conforme",
-        "justificativa": "O capacetre, colete e botas de segurança estão presentes. A luva é presente, mas não há referência expressa na norma que proíba o uso de luvas sem vestir as mãos nuas para manusear caixas congeladas.\n\nA japona térmica azul possui faixas reflectivas integradas, então não há problema com o colete laranja. A pessoa está vestida de forma adequada e em conformidade com as regras para a zona 2."
+        "justificativa": "A pessoa está vestindo colete refletivo, botas de segurança e luvas de proteção, cumprindo as regras de segurança. No entanto, a regra específica que não é mencionada como violada ou cumprida é a visibilidade na Câmara Fria, mas o manual não fornece informações suficientes para determinar se a pessoa está em conformidade com essa regra."
       },
       {
         "pessoa_id": 5,
@@ -57,7 +57,7 @@
           "y2": 720.7037963867188
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente de luvas, o que é obrigatório para qualquer manuseio de carga. Além disso, não há menção à presença de faixas reflectivas integradas na japona térmica azul."
+        "justificativa": "A pessoa não está em conformidade com a regra de coletes, pois o colete verde é exclusivo das equipes de Manutenção Predial, Elétrica e Jardinagem, mas não há indicação de que a pessoa pertence a uma dessas equipes. Além disso, o colete laranja está sendo usado, mesmo que seja para cumprir com as regras da zona 1."
       }
     ]
   }

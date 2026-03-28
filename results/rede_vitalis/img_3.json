@@ -1,7 +1,7 @@
 {
   "image": "img_3.png",
   "empresa": "Rede Vitalis",
-  "timestamp": "2026-03-27T09:02:43.407099",
+  "timestamp": "2026-03-27T23:57:57.739848",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 1262.6041259765625
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com as regras da EPI, pois o colete e as botas de segurança estão incertos."
+        "justificativa": "A pessoa não está em conformidade com a regra de colete refletivo, pois o valor está em incerto. A regra especifica que o colete refletivo é obrigatório (Rede Vitalis)"
       },
       {
         "pessoa_id": 2,
@@ -23,8 +23,8 @@
           "x2": 2478.968505859375,
           "y2": 1246.9993896484375
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que é permitido. A colete não é mencionado como um item proibido."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois elas estão presentes no relatório, mas não há indicação de que estão sendo usadas corretamente. A regra específica violada é 'Saco Preto: Lixo Comum (Papel de bala, copo de café, fralda limpa)'. No entanto, a pessoa está usando luvas de proteção, o que sugere que elas podem estar sendo usadas corretamente. A regra não especifica se as luvas devem ser usadas em conjunto com outros equipamentos. Portanto, é necessário mais informações para determinar se a pessoa está em conformidade."
       },
       {
         "pessoa_id": 3,
@@ -35,7 +35,7 @@
           "y2": 1536.0
         },
         "status": "Não conforme",
-        "justificativa": "Não conforme (status corrigido de 'Não conforma' — conjugação inválida do LLM)."
+        "justificativa": "A pessoa não está em conformidade com as regras de higiene pessoal, pois a unha espetada (incerta) pode gerar riscos para a saúde dos pacientes e viola a regra 'Unhas: Curtinhas e limpas' da Rede Vitalis."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 1047.9278564453125
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar colete, pois é incerto se está presente ou não."
+        "justificativa": "A pessoa não está em conformidade com a regra de usar luvas de proteção, pois elas estão ausentes. A regra especifica que as luvas de proteção são necessárias (fonte: Guia_Integracao_Rede_Vitalis_2024.docx)."
       }
     ]
   }

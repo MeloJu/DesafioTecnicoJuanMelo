@@ -1,7 +1,7 @@
 {
   "image": "img_4.png",
   "empresa": "Rede Vitalis",
-  "timestamp": "2026-03-27T09:02:51.469302",
+  "timestamp": "2026-03-27T23:58:04.178018",
   "response": {
     "results": [
       {
@@ -13,7 +13,7 @@
           "y2": 715.539306640625
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está usando capacete, botas de segurança e luvas, o que é permitido conforme regra \"Pode usar: Relógio, anel, brinco... Vocês estão liberados (porque não tocam nos pacientes). Aproveitem! ✅➡\". Além disso, a pessoa está usando colete, mas não há regra que proíba seu uso. No entanto, é importante notar que o guia recomenda esticar os braços e girar o pescoço a cada 2 horas, o que está sendo feito."
+        "justificativa": "A pessoa está de acordo com a regra de usar luvas de proteção (presente) e também com a regra de usar saco preto (lixo comum) para os objetos descartáveis."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 1003.0930786132812
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa está ausente do colete e não tem botas de segurança, embora o guia indique que elas são permitidas (Relógio, anel, brinco... Vocês estão liberados)."
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de luvas de proteção. A regra especifica que 'Luvas: Curtinhas e limpas', mas na avaliação, as luvas de proteção estão presentes, enquanto o guia especifica curtinhas e limpas, não luvas de proteção."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 738.50634765625,
           "y2": 1023.5187377929688
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está presente o luvas, que é permitido de acordo com a regra 'Pode usar: Relógio, anel, brinco... Vocês estão liberados (porque não tocam nos pacientes). Aproveitem! '"
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra 'Saco Preto: Lixo Comum' (Papel de bala, copo de café, fralda limpa) pois não está usando um saco preto. Além disso, não há informações sobre outros equipamentos que possam estar presentes para violar outras regras específicas."
       },
       {
         "pessoa_id": 4,
@@ -45,8 +45,8 @@
           "x2": 325.3826904296875,
           "y2": 996.3499755859375
         },
-        "status": "Conforme",
-        "justificativa": "O colete, botas de segurança e luvas estão presentes, o que atende às regras. O capacete não foi verificado e está incerto."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de usar coletes refletivos, pois está incerta, mas a regra especifica que os coletes refletivos são obrigatórios. Além disso, a pessoa não está usando um saco preto (lixo comum) como especificado na regra."
       }
     ]
   }
