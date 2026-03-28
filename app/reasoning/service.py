@@ -24,6 +24,18 @@ log = get_logger()
 
 _VALID_STATUSES = {"Conforme", "Não conforme", "Indeterminado"}
 
+
+def _normalise_status(raw: str) -> str:
+    """Normaliza qualquer variação de status retornada pelo LLM para um dos valores válidos."""
+    s = raw.strip().lower().replace("ã", "a").replace("â", "a")
+    if re.match(r"^(nao[\s_\-]?conform|inconform)", s):
+        return "Não conforme"
+    if re.match(r"^conform", s):
+        return "Conforme"
+    if re.match(r"^indetermin", s):
+        return "Indeterminado"
+    return raw.strip()
+
 _PROMPT_TEMPLATE = """\
 Você é um sistema de verificação de conformidade de EPIs.
 
@@ -110,26 +122,7 @@ class ReasoningService:
             justificativa = " ".join(str(item) for item in justificativa)
         justificativa = str(justificativa).strip()
 
-        # Normaliza variações de capitalização e conjugação que o LLM às vezes retorna
-        # ex: "Não Conforme" → "Não conforme", "conforme" → "Conforme"
-        _STATUS_ALIASES = {
-            s.lower(): s for s in _VALID_STATUSES
-        }
-        _STATUS_ALIASES.update({
-            "não conformo": "Não conforme",
-            "não conforma": "Não conforme",
-            "não conformes": "Não conforme",
-            "não conformidade": "Não conforme",
-            "nao conforme": "Não conforme",
-            "nao conformo": "Não conforme",
-            "nao conforma": "Não conforme",
-            "nao conformes": "Não conforme",
-            "nao conformidade": "Não conforme",
-            "inconformidade": "Não conforme",
-            "nao_conforme": "Não conforme",
-            "não_conforme": "Não conforme",
-        })
-        status = _STATUS_ALIASES.get(raw_status.lower(), raw_status)
+        status = _normalise_status(raw_status)
 
         if status not in _VALID_STATUSES:
             log.error(
