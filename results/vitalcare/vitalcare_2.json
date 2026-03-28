@@ -1,7 +1,7 @@
 {
   "image": "vitalcare_2.png",
   "empresa": "VitalCare",
-  "timestamp": "2026-03-27T23:48:49.131338",
+  "timestamp": "2026-03-28T16:25:18.023233",
   "response": {
     "results": [
       {
@@ -12,8 +12,8 @@
           "x2": 1085.5474853515625,
           "y2": 990.86767578125
         },
-        "status": "Indeterminado",
-        "justificativa": "Resposta do modelo não é JSON válido: {\"status\": \"Não conforme\", \"justificativa\": \"A pessoa não está em conformidade c"
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de uso de equipamentos de proteção individual em ambientes assistenciais, pois não está usando luvas de proteção (incerto). A regra específica estabelece que o uso de máscaras cirúrgicas pode ser requerido conforme avaliação de risco, surtos epidemiológicos ou tipo de atendimento, mas não há menção ao uso de luvas descartáveis."
       },
       {
         "pessoa_id": 2,
@@ -24,7 +24,7 @@
           "y2": 513.4486083984375
         },
         "status": "Conforme",
-        "justificativa": "A pessoa está vestindo o capacete, colete refletivo, botas de segurança e luvas de proteção, que são equipamentos obrigatórios em áreas assistenciais de atendimento direto ao paciente. No entanto, não há informações sobre a utilização de um avental de uso exclusivo dentro da instituição, o que é uma diretrina específica para essas áreas."
+        "justificativa": "A pessoa está usando um capacete, colete refletivo, botas de segurança e luvas de proteção, o que é conforme com as diretrizes de higiene e biossegurança estabelecidas pela VitalCare em seção 6.1 Trecho sobre Requisitos por Ambiente."
       },
       {
         "pessoa_id": 3,
@@ -34,8 +34,8 @@
           "x2": 717.0659790039062,
           "y2": 989.0437622070312
         },
-        "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de apresentação pessoal, pois usou um anel (atrimento pessoal), que é vedado segundo a regra 5.4 do manual da empresa VitalCare."
+        "status": "Conforme",
+        "justificativa": "A pessoa está utilizando um colete refletivo, mas essa é uma restrição para ambientes de atendimento ao público. Para ambientes assistenciais, a regra não especifica o uso obrigatório de equipamentos de proteção individual, apenas a higienização frequente das mãos e o uso de avental dentro da instituição."
       },
       {
         "pessoa_id": 4,
@@ -46,7 +46,7 @@
           "y2": 965.3388061523438
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de 'Apresentação Pessoal e Vestimenta' (Ambientes Assistenciais: A apresentação pessoal deve priorizar higiene, segurança e identificação funcional. É vedado o uso de adornos pessoais, como anéis, pulseiras, relógios e unhas artificiais, devido ao risco de contaminação cruzada.) da VitalCare."
+        "justificativa": "A pessoa não está em conformidade com a regra 'Ambientes Assistenciais: A apresentação pessoal deve priorizar higiene, segurança e identificação funcional.' (fonte: VitalCare_Manual_Institucional_Completo.pdf) pois usou 'anéis' como adorno pessoal, o que é proibido devido ao risco de contaminação cruzada."
       },
       {
         "pessoa_id": 5,
@@ -56,8 +56,8 @@
           "x2": 322.83319091796875,
           "y2": 986.3660278320312
         },
-        "status": "Conforme",
-        "justificativa": "A pessoa está usando um capacete, colete refletivo, botas de segurança e luvas de proteção, o que é conforme com as diretrizes de biossegurança da VitalCare, especialmente em relação ao uso de equipamentos de proteção individual em áreas assistenciais de atendimento direto ao paciente (regra 6.1) e nos setores de isolamento ou procedimentos invasivos (mesmo regra). Além disso, a pessoa está usando um jaleco (ou avental), o que também é conforme com as diretrizes da VitalCare."
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com a regra de apresentação pessoal e vestimenta nas áreas assistenciais, pois usou um colete refletivo, ao invés do requerido avental de uso exclusivo dentro da instituição."
       },
       {
         "pessoa_id": 6,
@@ -67,8 +67,8 @@
           "x2": 483.78179931640625,
           "y2": 843.28271484375
         },
-        "status": "Indeterminado",
-        "justificativa": "Falha na chamada ao modelo de linguagem: 'list' object has no attribute 'strip'"
+        "status": "Não conforme",
+        "justificativa": "A pessoa não está em conformidade com as regras de biossegurança e controle de infecção. Segundo a regra 6.1 do manual da empresa VitalCare, em áreas assistenciais de atendimento direto ao paciente, é obrigatório o uso de jaleco ou avental de uso exclusivo dentro da instituição, mas a pessoa não apresenta nenhum desses equipamentos."
       },
       {
         "pessoa_id": 7,
@@ -79,7 +79,7 @@
           "y2": 298.6438903808594
         },
         "status": "Não conforme",
-        "justificativa": "A pessoa não está em conformidade com a regra de usar equipamentos de proteção individual adequados nas áreas assistenciais. De acordo com a regra 6.1 do manual da empresa VitalCare, o uso de luvas descartáveis é obrigatório em setores de isolamento ou procedimentos invasivos, mas não há evidência de que a pessoa esteja usando equipamentos de proteção individual adequados nas áreas assistenciais."
+        "justificativa": "A pessoa não está em conformidade com a regra sobre vestimenta para ambientes assistenciais, pois não utiliza um jaleco ou avental de uso exclusivo dentro da instituição (Regra 6.1.2) e também não tem o uso de luvas de proteção, que é obrigatório em setores de isolamento ou procedimentos invasivos."
       }
     ]
   }
