@@ -84,6 +84,59 @@ def _save_result(empresa: str, image_path: Path, response) -> Path:
     return out_path
 
 
+def _process_image(pipeline, image_path: Path, empresa: str, setor: str) -> None:
+    """Roda o pipeline em uma imagem e imprime o resultado no terminal."""
+    print(f"\nImagem: {image_path.name}")
+    try:
+        response = pipeline.run(str(image_path), empresa=empresa, setor=setor)
+        out_path = _save_result(empresa, image_path, response)
+        print(f"  → {out_path}")
+
+        if not response.results:
+            print("  Nenhuma pessoa detectada.")
+            return
+
+        for result in response.results:
+            icon = "✓" if result.status == "Conforme" else "✗" if result.status == "Não conforme" else "?"
+            print(f"  [{icon}] Pessoa {result.pessoa_id}: {result.status}")
+            print(f"      {result.justificativa}")
+
+    except Exception as exc:
+        print(f"  [ERRO] {exc}")
+
+
+def _process_company(company: dict, clip_model_path) -> None:
+    """Carrega o pipeline para uma empresa e processa todas as suas imagens."""
+    empresa    = company["empresa"]
+    setor      = company["setor"]
+    images_dir = company["folder"] / company["images_folder"]
+
+    if not images_dir.exists():
+        print(f"[AVISO] Pasta de imagens não encontrada: {images_dir}")
+        return
+
+    images = sorted(images_dir.glob("*.png")) + sorted(images_dir.glob("*.jpg"))
+    if not images:
+        print(f"[AVISO] Nenhuma imagem em: {images_dir}")
+        return
+
+    epi_attributes = _load_epi_attributes(company)
+    pipeline = create_pipeline(
+        chroma_path=CHROMA_PATH,
+        epi_attributes=epi_attributes,
+        clip_model_path=clip_model_path,
+    )
+
+    print(f"{'='*60}")
+    print(f"Empresa: {empresa} | Setor: {setor}")
+    print(f"EPIs configurados: {[e.name for e in epi_attributes]}")
+    print(f"{'='*60}")
+
+    for image_path in images:
+        _process_image(pipeline, image_path, empresa, setor)
+    print()
+
+
 def main():
     parser = argparse.ArgumentParser(description="Roda o pipeline de verificação de EPIs")
     parser.add_argument(
@@ -96,7 +149,6 @@ def main():
     args = parser.parse_args()
 
     companies = _discover_companies(DATA_ROOT)
-
     if not companies:
         print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
         return
@@ -105,57 +157,13 @@ def main():
     print(f"Resultados → {RESULTS_DIR}/")
     if args.clip_model:
         print(f"CLIP model → {args.clip_model}")
-    print(f"Carregando pipeline...\n")
+    print("Carregando pipeline...\n")
 
     for company in companies:
-        empresa = company["empresa"]
-        setor = company["setor"]
-        images_dir = company["folder"] / company["images_folder"]
-
-        if not images_dir.exists():
-            print(f"[AVISO] Pasta de imagens não encontrada: {images_dir}")
-            continue
-
-        images = sorted(images_dir.glob("*.png")) + sorted(images_dir.glob("*.jpg"))
-        if not images:
-            print(f"[AVISO] Nenhuma imagem em: {images_dir}")
-            continue
-
-        epi_attributes = _load_epi_attributes(company)
-        pipeline = create_pipeline(
-            chroma_path=CHROMA_PATH,
-            epi_attributes=epi_attributes,
-            clip_model_path=args.clip_model,
-        )
-
-        print(f"{'='*60}")
-        print(f"Empresa: {empresa} | Setor: {setor}")
-        print(f"EPIs configurados: {[e.name for e in epi_attributes]}")
-        print(f"{'='*60}")
-
-        for image_path in images:
-            print(f"\nImagem: {image_path.name}")
-            try:
-                response = pipeline.run(str(image_path), empresa=empresa, setor=setor)
-                out_path = _save_result(empresa, image_path, response)
-                print(f"  → {out_path}")
-
-                if not response.results:
-                    print("  Nenhuma pessoa detectada.")
-                    continue
-
-                for result in response.results:
-                    icon = "✓" if result.status == "Conforme" else "✗" if result.status == "Não conforme" else "?"
-                    print(f"  [{icon}] Pessoa {result.pessoa_id}: {result.status}")
-                    print(f"      {result.justificativa}")
-
-            except Exception as exc:
-                print(f"  [ERRO] {exc}")
-
-        print()
+        _process_company(company, args.clip_model)
 
     _log_file.close()
-    print(f"Pipeline finalizado.")
+    print("Pipeline finalizado.")
     print(f"  Resultados JSON: {RESULTS_DIR}/")
     print(f"  Logs:            {_log_filename}")
 
