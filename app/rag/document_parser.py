@@ -23,16 +23,21 @@ MIN_CHUNK_LENGTH = 20
 
 
 class DocumentParser:
+    _READERS: dict = {
+        ".pdf":  "_read_pdf",
+        ".docx": "_read_docx",
+    }
+
     def parse(self, file_path: str, empresa: str, setor: str) -> List[Chunk]:
         path = Path(file_path)
         suffix = path.suffix.lower()
+        reader_name = self._READERS.get(suffix)
 
-        if suffix == ".pdf":
-            blocks = self._read_pdf(file_path)
-        elif suffix == ".docx":
-            blocks = self._read_docx(file_path)
-        else:
-            raise ValueError(f"Unsupported file format: '{suffix}'. Use .pdf or .docx.")
+        if not reader_name:
+            supported = list(self._READERS)
+            raise ValueError(f"Unsupported file format: '{suffix}'. Use {supported}.")
+
+        blocks = getattr(self, reader_name)(file_path)
 
         chunks = [
             Chunk(
