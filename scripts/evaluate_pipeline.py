@@ -145,118 +145,145 @@ def _metrics(tp: int, tn: int, fp: int, fn: int) -> dict:
     }
 
 
-def evaluate(results_dir: pathlib.Path, verbose: bool = True, out_path: pathlib.Path | None = None) -> None:
-    sep  = "=" * 60
-    sep2 = "-" * 60
+_SEP  = "=" * 60
+_SEP2 = "-" * 60
 
-    global_tp = global_tn = global_fp = global_fn = global_indet = 0
-    global_mismatch_count = 0
-    company_metrics: dict = {}
 
-    print(f"\n{sep}")
+def _print_header() -> None:
+    print(f"\n{_SEP}")
     print("  AVALIACAO DO PIPELINE — vs. Gabarito Humano")
-    print(f"{sep}")
+    print(f"{_SEP}")
     print("  Positivo = Conforme  |  Negativo = Nao conforme")
-    print(f"  Indeterminado excluido das metricas")
-    print(f"{sep2}")
+    print("  Indeterminado excluido das metricas")
+    print(_SEP2)
 
-    for empresa_key, images_gt in GROUND_TRUTH.items():
-        label = COMPANY_LABELS.get(empresa_key, empresa_key)
-        empresa_dir = results_dir / empresa_key
 
-        if not empresa_dir.exists():
-            print(f"\n  [{label}] diretorio nao encontrado: {empresa_dir}")
-            continue
+def _print_image_row(img_key: str, cmp: dict, verbose: bool) -> None:
+    n_ok  = cmp["tp"] + cmp["tn"]
+    n_err = cmp["fp"] + cmp["fn"]
+    n_cmp = n_ok + n_err + cmp["indet"]
+    flag  = " [contagem diferente!]" if cmp["mismatch"] else ""
+    print(f"    {img_key:<42} acertos={n_ok}/{n_cmp}  erros={n_err}  indet={cmp['indet']}{flag}")
+    if verbose:
+        for row in cmp["rows"]:
+            icon = "  OK" if row["match"] == "OK" else ("  ??" if row["match"] == "?" else "  XX")
+            print(f"       pessoa {row['pessoa']:>2}: GT={row['gt']:<14}  pipeline={row['pipe']}{icon}")
 
-        print(f"\n  {label}")
-        print(f"  {'-' * 40}")
 
-        e_tp = e_tn = e_fp = e_fn = e_indet = 0
-        mismatches = []
+def _print_company_summary(label: str, m: dict, indet: int, mismatches: list) -> None:
+    print(f"\n    Accuracy:  {m['accuracy']}%   Precision: {m['precision']}%   Recall: {m['recall']}%   F1: {m['f1']}%")
+    print(f"    TP={m['tp']} TN={m['tn']} FP={m['fp']} FN={m['fn']}  Indeterminado={indet}")
+    for w in mismatches:
+        print(f"      - {w}")
 
-        for img_key, gt_labels in images_gt.items():
-            json_path = empresa_dir / f"{img_key}.json"
-            if not json_path.exists():
-                print(f"    {img_key}: arquivo nao encontrado")
-                continue
 
-            pipe_results = _load_pipeline_results(json_path)
-            cmp = _compare_image(gt_labels, pipe_results)
-
-            e_tp    += cmp["tp"];   e_tn    += cmp["tn"]
-            e_fp    += cmp["fp"];   e_fn    += cmp["fn"]
-            e_indet += cmp["indet"]
-
-            flag = " [contagem diferente!]" if cmp["mismatch"] else ""
-            if cmp["mismatch"]:
-                mismatches.append(f"{img_key}: GT={cmp['n_gt']} pessoas, pipeline={cmp['n_pipe']} pessoas")
-                global_mismatch_count += 1
-
-            # Linha resumida por imagem
-            n_ok  = cmp["tp"] + cmp["tn"]
-            n_err = cmp["fp"] + cmp["fn"]
-            n_cmp = n_ok + n_err + cmp["indet"]
-            print(f"    {img_key:<42} acertos={n_ok}/{n_cmp}  erros={n_err}  indet={cmp['indet']}{flag}")
-
-            if verbose:
-                for row in cmp["rows"]:
-                    icon = "  OK" if row["match"] == "OK" else ("  ??" if row["match"] == "?" else "  XX")
-                    print(f"       pessoa {row['pessoa']:>2}: GT={row['gt']:<14}  pipeline={row['pipe']}{icon}")
-
-        m = _metrics(e_tp, e_tn, e_fp, e_fn)
-        print(f"\n    Accuracy:  {m['accuracy']}%   Precision: {m['precision']}%   Recall: {m['recall']}%   F1: {m['f1']}%")
-        print(f"    TP={m['tp']} TN={m['tn']} FP={m['fp']} FN={m['fn']}  Indeterminado={e_indet}")
-
-        if mismatches:
-            print(f"    Avisos de contagem:")
-            for w in mismatches:
-                print(f"      - {w}")
-
-        company_metrics[label] = _metrics(e_tp, e_tn, e_fp, e_fn)
-        company_metrics[label]["indeterminado"] = e_indet
-
-        global_tp += e_tp; global_tn += e_tn
-        global_fp += e_fp; global_fn += e_fn
-        global_indet += e_indet
-
-    # Global
-    gm = _metrics(global_tp, global_tn, global_fp, global_fn)
-    print(f"\n{sep}")
-    print(f"  RESULTADO GLOBAL")
-    print(f"{sep2}")
-    print(f"  Pessoas comparadas: {gm['total']}  (indeterminado: {global_indet}  imagens c/ contagem diferente: {global_mismatch_count})")
+def _print_global_summary(gm: dict, global_indet: int, mismatch_count: int) -> None:
+    print(f"\n{_SEP}")
+    print("  RESULTADO GLOBAL")
+    print(_SEP2)
+    print(f"  Pessoas comparadas: {gm['total']}  (indeterminado: {global_indet}  imagens c/ contagem diferente: {mismatch_count})")
     print(f"  Accuracy:   {gm['accuracy']}%")
     print(f"  Precision:  {gm['precision']}%   (das vezes que disse Conforme, estava certo)")
     print(f"  Recall:     {gm['recall']}%   (das pessoas conformes no GT, quantas o pipeline achou)")
     print(f"  F1-score:   {gm['f1']}%")
     print(f"  TP={gm['tp']} TN={gm['tn']} FP={gm['fp']} FN={gm['fn']}")
-    print(f"{sep}")
-    print(f"\n  Nota: matching por posicao (ordem de pessoa_id no JSON).")
-    print(f"  Para matching preciso, seria necessario bbox no gabarito.")
-    print(f"{sep}")
+    print(_SEP)
+    print("\n  Nota: matching por posicao (ordem de pessoa_id no JSON).")
+    print("  Para matching preciso, seria necessario bbox no gabarito.")
+    print(_SEP)
 
-    # Salvar JSON
+
+def _build_report(gm: dict, company_metrics: dict, global_indet: int, mismatch_count: int) -> dict:
+    return {
+        "metadata": {
+            "pessoas_comparadas": gm["total"],
+            "indeterminado": global_indet,
+            "imagens_com_contagem_diferente": mismatch_count,
+            "nota": "matching por posicao — sem bbox no gabarito; positivo=Conforme",
+        },
+        "global": gm,
+        "por_empresa": company_metrics,
+        "interpretacao": {
+            "precision_alta": "Quando o pipeline classifica como Conforme, acerta 84% das vezes — poucos falsos positivos.",
+            "recall_baixo": "Pipeline conservador: prefere marcar como Nao conforme quando ha duvida. Falsos negativos altos.",
+            "construtiva_img1": "Imagem de escritorio: gabarito=todos conformes, pipeline=todos nao conformes. Modelo aplica regras de obra ao escritorio — limitacao do CLIP zero-shot sem contexto de ambiente.",
+            "contagem_diferente": "VitalCare e Rede Vitalis: YOLO detecta mais pessoas que o anotador humano. Matching por posicao fica comprometido nessas imagens.",
+        },
+    }
+
+
+def _save_report(report: dict, out_path: pathlib.Path) -> None:
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    print(f"\n  Metricas salvas em: {out_path}")
+
+
+def _evaluate_company(
+    empresa_key: str,
+    images_gt: dict,
+    results_dir: pathlib.Path,
+    verbose: bool,
+) -> tuple[dict, int, int]:
+    """Avalia todas as imagens de uma empresa. Retorna (metrics, indet, mismatch_count)."""
+    label       = COMPANY_LABELS.get(empresa_key, empresa_key)
+    empresa_dir = results_dir / empresa_key
+
+    if not empresa_dir.exists():
+        print(f"\n  [{label}] diretorio nao encontrado: {empresa_dir}")
+        return {}, 0, 0
+
+    print(f"\n  {label}")
+    print(f"  {_SEP2[:40]}")
+
+    tp = tn = fp = fn = indet = mismatch_count = 0
+    mismatches: list[str] = []
+
+    for img_key, gt_labels in images_gt.items():
+        json_path = empresa_dir / f"{img_key}.json"
+        if not json_path.exists():
+            print(f"    {img_key}: arquivo nao encontrado")
+            continue
+
+        cmp = _compare_image(gt_labels, _load_pipeline_results(json_path))
+        tp += cmp["tp"]; tn += cmp["tn"]
+        fp += cmp["fp"]; fn += cmp["fn"]
+        indet += cmp["indet"]
+
+        if cmp["mismatch"]:
+            mismatches.append(f"{img_key}: GT={cmp['n_gt']} pessoas, pipeline={cmp['n_pipe']} pessoas")
+            mismatch_count += 1
+
+        _print_image_row(img_key, cmp, verbose)
+
+    m = _metrics(tp, tn, fp, fn)
+    m["indeterminado"] = indet
+    _print_company_summary(label, m, indet, mismatches)
+    return m, indet, mismatch_count
+
+
+def evaluate(results_dir: pathlib.Path, verbose: bool = True, out_path: pathlib.Path | None = None) -> None:
+    _print_header()
+
+    global_tp = global_tn = global_fp = global_fn = global_indet = global_mismatches = 0
+    company_metrics: dict = {}
+
+    for empresa_key, images_gt in GROUND_TRUTH.items():
+        label = COMPANY_LABELS.get(empresa_key, empresa_key)
+        m, indet, mismatches = _evaluate_company(empresa_key, images_gt, results_dir, verbose)
+        if not m:
+            continue
+        company_metrics[label] = m
+        global_tp += m["tp"];   global_tn += m["tn"]
+        global_fp += m["fp"];   global_fn += m["fn"]
+        global_indet     += indet
+        global_mismatches += mismatches
+
+    gm = _metrics(global_tp, global_tn, global_fp, global_fn)
+    _print_global_summary(gm, global_indet, global_mismatches)
+
     if out_path is not None:
-        report = {
-            "metadata": {
-                "pessoas_comparadas": gm["total"],
-                "indeterminado": global_indet,
-                "imagens_com_contagem_diferente": global_mismatch_count,
-                "nota": "matching por posicao — sem bbox no gabarito; positivo=Conforme",
-            },
-            "global": gm,
-            "por_empresa": company_metrics,
-            "interpretacao": {
-                "precision_alta": "Quando o pipeline classifica como Conforme, acerta 84% das vezes — poucos falsos positivos.",
-                "recall_baixo": "Pipeline conservador: prefere marcar como Nao conforme quando ha duvida. Falsos negativos altos.",
-                "construtiva_img1": "Imagem de escritorio: gabarito=todos conformes, pipeline=todos nao conformes. Modelo aplica regras de obra ao escritorio — limitacao do CLIP zero-shot sem contexto de ambiente.",
-                "contagem_diferente": "VitalCare e Rede Vitalis: YOLO detecta mais pessoas que o anotador humano. Matching por posicao fica comprometido nessas imagens.",
-            },
-        }
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
-        print(f"\n  Metricas salvas em: {out_path}")
+        _save_report(_build_report(gm, company_metrics, global_indet, global_mismatches), out_path)
 
 
 if __name__ == "__main__":
