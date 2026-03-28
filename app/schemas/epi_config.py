@@ -28,6 +28,8 @@ class EPIAttribute:
 
 
 DEFAULT_EPI_ATTRIBUTES: List[EPIAttribute] = [
+    # Threshold mais alto: borda circular do capacete é visualmente distinta,
+    # o que torna o CLIP mais confiante — reduz falsos positivos.
     EPIAttribute(
         name="helmet",
         label_pt="capacete",
@@ -36,6 +38,7 @@ DEFAULT_EPI_ATTRIBUTES: List[EPIAttribute] = [
         threshold_positive=0.65,
         threshold_negative=0.35,
     ),
+    # Threshold padrão: colete tem alta variação de cor e formato entre empresas.
     EPIAttribute(
         name="vest",
         label_pt="colete refletivo",
@@ -44,6 +47,8 @@ DEFAULT_EPI_ATTRIBUTES: List[EPIAttribute] = [
         threshold_positive=0.60,
         threshold_negative=0.40,
     ),
+    # Zona de incerteza mais ampla (0.30–0.70): botas sofrem oclusão frequente
+    # por objetos no chão, paletes e ângulos de câmera baixos.
     EPIAttribute(
         name="safety_boots",
         label_pt="botas de segurança",
@@ -52,6 +57,7 @@ DEFAULT_EPI_ATTRIBUTES: List[EPIAttribute] = [
         threshold_positive=0.70,
         threshold_negative=0.30,
     ),
+    # Threshold padrão: luvas têm variação de cor e tamanho, mesma incerteza do colete.
     EPIAttribute(
         name="gloves",
         label_pt="luvas de proteção",
