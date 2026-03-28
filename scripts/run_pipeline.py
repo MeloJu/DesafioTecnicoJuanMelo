@@ -31,11 +31,10 @@ os.environ.setdefault("YOLO_VERBOSE", "False")
 os.environ.setdefault("TRANSFORMERS_VERBOSITY", "error")
 os.environ.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
 
-import yaml
-
 from app.pipeline.factory import create_pipeline
 from app.logging.logger import configure_logging
 from app.schemas.epi_config import DEFAULT_EPI_ATTRIBUTES, EPIAttribute
+from scripts.utils import discover_companies
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -46,16 +45,6 @@ configure_logging(stream=_log_file)
 DATA_ROOT = Path("data/raw")
 CHROMA_PATH = "./chroma_db"
 RESULTS_DIR = Path("results")
-
-
-def _discover_companies(data_root: Path) -> list[dict]:
-    companies = []
-    for config_path in sorted(data_root.glob("*/company.yaml")):
-        with open(config_path, encoding="utf-8") as f:
-            cfg = yaml.safe_load(f)
-        cfg["folder"] = config_path.parent
-        companies.append(cfg)
-    return companies
 
 
 def _load_epi_attributes(cfg: dict) -> list:
@@ -148,7 +137,7 @@ def main():
     )
     args = parser.parse_args()
 
-    companies = _discover_companies(DATA_ROOT)
+    companies = discover_companies(DATA_ROOT)
     if not companies:
         print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
         return

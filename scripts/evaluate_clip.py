@@ -43,7 +43,7 @@ def predict(model: CLIPModel, processor: CLIPProcessor, image_path: str, thresho
     return 1 if score >= threshold else 0
 
 
-def evaluate(model: CLIPModel, processor: CLIPProcessor, records: list[dict], threshold: float) -> dict:
+def evaluate_model(model: CLIPModel, processor: CLIPProcessor, records: list[dict], threshold: float) -> dict:
     y_true, y_pred = [], []
     for r in records:
         true_label = 1 if r["label"] == 1 else 0
@@ -115,14 +115,14 @@ def main() -> None:
 
     # Modelo base
     base_model, base_proc = load_model(BASE_MODEL)
-    base_metrics = evaluate(base_model, base_proc, records, args.threshold)
+    base_metrics = evaluate_model(base_model, base_proc, records, args.threshold)
     print_results("CLIP Base (openai/clip-vit-base-patch32)", base_metrics)
 
     # Modelo fine-tunado
     ft_path = pathlib.Path(args.finetuned)
     if ft_path.exists():
         ft_model, ft_proc = load_model(str(ft_path))
-        ft_metrics = evaluate(ft_model, ft_proc, records, args.threshold)
+        ft_metrics = evaluate_model(ft_model, ft_proc, records, args.threshold)
         print_results(f"CLIP Fine-tunado ({ft_path})", ft_metrics)
 
         # Comparacao

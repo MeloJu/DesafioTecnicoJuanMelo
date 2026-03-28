@@ -23,29 +23,18 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import chromadb
-import yaml
 
 from app.rag.document_parser import DocumentParser
 from app.rag.embedding_service import EmbeddingService
 from app.rag.ollama_embedder import OllamaEmbedder
+from scripts.utils import discover_companies
 
 DATA_ROOT = Path("data/raw")
 CHROMA_PATH = "./chroma_db"
 
 
-def _discover_companies(data_root: Path) -> list[dict]:
-    """Encontra todas as pastas com company.yaml em data/raw/."""
-    companies = []
-    for config_path in sorted(data_root.glob("*/company.yaml")):
-        with open(config_path, encoding="utf-8") as f:
-            cfg = yaml.safe_load(f)
-        cfg["folder"] = config_path.parent
-        companies.append(cfg)
-    return companies
-
-
 def main():
-    companies = _discover_companies(DATA_ROOT)
+    companies = discover_companies(DATA_ROOT)
 
     if not companies:
         print(f"Nenhum company.yaml encontrado em {DATA_ROOT}/")
