@@ -1,7 +1,7 @@
 # Compliance AI — EPI Verification System
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![Tests](https://img.shields.io/badge/tests-165%20unit%20%7C%2010%20integration-brightgreen?logo=pytest)
+![Tests](https://img.shields.io/badge/tests-175%20passing-brightgreen?logo=pytest)
 ![Coverage](https://img.shields.io/badge/coverage-100%25%20unit-brightgreen)
 ![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
@@ -98,8 +98,8 @@ ollama pull llama3.2
 ollama pull nomic-embed-text
 
 # 4. Indexar + rodar
-python scripts/index_documents.py
-python scripts/run_pipeline.py
+make index   # ou: python scripts/index_documents.py
+make run     # ou: python scripts/run_pipeline.py
 ```
 
 ---
@@ -167,10 +167,12 @@ Cada imagem gera `results/<empresa>/<imagem>.json`:
 ## Testes
 
 ```bash
-# Unitários (sem modelos reais, rápido)
-pytest tests/unit/ --cov=app
+make test              # todos os testes
+make test-unit         # unitários com cobertura
+make test-integration  # integração
 
-# Integração (lógica entre módulos, sem modelos reais)
+# Ou diretamente:
+pytest tests/unit/ --cov=app
 pytest tests/integration/
 
 # E2E (requer Ollama rodando + dados reais em data/)
