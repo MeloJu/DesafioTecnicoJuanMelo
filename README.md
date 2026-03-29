@@ -211,7 +211,7 @@ Resultados de 4 empresas (15 imagens, 125 pessoas analisadas):
 
 ### Avaliação vs. gabarito humano
 
-Pipeline comparado com anotação humana de 103 pessoas em 20 imagens (`relatorio_compliance_visual.md`):
+Pipeline comparado com anotação humana de 103 pessoas em 20 imagens (`data/ground_truth.json`):
 
 | Empresa | Accuracy | Precision | Recall | F1 |
 |---|---|---|---|---|
@@ -265,7 +265,7 @@ project/
 │   ├── generate_clip_dataset.py ← gera dataset de pares imagem-texto para fine-tuning
 │   └── finetune_clip.py         ← fine-tuning contrastivo do CLIP em dados de EPI
 ├── data/
-│   └── ground_truth.json        ← gabarito humano (transcrito de relatorio_compliance_visual.md)
+│   └── ground_truth.json        ← gabarito humano anotado manualmente
 ├── results/                     ← resultados reais (4 empresas, 20 imagens)
 ├── tests/
 │   ├── unit/

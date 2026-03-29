@@ -48,3 +48,5 @@ logs/
 # Docs excluded from git
 ADR.md
 claude.md
+"DESAFIO TÉCNICO - TIME IA.pdf"
+relatorio_compliance_visual*.md
