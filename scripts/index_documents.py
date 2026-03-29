@@ -77,7 +77,7 @@ def main():
 
             collection = re.sub(r"[^a-z0-9]+", "_", empresa.lower()).strip("_")
             embedding_service.index(chunks, collection=collection)
-            print(f"  Collection: '{collection}' ✓")
+            print(f"  Collection: '{collection}' OK")
             total_chunks += len(chunks)
 
         except Exception as exc:
@@ -85,7 +85,7 @@ def main():
 
         print()
 
-    print(f"Indexação concluída. Total: {total_chunks} chunks → {CHROMA_PATH}/")
+    print(f"Indexacao concluida. Total: {total_chunks} chunks em {CHROMA_PATH}/")
 
 
 if __name__ == "__main__":
