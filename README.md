@@ -235,37 +235,44 @@ python scripts/evaluate_pipeline.py   # imprime + salva results/pipeline_evaluat
 project/
 ├── app/
 │   ├── schemas/
-│   │   ├── output.py          ← BoundingBox, PersonDetection, Rule, PersonResult
-│   │   └── epi_config.py      ← EPIAttribute dataclass + DEFAULT_EPI_ATTRIBUTES
+│   │   ├── output.py            ← BoundingBox, PersonDetection, Rule, PersonResult
+│   │   └── epi_config.py        ← EPIAttribute dataclass + DEFAULT_EPI_ATTRIBUTES
 │   ├── logging/
-│   │   └── logger.py          ← structlog JSON + correlation_id
+│   │   └── logger.py            ← structlog JSON + correlation_id
 │   ├── pipeline/
-│   │   ├── orchestrator.py    ← Pipeline.run()
-│   │   └── factory.py         ← create_pipeline() (composição de dependências)
+│   │   ├── orchestrator.py      ← Pipeline.run()
+│   │   └── factory.py           ← create_pipeline() (composição de dependências)
 │   ├── vision/
-│   │   ├── detector.py        ← PersonDetector (YOLO)
-│   │   ├── extractor.py       ← AttributeExtractor (CLIP + EPIAttribute)
-│   │   ├── service.py         ← VisionService
-│   │   └── clip_client.py     ← wrapper HuggingFace CLIP
+│   │   ├── detector.py          ← PersonDetector (YOLO)
+│   │   ├── extractor.py         ← AttributeExtractor (CLIP + EPIAttribute)
+│   │   ├── service.py           ← VisionService
+│   │   └── clip_client.py       ← wrapper HuggingFace CLIP
 │   ├── rag/
-│   │   ├── document_parser.py ← PDF/DOCX → List[Chunk]
+│   │   ├── document_parser.py   ← PDF/DOCX → List[Chunk]
 │   │   ├── embedding_service.py ← ChromaDB index + query
-│   │   ├── service.py         ← RagService
-│   │   └── ollama_embedder.py ← wrapper nomic-embed-text
+│   │   ├── service.py           ← RagService
+│   │   └── ollama_embedder.py   ← wrapper nomic-embed-text
 │   └── reasoning/
-│       ├── service.py         ← ReasoningService
-│       └── ollama_llm.py      ← wrapper Llama via Ollama
+│       ├── service.py           ← ReasoningService
+│       └── ollama_llm.py        ← wrapper Llama via Ollama
 ├── scripts/
-│   ├── index_documents.py         ← indexa PDFs no ChromaDB
-│   ├── run_pipeline.py            ← roda o pipeline para todas as empresas em data/
-│   ├── compute_metrics.py         ← agrega resultados de results/ e exibe métricas
-│   ├── generate_clip_dataset.py   ← gera dataset de pares imagem-texto para fine-tuning
-│   └── finetune_clip.py           ← fine-tuning contrastivo do CLIP em dados de EPI
-├── results/                       ← resultados reais (4 empresas, 125 pessoas, 15 imagens)
+│   ├── utils.py                 ← discover_companies() compartilhado entre scripts
+│   ├── index_documents.py       ← indexa PDFs no ChromaDB
+│   ├── run_pipeline.py          ← roda o pipeline para todas as empresas em data/
+│   ├── compute_metrics.py       ← agrega resultados de results/ e exibe métricas
+│   ├── evaluate_pipeline.py     ← compara resultados do pipeline vs. gabarito humano
+│   ├── evaluate_clip.py         ← avalia modelo CLIP base vs. fine-tunado
+│   ├── generate_clip_dataset.py ← gera dataset de pares imagem-texto para fine-tuning
+│   └── finetune_clip.py         ← fine-tuning contrastivo do CLIP em dados de EPI
+├── data/
+│   └── ground_truth.json        ← gabarito humano (transcrito de relatorio_compliance_visual.md)
+├── results/                     ← resultados reais (4 empresas, 20 imagens)
 ├── tests/
 │   ├── unit/
 │   ├── integration/
 │   └── e2e/
+├── .github/workflows/tests.yml  ← CI: roda testes em push/PR no GitHub Actions
+├── Makefile                     ← atalhos: make test, make run, make evaluate, ...
 ├── Dockerfile
 ├── docker-compose.yml
 ├── pyproject.toml
