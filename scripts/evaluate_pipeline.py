@@ -19,41 +19,18 @@ import argparse
 import json
 import pathlib
 
-# ---------------------------------------------------------------------------
-# Ground truth do relatorio_compliance_visual anotado manualmente
-# Chave: nome da pasta em results/ → nome do arquivo (sem .json) → lista de labels
-# Ordem: mesma sequencia numerica do relatorio (pessoa 1, 2, 3...)
-# ---------------------------------------------------------------------------
-GROUND_TRUTH = {
-    "logitrans_global": {
-        "img_1": ["Nao conforme", "Conforme",     "Nao conforme"],
-        "img_2": ["Conforme",     "Nao conforme", "Conforme"],
-        "img_3": ["Conforme",     "Conforme",     "Conforme",     "Nao conforme"],
-        "img_4": ["Conforme",     "Conforme",     "Nao conforme", "Nao conforme", "Conforme"],
-        "img_5": ["Nao conforme", "Conforme"],
-    },
-    "rede_vitalis": {
-        "img_1": ["Nao conforme", "Nao conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme"],
-        "img_2": ["Conforme",     "Conforme",     "Conforme", "Conforme", "Conforme"],
-        "img_3": ["Conforme",     "Conforme",     "Conforme"],
-        "img_4": ["Conforme",     "Conforme",     "Conforme", "Conforme", "Conforme"],
-        "img_5": ["Conforme",     "Nao conforme", "Nao conforme", "Conforme"],
-    },
-    "vitalcare": {
-        "vitalcare_1": ["Conforme"] * 7,
-        "vitalcare_2": ["Conforme"] * 6,
-        "vitalcare_3": ["Conforme"] * 3,
-        "vitalcare_4": ["Conforme"] * 3,
-        "vitalcare_5": ["Conforme"] * 4,
-    },
-    "construtiva_engenharia": {
-        "Construtiva Engenharia S.A. 1 ": ["Conforme"] * 10,
-        "Construtiva Engenharia S.A. 2 ": ["Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Conforme", "Nao conforme", "Conforme"],
-        "Construtiva Engenharia S.A. 3 ": ["Nao conforme", "Conforme",     "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme"],
-        "Construtiva Engenharia S.A. 4 ": ["Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Conforme"],
-        "Construtiva Engenharia S.A. 5 ": ["Nao conforme", "Conforme",     "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme"],
-    },
-}
+_GT_PATH = pathlib.Path(__file__).parent.parent / "data" / "ground_truth.json"
+
+
+def _load_ground_truth(path: pathlib.Path = _GT_PATH) -> dict:
+    """Carrega o gabarito humano de data/ground_truth.json."""
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    # Remove chaves de metadados que começam com "_"
+    return {k: v for k, v in data.items() if not k.startswith("_")}
+
+
+GROUND_TRUTH = _load_ground_truth()
 
 COMPANY_LABELS = {
     "logitrans_global":      "LogiTrans Global",

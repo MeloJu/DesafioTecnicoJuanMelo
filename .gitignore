@@ -27,6 +27,8 @@ build/
 
 # Data (large binaries — keep only in data/ locally, not in git)
 data/
+# Excecao: ground truth anotado manualmente (JSON pequeno, deve ser versionado)
+!data/ground_truth.json
 
 # ChromaDB local storage
 chroma_db/

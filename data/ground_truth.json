@@ -1,0 +1,32 @@
+{
+  "_source": "relatorio_compliance_visual(1).md — anotado manualmente",
+  "_note": "Chave: nome da pasta em results/ → stem do arquivo → lista de labels por pessoa (ordem do pessoa_id)",
+  "logitrans_global": {
+    "img_1": ["Nao conforme", "Conforme",     "Nao conforme"],
+    "img_2": ["Conforme",     "Nao conforme", "Conforme"],
+    "img_3": ["Conforme",     "Conforme",     "Conforme",     "Nao conforme"],
+    "img_4": ["Conforme",     "Conforme",     "Nao conforme", "Nao conforme", "Conforme"],
+    "img_5": ["Nao conforme", "Conforme"]
+  },
+  "rede_vitalis": {
+    "img_1": ["Nao conforme", "Nao conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme"],
+    "img_2": ["Conforme",     "Conforme",     "Conforme", "Conforme", "Conforme"],
+    "img_3": ["Conforme",     "Conforme",     "Conforme"],
+    "img_4": ["Conforme",     "Conforme",     "Conforme", "Conforme", "Conforme"],
+    "img_5": ["Conforme",     "Nao conforme", "Nao conforme", "Conforme"]
+  },
+  "vitalcare": {
+    "vitalcare_1": ["Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme"],
+    "vitalcare_2": ["Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme"],
+    "vitalcare_3": ["Conforme", "Conforme", "Conforme"],
+    "vitalcare_4": ["Conforme", "Conforme", "Conforme"],
+    "vitalcare_5": ["Conforme", "Conforme", "Conforme", "Conforme"]
+  },
+  "construtiva_engenharia": {
+    "Construtiva Engenharia S.A. 1 ": ["Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme", "Conforme"],
+    "Construtiva Engenharia S.A. 2 ": ["Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Conforme", "Nao conforme", "Conforme"],
+    "Construtiva Engenharia S.A. 3 ": ["Nao conforme", "Conforme",     "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme"],
+    "Construtiva Engenharia S.A. 4 ": ["Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Conforme"],
+    "Construtiva Engenharia S.A. 5 ": ["Nao conforme", "Conforme",     "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme", "Nao conforme"]
+  }
+}
