@@ -101,13 +101,18 @@ class TestDocumentParserDocx:
 
     @patch("app.rag.document_parser.docx")
     def test_docx_returns_list_of_chunks(self, mock_docx):
+        # Parágrafos curtos são agrupados em um único chunk pelo recursive split.
+        # O teste verifica que o conteúdo está presente, não a contagem exata.
         mock_docx.Document.return_value = self._make_docx_mock([
             "Capacete obrigatório em obras.",
             "Colete refletivo obrigatório.",
         ])
         parser = DocumentParser()
         chunks = parser.parse("manual.docx", EMPRESA, SETOR)
-        assert len(chunks) == 2
+        assert len(chunks) >= 1
+        full_text = " ".join(c.text for c in chunks)
+        assert "Capacete" in full_text
+        assert "Colete" in full_text
 
     @patch("app.rag.document_parser.docx")
     def test_docx_metadata_set_correctly(self, mock_docx):
