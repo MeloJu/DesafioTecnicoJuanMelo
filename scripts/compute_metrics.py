@@ -8,6 +8,7 @@ Uso:
 import argparse
 import json
 import pathlib
+import sys
 from collections import defaultdict
 
 STATUS_CONFORME = "Conforme"
@@ -30,8 +31,10 @@ def load_results(results_dir: pathlib.Path) -> list[dict]:
                     "pessoa_id": person.get("pessoa_id"),
                     "status": person.get("status", STATUS_INDET),
                 })
-        except Exception:
-            pass
+        except json.JSONDecodeError as exc:
+            print(f"[AVISO] JSON inválido em {json_file}: {exc}", file=sys.stderr)
+        except OSError as exc:
+            print(f"[AVISO] Erro ao ler {json_file}: {exc}", file=sys.stderr)
     return records
 
 

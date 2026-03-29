@@ -20,6 +20,7 @@ Saídas:
 """
 import argparse
 import json
+import re
 import sys
 import os
 from datetime import datetime
@@ -57,7 +58,6 @@ def _load_epi_attributes(cfg: dict) -> list:
 
 def _save_result(empresa: str, image_path: Path, response) -> Path:
     """Serializa o PipelineResponse como JSON e salva em results/<empresa>/."""
-    import re
     empresa_slug = re.sub(r"[^a-z0-9]+", "_", empresa.lower()).strip("_")
     out_dir = RESULTS_DIR / empresa_slug
     out_dir.mkdir(parents=True, exist_ok=True)
